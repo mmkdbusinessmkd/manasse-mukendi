@@ -22,6 +22,7 @@ const services = [
 ];
 
 const projects = [
+  { name: "Votre image parle avant vous", client: "LE COMMUNITY MANAGER", type: "Social Media", sector: "Personal branding", mission: "Conception éditoriale & visuelle", result: "Contenu de sensibilisation", image: "/images/projects/le-community-manager.png" },
   { name: "Contenu immobilier", client: "IMMO KONNECT", type: "Social Media", sector: "Immobilier", mission: "Création de contenu", result: "Visuel promotionnel", image: "/images/projects/immo-konnect.jpeg" },
   { name: "Couverture du FLMDA 2026", client: "FESTIVAL DES LANGUES MATERNELLES", type: "Communication", sector: "Événementiel", mission: "Couverture en direct", result: "Publication événementielle", image: "/images/projects/flmda-live.jpeg" },
   { name: "Campagne trafic FLMDA", client: "FLMDA RDC", type: "Publicité", sector: "Événementiel", mission: "Campagne Meta Ads", result: "29 992 personnes touchées", image: "/images/projects/flmda-campaign.jpeg" },
