@@ -35,7 +35,7 @@ export default function Home() {
   const [menu, setMenu] = useState(false);
   const [filter, setFilter] = useState("Tous");
   const [formMessage, setFormMessage] = useState("");
-  const visible = filter === "Tous" ? projects : projects.filter((p) => p.type === filter);
+  const visible = filter === "Tous" ? projects : projects.filter((p) => p.type === filter || (filter === "Campagnes" && p.type === "Publicité"));
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
