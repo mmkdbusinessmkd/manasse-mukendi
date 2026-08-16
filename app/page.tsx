@@ -22,13 +22,13 @@ const services = [
 ];
 
 const logos = [
-  "/images/logos/clinique-ruth.png",
-  "/images/logos/afromadia.png",
-  "/images/logos/afrika-connect.png",
-  "/images/logos/evantura.png",
-  "/images/logos/immo-konnect.png",
-  "/images/logos/amal-holding.png",
-  "/images/logos/zoom-tech.png",
+  "/images/logos/clinique-ruth.jpeg",
+  "/images/logos/afromadia.jpeg",
+  "/images/logos/afrika-connect.jpeg",
+  "/images/logos/evantura.jpeg",
+  "/images/logos/immo-konnect.jpeg",
+  "/images/logos/amal-holding.jpeg",
+  "/images/logos/zoom-tech.jpeg",
 ];
 
 const projects = [
@@ -79,7 +79,7 @@ export default function Home() {
 
     <section className="reasons"><p className="eyebrow">05 / APPROCHE</p><h2>Pas seulement publier.<br/>Construire une <em>présence.</em></h2><div>{[["Une vision stratégique", "Chaque action s’inscrit dans une direction claire."], ["Des contenus pour votre audience", "Des idées utiles, adaptées aux personnes que vous voulez toucher."], ["Une communication cohérente", "Votre marque reste reconnaissable à chaque point de contact."], ["Une approche orientée résultats", "L’attention est un début : les objectifs sont la destination."]].map(([t,d],i) => <article key={t}><span>0{i+1}</span><h3>{t}</h3><p>{d}</p></article>)}</div></section>
 
-    <section className="trusted" aria-label="Marques accompagnées"><p className="eyebrow">ILS M’ONT FAIT CONFIANCE</p><div className="logo-rail"><div className="logo-track">{[...logos, ...logos].map((logo, index) => <div className="logo-card" key={`${logo}-${index}`}><img src={logo} alt="Logo d’une marque accompagnée" loading="lazy"/></div>)}</div></div></section>
+    <section className="trusted" aria-label="Marques accompagnées"><p className="eyebrow">ILS M’ONT FAIT CONFIANCE</p><div className="logo-grid">{logos.map((logo) => <div className="logo-card" key={logo}><img src={logo} alt="Logo d’une marque accompagnée" loading="lazy"/></div>)}</div></section>
 
     <section className="cta"><p className="eyebrow light">UN PROJET EN TÊTE ?</p><h2>Votre prochaine étape<br/>commence <em>ici.</em></h2><p>Vous avez un projet, une marque à développer ou une communication à repenser ? Parlons-en.</p><div className="actions"><a className="button white" href="#contact">Démarrer un projet <b>↗</b></a><a className="button ghost" href={contact.whatsapp} target="_blank">WhatsApp <b>↗</b></a></div></section>
 
