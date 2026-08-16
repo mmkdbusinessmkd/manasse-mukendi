@@ -21,16 +21,6 @@ const services = [
   ["06", "Communication de marque", "J’aide les entreprises et organisations à structurer leur communication et une image cohérente."],
 ];
 
-const logos = [
-  "/images/logos/clinique-ruth.jpeg",
-  "/images/logos/afromadia.jpeg",
-  "/images/logos/afrika-connect.jpeg",
-  "/images/logos/evantura.jpeg",
-  "/images/logos/immo-konnect.jpeg",
-  "/images/logos/amal-holding.jpeg",
-  "/images/logos/zoom-tech.jpeg",
-];
-
 const projects = [
   { name: "Contenu immobilier", client: "IMMO KONNECT", type: "Social Media", sector: "Immobilier", mission: "Création de contenu", result: "Visuel promotionnel", image: "/images/projects/immo-konnect.jpeg" },
   { name: "Couverture du FLMDA 2026", client: "FESTIVAL DES LANGUES MATERNELLES", type: "Communication", sector: "Événementiel", mission: "Couverture en direct", result: "Publication événementielle", image: "/images/projects/flmda-live.jpeg" },
@@ -111,8 +101,6 @@ export default function Home() {
     <section className="work" id="realisations"><div className="work-head"><div><p className="eyebrow light">04 / RÉALISATIONS</p><h2>Quelques projets<br/><em>en mouvement.</em></h2></div><p>Une sélection de collaborations. Chaque projet est une réponse unique à un enjeu de marque.</p></div><div className="filters">{["Tous", "Social Media", "Branding", "Campagnes", "Communication", "Publicité"].map(x => <button className={filter === x ? "active" : ""} onClick={() => setFilter(x)} key={x}>{x}</button>)}</div><div className="project-grid">{visible.map((p,i) => <article className="project" key={p.name}><div className="project-art"><img src={p.image} alt={`${p.name} — ${p.client}`}/><span>{p.type}</span><b>{String(i+1).padStart(2,"0")}</b><i>↗</i></div><div className="project-info"><p>{p.client} <span>/ {p.sector}</span></p><h3>{p.name}</h3><div><small>MISSION<br/><b>{p.mission}</b></small><small>RÉSULTAT<br/><b>{p.result}</b></small></div></div></article>)}</div></section>
 
     <section className="reasons"><p className="eyebrow">05 / APPROCHE</p><h2>Pas seulement publier.<br/>Construire une <em>présence.</em></h2><div>{[["Une vision stratégique", "Chaque action s’inscrit dans une direction claire."], ["Des contenus pour votre audience", "Des idées utiles, adaptées aux personnes que vous voulez toucher."], ["Une communication cohérente", "Votre marque reste reconnaissable à chaque point de contact."], ["Une approche orientée résultats", "L’attention est un début : les objectifs sont la destination."]].map(([t,d],i) => <article key={t}><span>0{i+1}</span><h3>{t}</h3><p>{d}</p></article>)}</div></section>
-
-    <section className="trusted" aria-label="Marques accompagnées"><p className="eyebrow">ILS M’ONT FAIT CONFIANCE</p><div className="logo-grid">{logos.map((logo) => <div className="logo-card" key={logo}><img src={logo} alt="Logo d’une marque accompagnée" loading="lazy"/></div>)}</div></section>
 
     <section className="cta"><p className="eyebrow light">UN PROJET EN TÊTE ?</p><h2>Votre prochaine étape<br/>commence <em>ici.</em></h2><p>Vous avez un projet, une marque à développer ou une communication à repenser ? Parlons-en.</p><div className="actions"><a className="button white" href="#contact">Remplir le formulaire <b>↗</b></a></div><a className="whatsapp-link" href={contact.whatsapp} target="_blank" rel="noreferrer">Préférez un message rapide ? WhatsApp ↗</a></section>
 
