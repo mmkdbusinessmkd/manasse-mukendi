@@ -21,6 +21,9 @@
 
 .whatsapp-link{display:inline-block;position:relative;z-index:1;margin-top:18px;font:500 10px 'DM Mono';letter-spacing:.15px;color:#46633a;opacity:.72;border-bottom:1px solid #46633a55;padding-bottom:3px;transition:opacity .2s ease,color .2s ease}.whatsapp-link:hover{opacity:1;color:var(--ink)}
 
+/* Lisibilité renforcée */
+.eyebrow{color:#4a6552}.eyebrow.light{color:#d8e7dc}.intro{color:#e0ebe3}.hero-foot{color:#d1e0d6}.tag{color:#e0ebe3}.ghost{border-color:#d8e7dc;color:#fff}.service span,.timeline>article>span,.reasons article span{color:#3f684d}.service p,.bio p,.timeline p,.reasons p,.contact .section-head>p:not(.eyebrow){color:#365443}.bio p:first-child{color:#163c25}.stats span,.project-info p,.project-info small{color:#415e4c}.project-info p span{color:#557061}.project-info small b{color:#163c25}.work-head>p{color:#d8e7dc}.filters button{border-color:#9fbeaa;color:#f1f7f2}.contact label span,.form-end p{color:#365443}input,select,textarea{border-bottom-color:#789786;color:#163c25}input::placeholder,textarea::placeholder{color:#5d7868;opacity:1}.mail{color:#163c25}footer p{color:#d5e2d8}.footer-links a{color:#edf5ef}footer small{color:#cfddd3}.footer-availability{color:#d5e2d8!important}.whatsapp-link{color:#274d34;border-bottom-color:#274d3455;opacity:.9}
+
 /* Repères d'action : mêmes icônes élégantes sur mobile et ordinateur */
 
 @media(max-width:800px){.button b,.text-link b,.service i,.timeline article>b,.project-art i,.portrait-note b{width:27px!important;height:27px!important;font-size:14px!important}.button b{margin:-5px -7px -5px 2px!important}.service i{right:21px!important;bottom:18px!important}.project-art i{right:18px!important;top:17px!important}.portrait-note b{right:30px!important}}
