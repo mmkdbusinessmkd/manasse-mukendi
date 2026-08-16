@@ -5,3 +5,4 @@
 @media(max-width:410px){h1{font-size:45px}.hero{padding-top:64px}.orbit{top:52%}.reasons>div{grid-template-columns:1fr}.actions{flex-wrap:wrap}.project-info>div{gap:12px}footer{grid-template-columns:1fr}.motto,.footer-links{grid-row:auto}}
 
 .portrait-photo{height:590px;background:#101311 url('/images/manasse-marketing.jpg') center/cover no-repeat}@media(max-width:800px){.portrait-photo{height:380px}}
+.honeypot{display:none!important}

@@ -35,9 +35,25 @@ const steps = [["01", "Analyser", "Comprendre votre marque, votre marché, votre
 export default function Home() {
   const [menu, setMenu] = useState(false);
   const [filter, setFilter] = useState("Tous");
-  const [sent, setSent] = useState(false);
+  const [formMessage, setFormMessage] = useState("");
   const visible = filter === "Tous" ? projects : projects.filter((p) => p.type === filter);
-  const submit = (e: FormEvent) => { e.preventDefault(); setSent(true); };
+  const submit = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setFormMessage("Envoi en cours...");
+    try {
+      const response = await fetch("https://formsubmit.co/ajax/mnssmukendi0@gmail.com", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+      if (!response.ok) throw new Error("Submission failed");
+      form.reset();
+      setFormMessage("Merci, votre demande a bien été envoyée.");
+    } catch {
+      setFormMessage("L’envoi a échoué. Veuillez réessayer ou me contacter par WhatsApp.");
+    }
+  };
   const nav = ["Services", "À propos", "Méthode", "Réalisations", "Contact"];
   return <main>
     <header className="nav"><a className="brand" href="#accueil">MM<span>·</span></a><nav className={menu ? "open" : ""}>{nav.map(x => <a onClick={() => setMenu(false)} href={`#${x.toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").replace(" ", "-")}`} key={x}>{x}</a>)}</nav><a className="nav-cta" href="#contact">Échangeons <i>↗</i></a><button className="menu" aria-label="Ouvrir le menu" onClick={() => setMenu(!menu)}>{menu ? "×" : "☰"}</button></header>
@@ -56,7 +72,7 @@ export default function Home() {
 
     <section className="cta"><p className="eyebrow light">UN PROJET EN TÊTE ?</p><h2>Votre prochaine étape<br/>commence <em>ici.</em></h2><p>Vous avez un projet, une marque à développer ou une communication à repenser ? Parlons-en.</p><div className="actions"><a className="button white" href="#contact">Démarrer un projet <b>↗</b></a><a className="button ghost" href={contact.whatsapp} target="_blank">WhatsApp <b>↗</b></a></div></section>
 
-    <section className="contact section" id="contact"><div className="section-head"><p className="eyebrow">06 / CONTACT</p><h2>Parlons de<br/>votre <em>projet.</em></h2><p>Décrivez-moi votre besoin. Je vous répondrai dans les meilleurs délais.</p><a className="mail" href={`mailto:${contact.email}`}>{contact.email} ↗</a></div><form onSubmit={submit}>{[["Nom", "text"], ["Email", "email"], ["Téléphone", "tel"], ["Entreprise", "text"]].map(([p,t]) => <label key={p}><span>{p}</span><input required={p === "Nom" || p === "Email"} type={t} placeholder={p === "Nom" ? "Votre nom" : ""}/></label>)}<label><span>Service recherché</span><select defaultValue=""><option disabled value="">Choisir un service</option>{services.map(x => <option key={x[1]}>{x[1]}</option>)}</select></label><label><span>Budget</span><select defaultValue=""><option disabled value="">Votre budget estimatif</option><option>À définir ensemble</option><option>Moins de 500 $</option><option>500 $ – 1 500 $</option><option>Plus de 1 500 $</option></select></label><label className="full"><span>Message</span><textarea required placeholder="Parlez-moi de votre projet..."></textarea></label><div className="form-end"><p>{sent ? "Merci, votre demande est prête à être envoyée." : "Les champs marqués sont nécessaires."}</p><button className="button dark">Envoyer ma demande <b>↗</b></button></div></form></section>
+    <section className="contact section" id="contact"><div className="section-head"><p className="eyebrow">06 / CONTACT</p><h2>Parlons de<br/>votre <em>projet.</em></h2><p>Décrivez-moi votre besoin. Je vous répondrai dans les meilleurs délais.</p><a className="mail" href={`mailto:${contact.email}`}>{contact.email} ↗</a></div><form onSubmit={submit}><input className="honeypot" type="text" name="_honey" tabIndex={-1} autoComplete="off"/><input type="hidden" name="_subject" value="Nouvelle demande — site Manassé Mukendi"/><input type="hidden" name="_template" value="table"/>{[["Nom", "text", "name"], ["Email", "email", "email"], ["Téléphone", "tel", "phone"], ["Entreprise", "text", "company"]].map(([p,t,n]) => <label key={p}><span>{p}</span><input name={n} required={p === "Nom" || p === "Email"} type={t} placeholder={p === "Nom" ? "Votre nom" : ""}/></label>)}<label><span>Service recherché</span><select name="service" defaultValue=""><option disabled value="">Choisir un service</option>{services.map(x => <option key={x[1]}>{x[1]}</option>)}</select></label><label><span>Budget</span><select name="budget" defaultValue=""><option disabled value="">Votre budget estimatif</option><option>À définir ensemble</option><option>Moins de 500 $</option><option>500 $ – 1 500 $</option><option>Plus de 1 500 $</option></select></label><label className="full"><span>Message</span><textarea name="message" required placeholder="Parlez-moi de votre projet..."></textarea></label><div className="form-end"><p>{formMessage || "Les champs marqués sont nécessaires."}</p><button className="button dark">Envoyer ma demande <b>↗</b></button></div></form></section>
 
     <footer><div><a className="brand" href="#accueil">MM<span>·</span></a><p>Community Manager · Social Media Manager<br/>Marketeur Digital</p></div><p className="motto">Stratégie.<br/><em>Créativité.</em><br/>Résultats.</p><div className="footer-links">{Object.entries(contact.socials).map(([n,l]) => <a key={n} href={l}>{n} ↗</a>)}</div><small>© 2026 Manassé Mukendi. Tous droits réservés.</small></footer>
   </main>;
