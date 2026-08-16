@@ -22,13 +22,13 @@ const services = [
 ];
 
 const logos = [
-  "/images/logos/clinique-ruth.jpeg",
-  "/images/logos/afromadia.jpeg",
-  "/images/logos/afrika-connect.jpeg",
-  "/images/logos/evantura.jpeg",
-  "/images/logos/immo-konnect.jpeg",
-  "/images/logos/amal-holding.jpeg",
-  "/images/logos/zoom-tech.jpeg",
+  "/images/logos/clinique-ruth.png",
+  "/images/logos/afromadia.png",
+  "/images/logos/afrika-connect.png",
+  "/images/logos/evantura.png",
+  "/images/logos/immo-konnect.png",
+  "/images/logos/amal-holding.png",
+  "/images/logos/zoom-tech.png",
 ];
 
 const projects = [
