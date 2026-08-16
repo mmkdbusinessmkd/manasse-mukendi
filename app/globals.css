@@ -6,3 +6,6 @@
 
 .portrait-photo{height:590px;background:#101311 url('/images/manasse-marketing.jpg') center/cover no-repeat}@media(max-width:800px){.portrait-photo{height:380px}}
 .honeypot{display:none!important}
+
+/* Identité Manassé Mukendi */
+:root{--ink:#043915;--paper:#DFEBE7;--muted:#d2e2da;--lime:#D66F15;--line:#b9cec2}.white{background:var(--paper)}.brand span{color:var(--lime)}.project{background:var(--paper)}.project-art{height:310px;background:#043915}.project-art img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .45s ease}.project:hover .project-art img{transform:scale(1.045)}.project-art:before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#04391513 35%,#043915b8);z-index:1}.project-art:after{display:none}.project-art span,.project-art b,.project-art i{position:relative;z-index:2;color:#fff}.project-art b{position:absolute}.project-art i{float:right}@media(max-width:800px){.project-art{height:260px}}
