@@ -45,6 +45,7 @@ export default function Home() {
   const [menu, setMenu] = useState(false);
   const [filter, setFilter] = useState("Tous");
   const [formMessage, setFormMessage] = useState("");
+  const [scrollProgress, setScrollProgress] = useState(0);
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>("main > section:not(.hero), main > footer"));
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -67,6 +68,15 @@ export default function Home() {
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
+  useEffect(() => {
+    const updateProgress = () => {
+      const height = document.documentElement.scrollHeight - window.innerHeight;
+      setScrollProgress(height > 0 ? window.scrollY / height : 0);
+    };
+    updateProgress();
+    window.addEventListener("scroll", updateProgress, { passive: true });
+    return () => window.removeEventListener("scroll", updateProgress);
+  }, []);
   const visible = filter === "Tous" ? projects : projects.filter((p) => p.type === filter || (filter === "Campagnes" && p.type === "Publicité"));
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -87,7 +97,8 @@ export default function Home() {
   };
   const nav = ["Services", "À propos", "Méthode", "Réalisations", "Contact"];
   return <main>
-    <header className="nav"><a className="brand" href="#accueil">MM<span>·</span></a><nav className={menu ? "open" : ""}>{nav.map(x => <a onClick={() => setMenu(false)} href={`#${x.toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").replace(" ", "-")}`} key={x}>{x}</a>)}</nav><a className="nav-cta" href="#contact">Échangeons <i>↗</i></a><button className="menu" aria-label="Ouvrir le menu" onClick={() => setMenu(!menu)}>{menu ? "×" : "☰"}</button></header>
+    <div className="scroll-progress" aria-hidden="true" style={{ transform: `scaleX(${scrollProgress})` }}></div>
+    <header className={`nav ${scrollProgress > .015 ? "scrolled" : ""}`}><a className="brand" href="#accueil">MM<span>·</span></a><nav className={menu ? "open" : ""}>{nav.map(x => <a onClick={() => setMenu(false)} href={`#${x.toLowerCase().normalize("NFD").replace(/[\\u0300-\\u036f]/g, "").replace(" ", "-")}`} key={x}>{x}</a>)}</nav><a className="nav-cta" href="#contact">Échangeons <i>↗</i></a><button className="menu" aria-label="Ouvrir le menu" onClick={() => setMenu(!menu)}>{menu ? "×" : "☰"}</button></header>
 
     <section className="hero" id="accueil"><div className="hero-copy"><p className="eyebrow light">MANASSÉ MUKENDI <span>/</span> KINSHASA, RDC</p><h1>La communication qui <em>déplace</em> les marques.</h1><p className="intro">Stratégie, contenu, réseaux sociaux et publicité digitale : j’aide les marques à mieux communiquer, attirer leur audience et obtenir des résultats.</p><div className="actions"><a className="button white" href="#contact">Travaillons ensemble <b>↗</b></a><a className="text-link" href="#realisations">Voir mes réalisations <b>↓</b></a></div></div><div className="orbit" aria-hidden="true"><div className="orbit-ring"></div><div className="orbit-core"><span>digital</span><strong>impact</strong></div><span className="tag t1">STRATÉGIE</span><span className="tag t2">SOCIAL</span><span className="tag t3">CONTENU</span><span className="dot d1"></span><span className="dot d2"></span></div><div className="hero-foot"><span>Community Manager · Social Media Manager · Marketeur Digital</span><span>Disponible pour des projets en RDC et à l’international <b>●</b></span></div></section>
 
