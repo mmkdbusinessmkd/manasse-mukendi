@@ -21,6 +21,16 @@ const services = [
   ["06", "Communication de marque", "J’aide les entreprises et organisations à structurer leur communication et une image cohérente."],
 ];
 
+const logos = [
+  "/images/logos/clinique-ruth.jpeg",
+  "/images/logos/afromadia.jpeg",
+  "/images/logos/afrika-connect.jpeg",
+  "/images/logos/evantura.jpeg",
+  "/images/logos/immo-konnect.jpeg",
+  "/images/logos/amal-holding.jpeg",
+  "/images/logos/zoom-tech.jpeg",
+];
+
 const projects = [
   { name: "Contenu immobilier", client: "IMMO KONNECT", type: "Social Media", sector: "Immobilier", mission: "Création de contenu", result: "Visuel promotionnel", image: "/images/projects/immo-konnect.jpeg" },
   { name: "Couverture du FLMDA 2026", client: "FESTIVAL DES LANGUES MATERNELLES", type: "Communication", sector: "Événementiel", mission: "Couverture en direct", result: "Publication événementielle", image: "/images/projects/flmda-live.jpeg" },
@@ -60,6 +70,8 @@ export default function Home() {
     <section className="hero" id="accueil"><div className="hero-copy"><p className="eyebrow light">MANASSÉ MUKENDI <span>/</span> KINSHASA, RDC</p><h1>La communication qui <em>déplace</em> les marques.</h1><p className="intro">Stratégie, contenu, réseaux sociaux et publicité digitale : j’aide les marques à mieux communiquer, attirer leur audience et obtenir des résultats.</p><div className="actions"><a className="button white" href="#contact">Travaillons ensemble <b>↗</b></a><a className="text-link" href="#realisations">Voir mes réalisations <b>↓</b></a></div></div><div className="orbit" aria-hidden="true"><div className="orbit-ring"></div><div className="orbit-core"><span>digital</span><strong>impact</strong></div><span className="tag t1">STRATÉGIE</span><span className="tag t2">SOCIAL</span><span className="tag t3">CONTENU</span><span className="dot d1"></span><span className="dot d2"></span></div><div className="hero-foot"><span>Community Manager · Social Media Manager · Marketeur Digital</span><span>Disponible pour des projets en RDC et à l’international <b>●</b></span></div></section>
 
     <section className="section services" id="services"><div className="section-head"><p className="eyebrow">01 / EXPERTISE</p><h2>Ce que je peux faire<br/>pour votre marque.</h2></div><div className="service-grid">{services.map(([n,t,d]) => <article className="service" key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p><i>↗</i></article>)}</div></section>
+
+    <section className="trusted" aria-label="Marques accompagnées"><p className="eyebrow">ILS M’ONT FAIT CONFIANCE</p><div className="logo-rail"><div className="logo-track">{[...logos, ...logos].map((logo, index) => <div className="logo-card" key={`${logo}-${index}`}><img src={logo} alt="Logo d’une marque accompagnée" loading="lazy"/></div>)}</div></div></section>
 
     <section className="about" id="a-propos"><div className="portrait"><div className="portrait-photo" role="img" aria-label="Portrait créatif de Manassé Mukendi dans l'univers du marketing digital"></div><div className="portrait-note">MANASSÉ<br/>MUKENDI <b>↗</b></div></div><div className="about-copy"><p className="eyebrow">02 / À PROPOS</p><h2>Derrière la stratégie,<br/>il y a une <em>vision.</em></h2><div className="bio"><p>Je suis Manassé Mukendi, Community Manager, Social Media Manager et Marketeur Digital basé à Kinshasa.</p><p>Mon travail ne consiste pas simplement à publier du contenu. Je cherche à comprendre une marque, son audience, ses objectifs et son environnement afin de construire une communication qui a du sens.</p><p>Ma vision est simple : une bonne communication ne doit pas seulement attirer l’attention. Elle doit créer de la confiance et contribuer aux objectifs de l’entreprise.</p></div><div className="stats">{["Projets réalisés", "Marques accompagnées", "Campagnes", "Années d’expérience"].map(s => <div key={s}><strong>—</strong><span>{s}</span></div>)}</div></div></section>
 
