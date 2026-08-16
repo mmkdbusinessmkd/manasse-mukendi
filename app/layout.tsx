@@ -5,7 +5,7 @@ export const metadata: Metadata = {
   title: "Manassé Mukendi | Communication digitale",
   description: "Community Manager, Social Media Manager et Marketeur Digital basé à Kinshasa.",
   verification: {
-    google: "HPnEqhNTn-Gvo1mGxdYjqne7XHMykMDPJNV3WtdGxYM",
+    google: "4d_ZXQs7PN55JeZ_tB2xVSSPkjddHri67WOEBsxviEo",
   },
 };
 
