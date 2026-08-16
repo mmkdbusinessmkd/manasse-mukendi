@@ -22,13 +22,13 @@ const services = [
 ];
 
 const logos = [
-  { src: "/images/logos/clinique-ruth.jpeg", scale: 1.14 },
-  { src: "/images/logos/afromadia.jpeg", scale: 2.25 },
-  { src: "/images/logos/afrika-connect.jpeg", scale: 1.95 },
-  { src: "/images/logos/evantura.jpeg", scale: 1.25 },
-  { src: "/images/logos/immo-konnect.jpeg", scale: 1.04 },
-  { src: "/images/logos/amal-holding.jpeg", scale: 1.42 },
-  { src: "/images/logos/zoom-tech.jpeg", scale: 1.25 },
+  "/images/logos/clinique-ruth.jpeg",
+  "/images/logos/afromadia.jpeg",
+  "/images/logos/afrika-connect.jpeg",
+  "/images/logos/evantura.jpeg",
+  "/images/logos/immo-konnect.jpeg",
+  "/images/logos/amal-holding.jpeg",
+  "/images/logos/zoom-tech.jpeg",
 ];
 
 const projects = [
@@ -79,7 +79,7 @@ export default function Home() {
 
     <section className="reasons"><p className="eyebrow">05 / APPROCHE</p><h2>Pas seulement publier.<br/>Construire une <em>présence.</em></h2><div>{[["Une vision stratégique", "Chaque action s’inscrit dans une direction claire."], ["Des contenus pour votre audience", "Des idées utiles, adaptées aux personnes que vous voulez toucher."], ["Une communication cohérente", "Votre marque reste reconnaissable à chaque point de contact."], ["Une approche orientée résultats", "L’attention est un début : les objectifs sont la destination."]].map(([t,d],i) => <article key={t}><span>0{i+1}</span><h3>{t}</h3><p>{d}</p></article>)}</div></section>
 
-    <section className="trusted" aria-label="Marques accompagnées"><p className="eyebrow">ILS M’ONT FAIT CONFIANCE</p><div className="logo-rail"><div className="logo-track">{[...logos, ...logos].map((logo, index) => <div className="logo-card" key={`${logo.src}-${index}`}><img src={logo.src} alt="Logo d’une marque accompagnée" loading="lazy" style={{ transform: `scale(${logo.scale})` }}/></div>)}</div></div></section>
+    <section className="trusted" aria-label="Marques accompagnées"><p className="eyebrow">ILS M’ONT FAIT CONFIANCE</p><div className="logo-rail"><div className="logo-track">{[...logos, ...logos].map((logo, index) => <div className="logo-card" key={`${logo}-${index}`}><img src={logo} alt="Logo d’une marque accompagnée" loading="lazy"/></div>)}</div></div></section>
 
     <section className="cta"><p className="eyebrow light">UN PROJET EN TÊTE ?</p><h2>Votre prochaine étape<br/>commence <em>ici.</em></h2><p>Vous avez un projet, une marque à développer ou une communication à repenser ? Parlons-en.</p><div className="actions"><a className="button white" href="#contact">Démarrer un projet <b>↗</b></a><a className="button ghost" href={contact.whatsapp} target="_blank">WhatsApp <b>↗</b></a></div></section>
 
