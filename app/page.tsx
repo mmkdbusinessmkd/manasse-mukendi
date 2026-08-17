@@ -46,6 +46,11 @@ export default function Home() {
   const [formMessage, setFormMessage] = useState("");
   const [scrollProgress, setScrollProgress] = useState(0);
   useEffect(() => {
+    if (window.location.hostname === "manasse-mukendi.vercel.app") {
+      window.location.replace(`https://manasse-mukendi.com${window.location.pathname}${window.location.search}${window.location.hash}`);
+    }
+  }, []);
+  useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>("main > section:not(.hero), main > footer"));
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
