@@ -1,0 +1,16 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "manasse-mukendi.vercel.app"
+        }
+      ],
+      "destination": "https://manasse-mukendi.com/:path*",
+      "permanent": true
+    }
+  ]
+}
