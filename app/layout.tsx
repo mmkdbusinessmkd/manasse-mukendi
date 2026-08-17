@@ -3,7 +3,7 @@ import "./globals.css";
 import "./identity.css";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://manasse-mukendi.com"),
+  metadataBase: new URL("https://www.manasse-mukendi.com"),
   title: "Manassé Mukendi | Communication digitale",
   description: "Community Manager, Social Media Manager et Marketeur Digital basé à Kinshasa.",
   alternates: {
