@@ -45,6 +45,7 @@ export default function Home() {
   const [filter, setFilter] = useState("Tous");
   const [formMessage, setFormMessage] = useState("");
   const [scrollProgress, setScrollProgress] = useState(0);
+  const [activeSection, setActiveSection] = useState("accueil");
   useEffect(() => {
     if (window.location.hostname === "manasse-mukendi.vercel.app") {
       window.location.replace(`https://manasse-mukendi.com${window.location.pathname}${window.location.search}${window.location.hash}`);
@@ -89,6 +90,22 @@ export default function Home() {
     window.addEventListener("scroll", updateProgress, { passive: true });
     return () => window.removeEventListener("scroll", updateProgress);
   }, []);
+  useEffect(() => {
+    const targets = ["accueil", ...navigation.map(({ target }) => target)]
+      .map((id) => document.getElementById(id))
+      .filter((section): section is HTMLElement => Boolean(section));
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+        if (visible) setActiveSection(visible.target.id);
+      },
+      { rootMargin: "-30% 0px -55% 0px", threshold: [0.05, 0.2, 0.5] },
+    );
+    targets.forEach((section) => observer.observe(section));
+    return () => observer.disconnect();
+  }, []);
   const visible = filter === "Tous" ? projects : projects.filter((p) => p.type === filter || (filter === "Campagnes" && p.type === "Publicité"));
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -109,7 +126,7 @@ export default function Home() {
   };
   return <main>
     <div className="scroll-progress" aria-hidden="true" style={{ transform: `scaleX(${scrollProgress})` }}></div>
-    <header className={`nav ${scrollProgress > .015 ? "scrolled" : ""}`}><a className="brand" href="#accueil">MM<span>·</span></a><nav className={menu ? "open" : ""}>{navigation.map(({ label, target }) => <a onClick={() => setMenu(false)} href={`#${target}`} key={target}>{label}</a>)}</nav><a className="nav-cta" href="#contact">Échangeons <i>↗</i></a><button className="menu" aria-label="Ouvrir le menu" onClick={() => setMenu(!menu)}>{menu ? "×" : "☰"}</button></header>
+    <header className={`nav ${scrollProgress > .015 ? "scrolled" : ""}`}><a className="brand" href="#accueil">MM<span>·</span></a><nav className={menu ? "open" : ""}>{navigation.map(({ label, target }) => <a className={activeSection === target ? "active" : ""} onClick={() => setMenu(false)} href={`#${target}`} key={target}>{label}</a>)}</nav><a className="nav-cta" href="#contact">Échangeons <i>↗</i></a><button className="menu" aria-label="Ouvrir le menu" onClick={() => setMenu(!menu)}>{menu ? "×" : "☰"}</button></header>
 
     <section className="hero" id="accueil"><div className="hero-copy"><p className="eyebrow light">MANASSÉ MUKENDI <span>/</span> KINSHASA, RDC</p><h1><span className="headline-lead">La communication</span> qui <em>déplace</em> les marques.</h1><p className="intro">Stratégie, contenu, réseaux sociaux et publicité digitale : j’aide les marques à mieux communiquer, attirer leur audience et obtenir des résultats.</p><div className="actions"><a className="button white" href="#contact">Travaillons ensemble <b>↗</b></a><a className="text-link" href="#realisations">Voir mes réalisations <b>↓</b></a></div></div><div className="orbit" aria-hidden="true"><div className="orbit-ring"></div><div className="orbit-core"><span>digital</span><strong>impact</strong></div><span className="tag t1">STRATÉGIE</span><span className="tag t2">SOCIAL</span><span className="tag t3">CONTENU</span><span className="dot d1"></span><span className="dot d2"></span></div><div className="hero-foot"><span>Community Manager · Social Media Manager · Marketeur Digital</span><span>Disponible pour des projets en RDC et à l’international <b>●</b></span></div></section>
 
