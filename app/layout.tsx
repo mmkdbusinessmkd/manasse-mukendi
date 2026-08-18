@@ -13,6 +13,10 @@ export const metadata: Metadata = {
   verification: {
     google: "4d_ZXQs7PN55JeZ_tB2xVSSPkjddHri67WOEBsxviEo",
   },
+  icons: {
+    icon: "/images/brand/icon-mm.png",
+    apple: "/images/brand/icon-mm.png",
+  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
