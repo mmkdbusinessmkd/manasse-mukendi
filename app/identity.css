@@ -42,4 +42,5 @@ footer{overflow:hidden}footer:before{content:"";position:absolute;right:-90px;to
 
 /* Signature de marque */
 .brand-logo{display:flex;align-items:center;width:132px;height:44px;letter-spacing:normal}.brand-logo img{display:block;width:100%;height:100%;object-fit:contain;object-position:left center}.brand-logo:hover{transform:translateY(-1px)}
+.footer-mark{display:grid;place-items:center;width:52px;height:52px;border-radius:14px;overflow:hidden;box-shadow:0 12px 28px #0000002b}.footer-mark img{display:block;width:100%;height:100%;object-fit:cover}.footer-mark:hover{transform:translateY(-3px) rotate(-3deg)}
 @media(max-width:800px){.brand-logo{width:114px;height:39px}.brand-logo img{object-position:left center}}
