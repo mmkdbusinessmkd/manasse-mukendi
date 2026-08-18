@@ -14,8 +14,8 @@ export const metadata: Metadata = {
     google: "4d_ZXQs7PN55JeZ_tB2xVSSPkjddHri67WOEBsxviEo",
   },
   icons: {
-    icon: "/images/brand/icon-mm.png",
-    apple: "/images/brand/icon-mm.png",
+    icon: "/images/brand/favicon-mm.png",
+    apple: "/images/brand/favicon-mm.png",
   },
 };
 
