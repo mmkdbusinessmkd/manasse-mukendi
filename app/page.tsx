@@ -26,11 +26,19 @@ const projects = [
   { name: "Contenu immobilier", client: "IMMO KONNECT", type: "Social Media", sector: "Immobilier", mission: "Création de contenu", result: "Visuel promotionnel", image: "/images/projects/immo-konnect.jpeg" },
   { name: "Couverture du FLMDA 2026", client: "FESTIVAL DES LANGUES MATERNELLES", type: "Communication", sector: "Événementiel", mission: "Couverture en direct", result: "Publication événementielle", image: "/images/projects/flmda-live.jpeg" },
   { name: "Campagne trafic FLMDA", client: "FLMDA RDC", type: "Publicité", sector: "Événementiel", mission: "Campagne Meta Ads", result: "29 992 personnes touchées", image: "/images/projects/flmda-campaign.jpeg" },
-  { name: "Billetterie connectée", client: "EVANTURA", type: "Social Media", sector: "Événementiel", mission: "Création de contenu", result: "Visuel promotionnel", image: "/images/projects/evantura.jpeg" },
+  { name: "Votre prochaine sortie, en un geste", client: "EVANTURA", type: "Social Media", sector: "Événementiel", mission: "Direction artistique & conception Photoshop", result: "Visuel de campagne digitale", image: "/images/projects/evantura-application.jpg" },
   { name: "Identité visuelle", client: "AMAL HOLDING", type: "Branding", sector: "Holding", mission: "Logo & déclinaisons", result: "Brand guidelines 2026", image: "/images/projects/amal-holding.jpeg" },
 ];
 
 const steps = [["01", "Analyser", "Comprendre votre marque, votre marché, votre audience et vos objectifs."], ["02", "Stratégiser", "Définir le positionnement, les messages et la stratégie adaptée."], ["03", "Créer", "Produire des contenus cohérents, pertinents et engageants."], ["04", "Diffuser", "Publier et promouvoir les contenus auprès des bonnes audiences."], ["05", "Mesurer", "Analyser les performances et optimiser continuellement la stratégie."]];
+
+const certifications = [
+  { title: "Chef de projet digital & Community Management", issuer: "Digital School", year: "2024" },
+  { title: "Ad Digital Expert — Marketing digital", issuer: "Aleph", year: "2024" },
+  { title: "Marketing des réseaux sociaux", issuer: "HubSpot Academy", year: "2025" },
+];
+
+const photoshopSkills = ["Conception visuelle", "Retouche photo", "Compositing", "Déclinaisons multi-formats"];
 
 const navigation = [
   { label: "Services", target: "services" },
@@ -137,6 +145,8 @@ export default function Home() {
     <section className="section services" id="services"><div className="section-head"><p className="eyebrow">01 / EXPERTISE</p><h2>Ce que je peux faire<br/>pour votre marque.</h2></div><div className="service-grid">{services.map(([n,t,d]) => <article className="service" key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p><BrandGlyph className="card-glyph"/></article>)}</div></section>
 
     <section className="about" id="a-propos"><div className="portrait"><div className="portrait-photo" role="img" aria-label="Portrait créatif de Manassé Mukendi dans l'univers du marketing digital"></div><div className="portrait-note">MANASSÉ<br/>MUKENDI <BrandGlyph className="outline"/></div></div><div className="about-copy"><p className="eyebrow">02 / À PROPOS</p><h2>Derrière la stratégie,<br/>il y a une <em>vision.</em></h2><div className="bio"><p>Je suis Manassé Mukendi, Community Manager, Social Media Manager et Marketeur Digital basé à Kinshasa.</p><p>Mon travail ne consiste pas simplement à publier du contenu. Je cherche à comprendre une marque, son audience, ses objectifs et son environnement afin de construire une communication qui a du sens.</p><p>Ma vision est simple : une bonne communication ne doit pas seulement attirer l’attention. Elle doit créer de la confiance et contribuer aux objectifs de l’entreprise.</p></div></div></section>
+
+    <section className="credentials" id="certifications"><div className="credential-photo"><img src="/images/certifications/remise-diplome.jpg" alt="Manassé Mukendi lors de sa remise de diplôme en 2024"/><div className="credential-photo-label"><span>FORMATION CONTINUE</span><strong>Une expertise<br/>validée sur le terrain.</strong></div></div><div className="credential-content"><p className="eyebrow light">CERTIFICATIONS / COMPÉTENCES</p><h2>Apprendre. Appliquer.<br/><em>Progresser.</em></h2><p className="credential-lead">Je complète l’expérience de terrain par des formations ciblées en stratégie digitale, publicité et réseaux sociaux.</p><div className="photoshop-skill"><div><span>OUTIL CRÉATIF</span><strong>Adobe Photoshop</strong></div><ul>{photoshopSkills.map((skill) => <li key={skill}>{skill}</li>)}</ul></div><div className="credential-list">{certifications.map((certificate, index) => <div className="credential-item" key={certificate.title}><span className="credential-number">0{index + 1}</span><span className="credential-name"><strong>{certificate.title}</strong><small>{certificate.issuer} · {certificate.year}</small></span><span className="credential-check" aria-hidden="true">✓</span></div>)}</div></div></section>
 
     <section className="section method" id="methode"><div className="section-head"><p className="eyebrow">03 / PROCESSUS</p><h2>Une méthode simple.<br/>Une stratégie pensée<br/>pour les <em>résultats.</em></h2></div><div className="timeline">{steps.map(([n,t,d]) => <article key={n}><span>{n}</span><div><h3>{t}</h3><p>{d}</p></div><b className="timeline-progress" aria-hidden="true"><span></span></b></article>)}</div></section>
 
