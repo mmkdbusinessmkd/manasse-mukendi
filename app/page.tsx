@@ -26,7 +26,7 @@ const projects = [
   { name: "Contenu immobilier", client: "IMMO KONNECT", type: "Social Media", sector: "Immobilier", mission: "Création de contenu", result: "Visuel promotionnel", image: "/images/projects/immo-konnect.jpeg" },
   { name: "Couverture du FLMDA 2026", client: "FESTIVAL DES LANGUES MATERNELLES", type: "Communication", sector: "Événementiel", mission: "Couverture en direct", result: "Publication événementielle", image: "/images/projects/flmda-live.jpeg" },
   { name: "Campagne trafic FLMDA", client: "FLMDA RDC", type: "Publicité", sector: "Événementiel", mission: "Campagne Meta Ads", result: "29 992 personnes touchées", image: "/images/projects/flmda-campaign.jpeg" },
-  { name: "Votre prochaine sortie, en un geste", client: "EVANTURA", type: "Social Media", sector: "Événementiel", mission: "Direction artistique & conception Photoshop", result: "Visuel de campagne digitale", image: "/images/projects/evantura-application.jpg" },
+  { name: "Votre prochaine sortie, en un geste", client: "EVANTURA", type: "Social Media", sector: "Événementiel", mission: "Direction artistique & conception Photoshop", result: "Visuel de campagne digitale", image: "/images/projects/evantura-evenement-semaine.webp" },
   { name: "Identité visuelle", client: "AMAL HOLDING", type: "Branding", sector: "Holding", mission: "Logo & déclinaisons", result: "Brand guidelines 2026", image: "/images/projects/amal-holding.jpeg" },
 ];
 
