@@ -42,6 +42,16 @@ const certifications = [
 
 const sectors = ["Santé", "Immobilier", "Événementiel", "Technologie", "Institutionnel", "Commerce"];
 
+const partnerLogos = [
+  ["Clinique Ruth", "/images/logos/clinique-ruth.png"],
+  ["Afromadia", "/images/logos/afromadia.png"],
+  ["Afrika Connect", "/images/logos/afrika-connect.png"],
+  ["Evantura", "/images/logos/evantura.png"],
+  ["Immo Konnect", "/images/logos/immo-konnect.png"],
+  ["Amal Holding", "/images/logos/amal-holding.png"],
+  ["Zoom Tech", "/images/logos/zoom-tech.png"],
+];
+
 const navigation = [
   { label: "Accueil", target: "accueil" },
   { label: "Services", target: "services" },
@@ -155,6 +165,8 @@ export default function Home() {
     <section className="section sectors" aria-labelledby="sectors-title"><div className="section-head compact-head"><p className="eyebrow">SECTEURS ACCOMPAGNÉS</p><h2 id="sectors-title">Des contextes différents.<br/>Une même exigence de <em>clarté.</em></h2></div><div className="sector-grid">{sectors.map((sector, index) => <div className="sector-item" key={sector}><span>0{index + 1}</span><strong>{sector}</strong></div>)}</div></section>
 
     <section className="work" id="realisations"><div className="work-head"><div><p className="eyebrow light">04 / RÉALISATIONS</p><h2>Des projets pensés<br/>comme des <em>réponses.</em></h2></div><p>Au-delà des livrables : le contexte, l’intervention et ce que chaque collaboration a permis de construire.</p></div><div className="filters" aria-label="Filtrer les réalisations">{["Tous", "Social Media", "Branding", "Campagnes", "Communication"].map(x => <button className={filter === x ? "active" : ""} onClick={() => setFilter(x)} key={x}>{x}</button>)}</div><div className="project-grid">{visible.map((p,i) => <article className={`project case-study ${i === 0 ? "featured" : ""}`} key={`${filter}-${p.name}`}><div className="project-art"><img src={p.image} alt={`${p.name} — ${p.client}`} loading="lazy" decoding="async"/><div className="project-topline"><span>{i === 0 ? `Cas client · ${p.type}` : p.type}</span><BrandGlyph className="card-glyph light"/></div><b>{String(i+1).padStart(2,"0")}</b>{i === 0 && <p className="project-caption">Étude de cas sélectionnée</p>}</div><div className="project-info"><p className="case-client">CLIENT <strong>{p.client}</strong> <span>/ {p.sector}</span></p><h3>{p.name}</h3><div className="case-details"><div className="case-detail"><small>CONTEXTE</small><p>{p.context}</p></div><div className="case-detail"><small>INTERVENTION</small><p>{p.intervention}</p></div><div className="case-result"><small>RÉSULTAT</small><strong>{p.result}</strong></div></div></div></article>)}</div></section>
+
+    <section className="partners" aria-labelledby="partners-title"><div className="partners-heading"><p className="eyebrow">COLLABORATIONS</p><h2 id="partners-title">Ils m’ont fait <em>confiance.</em></h2><p>Une sélection de marques et d’organisations accompagnées dans leur communication.</p></div><div className="partner-grid">{partnerLogos.map(([name, logo]) => <div className="partner-card" key={name}><img src={logo} alt={name} loading="lazy" decoding="async"/></div>)}</div></section>
 
     <section className="reasons"><p className="eyebrow">05 / APPROCHE</p><h2>Pas seulement publier.<br/>Construire une <em>présence.</em></h2><div>{[["Une vision stratégique", "Chaque action s’inscrit dans une direction claire."], ["Des contenus pour votre audience", "Des idées utiles, adaptées aux personnes que vous voulez toucher."], ["Une communication cohérente", "Votre marque reste reconnaissable à chaque point de contact."], ["Une approche orientée résultats", "L’attention est un début : les objectifs sont la destination."]].map(([t,d],i) => <article key={t}><span>0{i+1}</span><h3>{t}</h3><p>{d}</p></article>)}</div></section>
 
