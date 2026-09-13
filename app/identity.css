@@ -252,6 +252,8 @@ footer small{color:#d7e5dc}
 /* Layout guardrails — text and decorative controls keep separate zones. */
 .service h3,.project-info h3,.timeline h3,.reasons h3{text-wrap:balance;overflow-wrap:break-word}
 .service p{max-width:calc(100% - 52px)}
+.about{overflow:hidden}
+.reveal:not(.is-visible) .portrait,.reveal:not(.is-visible) .about-copy{transform:translateY(20px)}
 .case-study .case-client{min-width:0;flex-wrap:wrap;line-height:1.5}
 .case-study .case-client strong,.case-study .case-client span{min-width:0;overflow-wrap:break-word}
 .credential-item strong{min-width:0;overflow-wrap:break-word}
