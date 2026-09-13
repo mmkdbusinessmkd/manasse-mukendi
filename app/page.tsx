@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 const contact = {
   whatsapp: "https://wa.me/243838318812",
@@ -23,6 +23,7 @@ const services = [
 
 const projects = [
   { name: "Campagne trafic FLMDA", client: "FLMDA RDC", type: "Publicité", sector: "Événementiel", context: "Renforcer la visibilité digitale de l’événement.", intervention: "Stratégie éditoriale, création de contenus, gestion des canaux et suivi de la communication.", result: "29 992 personnes touchées, progression de la communauté et forte production de contenus.", image: "/images/projects/flmda-campaign.jpeg" },
+  { name: "Fête du Travail — SNEL SA", client: "SNEL SA", type: "Communication", sector: "Institutionnel", context: "Prendre la parole à l’occasion du 1er Mai tout en valorisant les agents et techniciens de l’entreprise.", intervention: "Conception d’un visuel institutionnel aligné avec les codes de marque et adapté aux réseaux sociaux.", result: "Un message lisible, valorisant et cohérent avec la dimension nationale de l’entreprise.", image: "/images/projects/snel-fete-travail.jpg" },
   { name: "Septembre, c’est la rentrée", client: "SAFIA BELLA", type: "Social Media", sector: "Personal branding", context: "Créer une prise de parole de rentrée alignée avec l’univers personnel de Safia Bella.", intervention: "Direction artistique, composition graphique et adaptation du message pour les réseaux sociaux.", result: "Un contenu de saison expressif, cohérent et immédiatement identifiable.", image: "/images/projects/safia-bella-rentree.webp" },
   { name: "Contenu immobilier", client: "IMMO KONNECT", type: "Social Media", sector: "Immobilier", context: "Valoriser l’offre immobilière et soutenir sa visibilité en ligne.", intervention: "Création de contenus promotionnels adaptés aux réseaux sociaux.", result: "Des messages plus lisibles et une présence visuelle plus professionnelle.", image: "/images/projects/immo-konnect.jpeg" },
   { name: "Couverture du FLMDA 2026", client: "FESTIVAL DES LANGUES MATERNELLES", type: "Communication", sector: "Événementiel", context: "Faire vivre l’événement en temps réel auprès de la communauté.", intervention: "Couverture en direct, rédaction et publication de contenus événementiels.", result: "Une actualité continue et une meilleure visibilité des temps forts.", image: "/images/projects/flmda-live.jpeg" },
@@ -35,7 +36,7 @@ const steps = [["01", "Comprendre", "Votre activité, vos objectifs, votre audie
 
 const proofPoints = [
   ["29 992", "personnes touchées sur une campagne documentée"],
-  ["7", "collaborations présentées"],
+  ["8", "collaborations présentées"],
   ["6", "secteurs déjà accompagnés"],
   ["RDC +", "missions à distance"],
 ];
@@ -83,6 +84,8 @@ export default function Home() {
   const [formMessage, setFormMessage] = useState("");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState("accueil");
+  const [selectedProject, setSelectedProject] = useState<(typeof projects)[number] | null>(null);
+  const modalCloseRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
     if (window.location.hostname === "manasse-mukendi.vercel.app") {
       window.location.replace(`https://www.manasse-mukendi.com${window.location.pathname}${window.location.search}${window.location.hash}`);
@@ -143,6 +146,21 @@ export default function Home() {
     targets.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
+  useEffect(() => {
+    if (!selectedProject) return;
+    const previouslyFocused = document.activeElement as HTMLElement | null;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setSelectedProject(null);
+    };
+    document.body.classList.add("modal-open");
+    window.addEventListener("keydown", closeOnEscape);
+    modalCloseRef.current?.focus();
+    return () => {
+      document.body.classList.remove("modal-open");
+      window.removeEventListener("keydown", closeOnEscape);
+      previouslyFocused?.focus();
+    };
+  }, [selectedProject]);
   const visible = filter === "Tous" ? projects : projects.filter((p) => p.type === filter || (filter === "Campagnes" && p.type === "Publicité"));
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -179,7 +197,7 @@ export default function Home() {
 
     <section className="section sectors" aria-labelledby="sectors-title"><div className="section-head compact-head"><p className="eyebrow">SECTEURS ACCOMPAGNÉS</p><h2 id="sectors-title">Des contextes différents.<br/>Une même exigence de <em>clarté.</em></h2></div><div className="sector-grid">{sectors.map((sector, index) => <div className="sector-item" key={sector}><span>0{index + 1}</span><strong>{sector}</strong></div>)}</div></section>
 
-    <section className="work" id="realisations"><div className="work-head"><div><p className="eyebrow light">04 / RÉALISATIONS</p><h2>Des interventions.<br/>Des preuves <em>concrètes.</em></h2></div><p>Chaque projet part d’un contexte précis, mobilise une intervention adaptée et vise un résultat utile pour la marque.</p></div><div className="work-proof"><span><strong>29 992</strong> personnes touchées</span><span><strong>7</strong> projets présentés</span><span><strong>6</strong> secteurs accompagnés</span></div><div className="filters" aria-label="Filtrer les réalisations">{["Tous", "Social Media", "Branding", "Campagnes", "Communication"].map(x => <button className={filter === x ? "active" : ""} onClick={() => setFilter(x)} key={x}>{x}</button>)}</div><div className="project-grid">{visible.map((p,i) => <article className={`project case-study ${i === 0 ? "featured" : ""}`} key={`${filter}-${p.name}`}><div className="project-art"><img src={p.image} alt={`${p.name} — ${p.client}`} loading="lazy" decoding="async"/><div className="project-topline"><span>{i === 0 ? `Cas client · ${p.type}` : p.type}</span><BrandGlyph className="card-glyph light"/></div><b>{String(i+1).padStart(2,"0")}</b>{i === 0 && <p className="project-caption">Étude de cas sélectionnée</p>}</div><div className="project-info"><p className="case-client">CLIENT <strong>{p.client}</strong> <span>/ {p.sector}</span></p><h3>{p.name}</h3><div className="case-details"><div className="case-detail"><small>CONTEXTE</small><p>{p.context}</p></div><div className="case-detail"><small>INTERVENTION</small><p>{p.intervention}</p></div><div className="case-result"><small>RÉSULTAT</small><strong>{p.result}</strong></div></div></div></article>)}</div><div className="work-closing"><p>Vous avez un enjeu similaire ?</p><a className="button white" href="#contact">Parlons de votre objectif <BrandGlyph/></a></div></section>
+    <section className="work" id="realisations"><div className="work-head"><div><p className="eyebrow light">04 / RÉALISATIONS</p><h2>Des interventions.<br/>Des preuves <em>concrètes.</em></h2></div><p>Chaque projet part d’un contexte précis, mobilise une intervention adaptée et vise un résultat utile pour la marque.</p></div><div className="work-proof"><span><strong>29 992</strong> personnes touchées</span><span><strong>8</strong> projets présentés</span><span><strong>6</strong> secteurs accompagnés</span></div><div className="filters" aria-label="Filtrer les réalisations">{["Tous", "Social Media", "Branding", "Campagnes", "Communication"].map(x => <button aria-pressed={filter === x} className={filter === x ? "active" : ""} onClick={() => setFilter(x)} key={x}>{x}</button>)}</div><div className="project-grid">{visible.map((p,i) => <article className={`project case-study ${i === 0 ? "featured" : ""}`} key={`${filter}-${p.name}`}><div className="project-art"><img src={p.image} alt={`${p.name} — ${p.client}`} loading="lazy" decoding="async"/><div className="project-topline"><span>{i === 0 ? `Cas client · ${p.type}` : p.type}</span><BrandGlyph className="card-glyph light"/></div><b>{String(i+1).padStart(2,"0")}</b>{i === 0 && <p className="project-caption">Étude de cas sélectionnée</p>}</div><div className="project-info"><p className="case-client">CLIENT <strong>{p.client}</strong> <span>/ {p.sector}</span></p><h3>{p.name}</h3><div className="case-details"><div className="case-detail"><small>CONTEXTE</small><p>{p.context}</p></div><div className="case-detail"><small>INTERVENTION</small><p>{p.intervention}</p></div><div className="case-result"><small>RÉSULTAT</small><strong>{p.result}</strong></div></div><button className="project-view-button" onClick={() => setSelectedProject(p)}>Voir le projet <span aria-hidden="true">+</span></button></div></article>)}</div><div className="work-closing"><p>Vous avez un enjeu similaire ?</p><a className="button white" href="#contact">Parlons de votre objectif <BrandGlyph/></a></div></section>
 
     <section className="partners" aria-labelledby="partners-title"><div className="partners-heading"><p className="eyebrow">COLLABORATIONS</p><h2 id="partners-title">Ils m’ont fait <em>confiance.</em></h2><p>Une sélection de marques et d’organisations accompagnées dans leur communication.</p></div><div className="partner-marquee"><div className="partner-track"><div className="partner-row">{partnerLogos.map(([name, logo]) => <div className="partner-card" key={name}><img src={logo} alt={name} loading="lazy" decoding="async"/></div>)}</div><div className="partner-row" aria-hidden="true">{partnerLogos.map(([name, logo]) => <div className="partner-card" key={`duplicate-${name}`}><img src={logo} alt="" loading="lazy" decoding="async"/></div>)}</div></div></div></section>
 
@@ -189,6 +207,8 @@ export default function Home() {
 
     <section className="contact section" id="contact"><div className="section-head"><p className="eyebrow">06 / CONTACT</p><h2>Parlons de<br/>votre <em>projet.</em></h2><p>Expliquez-moi votre contexte, votre objectif et le principal défi que vous rencontrez. Je vous répondrai personnellement avec une première orientation.</p><a className="mail" href={`mailto:${contact.email}`}>{contact.email} <span className="link-dot" aria-hidden="true"></span></a></div><form onSubmit={submit}><input className="honeypot" type="text" name="_honey" tabIndex={-1} autoComplete="off"/><input type="hidden" name="_subject" value="Nouvelle demande — site Manassé Mukendi"/><input type="hidden" name="_template" value="table"/>{contactFields.map((field) => <label key={field.label}><span>{field.label}{!field.required && <small> — facultatif</small>}</span><input name={field.name} required={field.required} type={field.type} placeholder={field.placeholder}/></label>)}<label><span>Service recherché</span><select name="service" required defaultValue=""><option disabled value="">Choisir un service</option>{services.map(x => <option key={x[1]}>{x[1]}</option>)}</select></label><label className="full"><span>Votre besoin</span><textarea name="message" required placeholder="Votre contexte, votre objectif et le résultat que vous souhaitez obtenir..."></textarea></label><div className="form-end"><p>{formMessage || "Les champs marqués comme facultatifs peuvent être laissés vides. Vos informations servent uniquement à vous répondre."}</p><button className="button dark">Envoyer ma demande <BrandGlyph/></button></div></form></section>
 
-    <footer><div><a className="brand footer-mark" href="#accueil" aria-label="Retour à l'accueil"><img src="/images/brand/icon-mm.png" alt="Manassé Mukendi"/></a><p>Consultant en communication digitale<br/>Social Media Manager</p></div><p className="motto">Stratégie.<br/><em>Créativité.</em><br/>Résultats.</p><div className="footer-links"><p className="footer-availability">Disponible pour des missions ponctuelles, des accompagnements mensuels et des collaborations à distance.</p>{Object.entries(contact.socials).map(([n,l]) => <a key={n} href={l}>{n} <span className="link-dot" aria-hidden="true"></span></a>)}</div><small>© 2026 Manassé Mukendi. Tous droits réservés.</small></footer>
+    <footer><div><a className="brand footer-mark" href="#accueil" aria-label="Retour à l'accueil"><img src="/images/brand/icon-mm.png" alt="Manassé Mukendi"/></a><p>Consultant en communication digitale<br/>Social Media Manager</p></div><p className="motto">Stratégie.<br/><em>Créativité.</em><br/>Résultats.</p><div className="footer-links"><p className="footer-availability">Disponible pour des missions ponctuelles, des accompagnements mensuels et des collaborations à distance.</p>{Object.entries(contact.socials).map(([n,l]) => <a key={n} href={l} target="_blank" rel="noreferrer">{n} <span className="link-dot" aria-hidden="true"></span></a>)}</div><small>© 2026 Manassé Mukendi. Tous droits réservés.</small></footer>
+
+    {selectedProject && <div className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" onMouseDown={() => setSelectedProject(null)}><article className="project-modal-card" onMouseDown={(event) => event.stopPropagation()}><button ref={modalCloseRef} className="project-modal-close" onClick={() => setSelectedProject(null)} aria-label="Fermer le projet">×</button><div className="project-modal-visual"><img src={selectedProject.image} alt={`${selectedProject.name} — ${selectedProject.client}`}/></div><div className="project-modal-copy"><p className="eyebrow">{selectedProject.client} / {selectedProject.sector}</p><h2 id="project-modal-title">{selectedProject.name}</h2><div><small>CONTEXTE</small><p>{selectedProject.context}</p></div><div><small>INTERVENTION</small><p>{selectedProject.intervention}</p></div><div className="project-modal-result"><small>RÉSULTAT</small><strong>{selectedProject.result}</strong></div><a className="button dark" href="#contact" onClick={() => setSelectedProject(null)}>Parler d’un projet similaire <BrandGlyph/></a></div></article></div>}
   </main>;
 }
