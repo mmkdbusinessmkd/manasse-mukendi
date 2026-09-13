@@ -175,3 +175,31 @@ footer{padding:68px 4.6% 28px;background-image:linear-gradient(90deg,#ffffff06 1
 button,a,input,select,textarea{outline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--accent)}.filters button{min-height:42px}.project-info{display:flex;flex-direction:column}.project-view-button{display:flex;align-items:center;justify-content:space-between;width:100%;min-height:46px;margin-top:18px;padding:12px 0;border:0;border-top:1px solid #c7d8cd;background:transparent;color:var(--ink);font:750 12px Manrope;cursor:pointer}.project-view-button span{display:grid;place-items:center;width:27px;height:27px;border:1px solid #90aa99;border-radius:50%;font-size:18px;font-weight:400;transition:transform .25s ease,background .25s ease,color .25s ease}.project:hover .project-view-button span,.project-view-button:hover span{transform:rotate(90deg);background:var(--accent);border-color:var(--accent);color:#fff}.modal-open{overflow:hidden}.project-modal{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:28px;background:#001b0dcf;backdrop-filter:blur(12px);animation:modal-fade .22s ease both}.project-modal-card{position:relative;display:grid;grid-template-columns:minmax(330px,.92fr) minmax(400px,1.08fr);width:min(1120px,94vw);max-height:min(820px,90vh);overflow:hidden;border:1px solid #ffffff30;border-radius:22px;background:#f4f9f5;box-shadow:0 36px 100px #0008;animation:modal-rise .38s cubic-bezier(.22,1,.36,1) both}.project-modal-close{position:absolute;top:16px;right:16px;z-index:2;display:grid;place-items:center;width:42px;height:42px;border:1px solid #ffffff80;border-radius:50%;background:#043915d9;color:#fff;font-size:25px;line-height:1;cursor:pointer}.project-modal-visual{min-height:620px;background:var(--ink);overflow:hidden}.project-modal-visual img{width:100%;height:100%;object-fit:contain}.project-modal-copy{overflow-y:auto;padding:clamp(42px,5vw,72px)}.project-modal-copy .eyebrow{margin-bottom:20px}.project-modal-copy h2{max-width:520px;margin:0 0 38px;font-size:clamp(31px,3vw,46px);line-height:1;letter-spacing:-.065em}.project-modal-copy>div{padding:18px 0;border-top:1px solid #c5d6cb}.project-modal-copy small{font:500 10px 'DM Mono';letter-spacing:.8px;color:#65806e}.project-modal-copy p{margin:8px 0 0;color:#365443;font-size:14px;line-height:1.7}.project-modal-result{margin:8px 0 26px;padding:20px!important;border:0!important;border-radius:12px;background:var(--ink);color:#fff}.project-modal-result small{color:#b8d0c0}.project-modal-result strong{display:block;margin-top:8px;font-size:16px;line-height:1.55}.project-modal-copy .button{width:max-content;min-height:52px}@keyframes modal-fade{from{opacity:0}}@keyframes modal-rise{from{opacity:0;transform:translateY(24px) scale(.985)}}
 @media(max-width:800px){.filters{scroll-snap-type:x proximity;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}.filters button{min-height:44px;scroll-snap-align:start}.project:not(.featured) .case-detail{display:none}.project:not(.featured) .case-details{display:block}.project-view-button{min-height:48px;font-size:13px}.project-modal{align-items:end;padding:0}.project-modal-card{grid-template-columns:1fr;width:100%;max-height:92svh;border-radius:20px 20px 0 0}.project-modal-visual{min-height:0;height:min(52svh,420px)}.project-modal-copy{padding:28px 22px 34px}.project-modal-copy h2{margin-bottom:24px;font-size:30px}.project-modal-copy>div{padding:14px 0}.project-modal-copy p{font-size:14px}.project-modal-result strong{font-size:15px}.project-modal-copy .button{width:100%}}
 @media(prefers-reduced-motion:reduce){.project-modal,.project-modal-card{animation:none}.project-view-button span{transition:none}}
+
+/* Scroll contrast — keep copy legible while preserving restrained motion. */
+.reveal{opacity:1}
+.reveal:not(.is-visible){opacity:1;transform:translateY(24px)}
+.reveal:not(.is-visible) .eyebrow,
+.reveal:not(.is-visible) h2,
+.reveal:not(.is-visible) .section-head>p:not(.eyebrow),
+.reveal:not(.is-visible) .work-head>p,
+.reveal:not(.is-visible) form,
+.reveal:not(.is-visible) .whatsapp-link{opacity:1;transform:translateY(14px)}
+.eyebrow{color:#294f37}
+.section-intro,.service-closing p,.credentials-compact .credential-intro>p:last-child{color:#355a42}
+.proof-point span{color:#365a42;font-size:12px}
+.work .eyebrow.light,.cta .eyebrow.light{color:#f2f8f4}
+.work-head>p{color:#edf6f0}
+.work-proof span{color:#dce9df;font-size:12px}
+.work-closing p{color:#e4efe7}
+.case-result small,.project-modal-result small{color:#d8e7dc}
+.cta>p:not(.eyebrow),.cta .whatsapp-link{color:#f2f8f4!important}
+footer p,.footer-availability{color:#e4efe7!important}
+footer small{color:#d7e5dc}
+.project-info p,.case-detail p,.project-modal-copy p{color:#2f523b}
+.project-modal-copy small{color:#466851}
+.project-modal-copy .project-modal-result small{color:#d8e7dc}
+@media(max-width:800px){
+  .reveal:not(.is-visible){transform:translateY(18px)}
+  .work-head>p,.work-proof span,.work-closing p,.cta>p:not(.eyebrow),.cta .whatsapp-link{color:#f0f7f2!important}
+}
