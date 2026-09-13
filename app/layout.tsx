@@ -6,7 +6,7 @@ import "./identity.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.manasse-mukendi.com"),
   title: "Marketing et communication digitale | Manassé Mukendi",
-  description: "Consultant en marketing et communication digitale, basé à Kinshasa et disponible en Afrique et à l’international. Stratégie, contenus et Social Media.",
+  description: "Consultant en marketing et communication digitale, mobile et disponible pour des projets en Afrique et à l’international. Stratégie, contenus et Social Media.",
   keywords: ["marketing et communication digitale", "consultant en communication digitale international", "marketing digital Afrique", "marketing digital Kinshasa", "Social Media Manager", "stratégie digitale", "communication digitale RDC"],
   applicationName: "Manassé Mukendi",
   alternates: {
