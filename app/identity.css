@@ -236,3 +236,15 @@ footer small{color:#d7e5dc}
   .contact.section{gap:44px}.contact form{padding:24px 18px}
 }
 @media(max-width:420px){.sector-grid{grid-template-columns:1fr}.hero{min-height:700px}}
+
+/* Touch devices must never keep desktop hover colours on light cards. */
+@media(hover:none),(pointer:coarse){
+  .service:hover,.service:active{background:#f7fbf8!important;border-color:#b8cec0!important;color:var(--ink)!important;box-shadow:none;transform:none}
+  .service:hover h3,.service:active h3{color:var(--ink)!important}
+  .service:hover p,.service:active p{color:#294f37!important}
+  .service:hover>span,.service:active>span{border-color:#c1d5c8!important;background:#edf5ef!important;color:#315b3e!important}
+  .service:hover .card-glyph,.service:active .card-glyph{color:var(--ink)!important}
+  .reasons article:hover,.reasons article:active{background:transparent!important;border-color:#bdd1c3!important;color:var(--ink)!important;box-shadow:none;transform:none}
+  .reasons article:hover h3,.reasons article:active h3{color:var(--ink)!important}
+  .reasons article:hover p,.reasons article:active p{color:#294f37!important}
+}
