@@ -6,8 +6,8 @@ import "./identity.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.manasse-mukendi.com"),
   title: "Marketing et communication digitale | Manassé Mukendi",
-  description: "Consultant en marketing et communication digitale et Social Media Manager à Kinshasa. J’aide les entreprises à structurer leur image, leur stratégie et leur présence en ligne.",
-  keywords: ["marketing et communication digitale", "marketing digital Kinshasa", "consultant en communication digitale", "Social Media Manager", "stratégie digitale", "communication digitale RDC", "réseaux sociaux RDC"],
+  description: "Consultant en marketing et communication digitale, basé à Kinshasa et disponible en Afrique et à l’international. Stratégie, contenus et Social Media.",
+  keywords: ["marketing et communication digitale", "consultant en communication digitale international", "marketing digital Afrique", "marketing digital Kinshasa", "Social Media Manager", "stratégie digitale", "communication digitale RDC"],
   applicationName: "Manassé Mukendi",
   alternates: {
     canonical: "/",
@@ -18,12 +18,12 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "Manassé Mukendi",
     title: "Marketing et communication digitale | Manassé Mukendi",
-    description: "Conseil, stratégie, contenus et Social Media pour construire une présence digitale plus claire, cohérente et efficace.",
+    description: "Conseil, stratégie, contenus et Social Media pour des entreprises en RDC, en Afrique et à l’international.",
   },
   twitter: {
     card: "summary",
     title: "Marketing et communication digitale | Manassé Mukendi",
-    description: "Conseil, stratégie, contenus et Social Media pour construire une présence digitale plus claire, cohérente et efficace.",
+    description: "Conseil, stratégie, contenus et Social Media pour des entreprises en RDC, en Afrique et à l’international.",
   },
   verification: {
     google: "4d_ZXQs7PN55JeZ_tB2xVSSPkjddHri67WOEBsxviEo",
