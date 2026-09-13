@@ -267,3 +267,14 @@ footer small{color:#d7e5dc}
   .form-end{gap:20px}.form-end p{font-size:12px;line-height:1.6}.form-end .button{flex:1 1 auto}
   footer p,.footer-links{font-size:13px;line-height:1.65}footer small{font-size:10px;line-height:1.55}
 }
+
+/* Conserver le portrait complet, sans recadrage, sur tous les écrans. */
+.portrait-photo{
+  width:100%;
+  height:auto!important;
+  aspect-ratio:3/4;
+  background-size:contain!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  background-color:#0a4423;
+}
