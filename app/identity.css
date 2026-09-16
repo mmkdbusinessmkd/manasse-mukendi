@@ -383,6 +383,19 @@ footer small{color:#d7e5dc}
 @media(max-width:380px){.testimonial-author{flex-direction:column}}
 @media(prefers-reduced-motion:reduce){.testimonial-details blockquote{animation:none}.testimonial-details summary span{transition:none}}
 
+/* Each card enters when it reaches the viewport, including expanded projects. */
+.motion-ready{transition:opacity .5s ease,transform .55s cubic-bezier(.22,1,.36,1),box-shadow .25s ease,background-color .25s ease!important;transition-delay:var(--entry-delay,0ms)!important}
+.motion-ready:not(.motion-in){opacity:0!important;transform:translateY(22px)!important;animation:none!important}
+.motion-ready.motion-in{opacity:1!important;animation:none!important}
+.testimonial-card{transition:border-color .25s ease,box-shadow .3s ease}
+.testimonial-card:hover{border-color:#779c83;box-shadow:0 12px 30px #0439150b}
+.contact input,.contact select,.contact textarea{transition:border-color .22s ease,background-color .22s ease,box-shadow .22s ease}
+.contact input:focus,.contact select:focus,.contact textarea:focus{border-bottom-color:#a94706;box-shadow:0 2px 0 #a94706;background-color:#ffffff50}
+.nav nav.open{animation:menu-arrive .25s ease both}
+@keyframes menu-arrive{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:800px){.motion-ready{transition-duration:.35s,.4s,.2s,.2s!important;transition-delay:0ms!important}.motion-ready:not(.motion-in){transform:translateY(14px)!important}}
+@media(prefers-reduced-motion:reduce){.motion-ready,.motion-ready:not(.motion-in){opacity:1!important;transform:none!important;transition:none!important}.nav nav.open{animation:none}.contact input,.contact select,.contact textarea,.testimonial-card{transition:none}}
+
 /* One card language and a clearer introduction. */
 .hero-positioning{margin:0 0 22px;color:#fff;font-size:clamp(18px,1.8vw,26px);font-weight:650;line-height:1.4;animation:hero-in .65s .12s both}
 .hero h1{font-size:clamp(40px,4.7vw,68px);line-height:1.08;max-width:780px}

@@ -23,9 +23,9 @@ const services = [
 const projects = [
   { name: "Simplifier le parcours client", client: "ZOOM TECH", type: "Social Media", sector: "Technologie", context: "Sensibiliser les entreprises à l’importance d’un suivi client rapide, clair et accessible.", intervention: "Conception éditoriale et visuelle d’un contenu pédagogique reliant la digitalisation à une meilleure expérience client.", result: "Un message commercial concret qui rend la promesse de Zoom Tech immédiatement compréhensible.", image: "/images/projects/zoom-tech-semaine.webp" },
   { name: "Événement de la semaine", client: "EVANTURA", type: "Social Media", sector: "Événementiel", context: "Rendre l’offre événementielle immédiatement compréhensible et attractive.", intervention: "Direction artistique et conception de visuels de campagne sur Photoshop.", result: "Une campagne visuelle cohérente avec l’univers et l’offre de la plateforme.", image: "/images/projects/evantura-evenement-semaine.webp" },
-  { name: "Fête du Travail — SNEL SA", client: "SNEL SA", type: "Communication", sector: "Institutionnel", context: "Prendre la parole à l’occasion du 1er Mai tout en valorisant les agents et techniciens de l’entreprise.", intervention: "Conception d’un visuel institutionnel aligné avec les codes de marque et adapté aux réseaux sociaux.", result: "Un message lisible, valorisant et cohérent avec la dimension nationale de l’entreprise.", image: "/images/projects/snel-fete-travail.jpg" },
+  { name: "Fête du travail — SNEL SA", client: "SNEL SA", type: "Communication", sector: "Institutionnel", context: "Prendre la parole à l’occasion du 1er mai tout en valorisant les agents et techniciens de l’entreprise.", intervention: "Conception d’un visuel institutionnel aligné avec les codes de marque et adapté aux réseaux sociaux.", result: "Un message lisible, valorisant et cohérent avec la dimension nationale de l’entreprise.", image: "/images/projects/snel-fete-travail.jpg" },
   { name: "Septembre, c’est la rentrée", client: "SAFIA BELLA", type: "Social Media", sector: "Marque personnelle", context: "Créer une prise de parole de rentrée alignée avec l’univers personnel de Safia Bella.", intervention: "Direction artistique, composition graphique et adaptation du message pour les réseaux sociaux.", result: "Un contenu de saison expressif, cohérent et immédiatement identifiable.", image: "/images/projects/safia-bella-rentree.webp" },
-  { name: "Campagne trafic FLMDA", client: "FLMDA RDC", type: "Publicité", sector: "Événementiel", context: "Renforcer la visibilité digitale de l’événement.", intervention: "Stratégie éditoriale, création de contenus, gestion des canaux et suivi de la communication.", result: "29 992 personnes touchées, progression de la communauté et forte production de contenus.", image: "/images/projects/flmda-campaign.jpeg" },
+  { name: "Campagne de trafic FLMDA", client: "FLMDA RDC", type: "Publicité", sector: "Événementiel", context: "Renforcer la visibilité digitale de l’événement.", intervention: "Stratégie éditoriale, création de contenus, gestion des canaux et suivi de la communication.", result: "29 992 personnes touchées, progression de la communauté et forte production de contenus.", image: "/images/projects/flmda-campaign.jpeg" },
   { name: "Contenu immobilier", client: "IMMO KONNECT", type: "Social Media", sector: "Immobilier", context: "Valoriser l’offre immobilière et soutenir sa visibilité en ligne.", intervention: "Création de contenus promotionnels adaptés aux réseaux sociaux.", result: "Des messages plus lisibles et une présence visuelle plus professionnelle.", image: "/images/projects/immo-konnect.jpeg" },
   { name: "Couverture du FLMDA 2026", client: "FESTIVAL DES LANGUES MATERNELLES", type: "Communication", sector: "Événementiel", context: "Faire vivre l’événement en temps réel auprès de la communauté.", intervention: "Couverture en direct, rédaction et publication de contenus événementiels.", result: "Une actualité continue et une meilleure visibilité des temps forts.", image: "/images/projects/flmda-live.jpeg" },
   { name: "Votre image parle avant vous", client: "LE COMMUNITY MANAGER", type: "Social Media", sector: "Marque personnelle", context: "Renforcer la perception d’expertise autour de la marque personnelle.", intervention: "Conception éditoriale et visuelle de contenus de sensibilisation.", result: "Une communication plus claire, cohérente et identifiable.", image: "/images/projects/le-community-manager.webp" },
@@ -33,7 +33,7 @@ const projects = [
 
 const contactFields = [
   { label: "Nom", type: "text", name: "name", placeholder: "Votre nom", required: true },
-  { label: "Email", type: "email", name: "email", placeholder: "votre@email.com", required: true },
+  { label: "E-mail", type: "email", name: "email", placeholder: "votre@email.com", required: true },
   { label: "Téléphone / WhatsApp", type: "tel", name: "phone", placeholder: "+243 ...", required: true },
 ];
 
@@ -102,6 +102,28 @@ export default function Home() {
     return () => observer.disconnect();
   }, []);
   useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const items = Array.from(document.querySelectorAll<HTMLElement>(".service, .consistent-projects .project, .why-grid article, .testimonial-card"));
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("motion-in");
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
+    items.forEach((item, index) => {
+      if (item.classList.contains("motion-ready")) return;
+      item.style.setProperty("--entry-delay", `${index % 2 * 70}ms`);
+      item.classList.add("motion-ready");
+      observer.observe(item);
+    });
+    return () => {
+      observer.disconnect();
+      items.forEach((item) => item.classList.add("motion-in"));
+    };
+  }, [showAllProjects]);
+  useEffect(() => {
     const hash = decodeURIComponent(window.location.hash.slice(1));
     const target = hash.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     if (hash && target !== hash && document.getElementById(target)) {
@@ -153,7 +175,7 @@ export default function Home() {
   const submit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
-    setFormMessage("Envoi en cours...");
+    setFormMessage("Envoi en cours…");
     try {
       const response = await fetch("https://formsubmit.co/ajax/mnssmukendi0@gmail.com", {
         method: "POST",
@@ -189,7 +211,7 @@ export default function Home() {
       <figure className="testimonial-card">
         <figcaption className="testimonial-author">
           <img src="/images/peter-ngoyi.png" alt="Peter Ngoyi N." width="1120" height="1109" loading="lazy" decoding="async"/>
-          <div><h3>Peter Ngoyi N.</h3><p>Stratège en communication &amp; écrivain</p><p className="testimonial-specialties">Marque d’entreprises · Personal Branding · RSE</p></div>
+          <div><h3>Peter Ngoyi N.</h3><p>Stratège en communication &amp; écrivain</p><p className="testimonial-specialties">Marques d’entreprise · Personal branding · RSE</p></div>
         </figcaption>
         <div className="testimonial-content">
           <blockquote className="testimonial-highlight"><p>« Il sait combiner simplicité, créativité, rapidité et efficacité quand vous travaillez avec lui dans des projets. »</p></blockquote>
@@ -209,7 +231,7 @@ export default function Home() {
 
     <section className="cta"><p className="eyebrow light">PROCHAINE ÉTAPE</p><h2>Votre communication<br/>peut faire <em>mieux.</em></h2><p>Parlons de votre image, de votre communication et de ce que vous souhaitez construire.</p><div className="actions"><a className="button white" href="#contact">Parler de mon projet <BrandGlyph/></a><a className="button button-ghost" href="#contact">Demander un devis <span className="button-dot" aria-hidden="true"></span></a></div></section>
 
-    <section className="contact section" id="contact"><div className="section-head"><p className="eyebrow">04 / CONTACT</p><h2>Votre projet commence<br/>par un <em>échange.</em></h2><p>Décrivez brièvement votre besoin. Je vous recontacte personnellement pour définir la meilleure prochaine étape.</p><a className="mail" href={`mailto:${contact.email}`}>{contact.email} <span className="link-dot" aria-hidden="true"></span></a><a className="whatsapp-link contact-whatsapp" href={contact.whatsapp} target="_blank" rel="noreferrer">Ou écrivez-moi sur WhatsApp <span className="link-dot" aria-hidden="true"></span></a></div><form onSubmit={submit}><input className="honeypot" type="text" name="_honey" tabIndex={-1} autoComplete="off"/><input type="hidden" name="_subject" value="Nouvelle demande — site Manassé Mukendi"/><input type="hidden" name="_template" value="table"/>{contactFields.map((field) => <label key={field.label}><span>{field.label}</span><input name={field.name} required={field.required} type={field.type} placeholder={field.placeholder}/></label>)}<label><span>Service recherché</span><select name="service" required defaultValue=""><option disabled value="">Choisir un service</option>{services.map(x => <option key={x[1]}>{x[1]}</option>)}</select></label><label className="full"><span>Votre besoin</span><textarea name="message" required placeholder="Votre objectif et le résultat que vous souhaitez obtenir..."></textarea></label><div className="form-end"><p>{formMessage || "Vos informations servent uniquement à vous recontacter au sujet de votre demande."}</p><button className="button dark">Envoyer ma demande <BrandGlyph/></button></div></form></section>
+    <section className="contact section" id="contact"><div className="section-head"><p className="eyebrow">04 / CONTACT</p><h2>Votre projet commence<br/>par un <em>échange.</em></h2><p>Décrivez brièvement votre besoin. Je vous recontacte personnellement pour définir la meilleure prochaine étape.</p><a className="mail" href={`mailto:${contact.email}`}>{contact.email} <span className="link-dot" aria-hidden="true"></span></a><a className="whatsapp-link contact-whatsapp" href={contact.whatsapp} target="_blank" rel="noreferrer">Ou écrivez-moi sur WhatsApp <span className="link-dot" aria-hidden="true"></span></a></div><form onSubmit={submit}><input className="honeypot" type="text" name="_honey" tabIndex={-1} autoComplete="off"/><input type="hidden" name="_subject" value="Nouvelle demande — site Manassé Mukendi"/><input type="hidden" name="_template" value="table"/>{contactFields.map((field) => <label key={field.label}><span>{field.label}</span><input name={field.name} required={field.required} type={field.type} placeholder={field.placeholder}/></label>)}<label><span>Service recherché</span><select name="service" required defaultValue=""><option disabled value="">Choisir un service</option>{services.map(x => <option key={x[1]}>{x[1]}</option>)}</select></label><label className="full"><span>Votre besoin</span><textarea name="message" required placeholder="Votre objectif et le résultat que vous souhaitez obtenir…"></textarea></label><div className="form-end"><p>{formMessage || "Vos informations servent uniquement à vous recontacter au sujet de votre demande."}</p><button className="button dark">Envoyer ma demande <BrandGlyph/></button></div></form></section>
 
     <footer><div><a className="brand footer-mark" href="#accueil" aria-label="Retour à l'accueil"><img src="/images/brand/icon-mm.png" alt="Manassé Mukendi"/></a><p>Consultant en marketing &amp; communication digitale<br/>Social Media Manager</p></div><p className="motto">Stratégie.<br/><em>Créativité.</em><br/>Résultats.</p><div className="footer-links"><p className="footer-availability">Disponible pour des missions ponctuelles, des accompagnements mensuels et des collaborations en RDC comme à l’international.</p>{Object.entries(contact.socials).map(([n,l]) => <a key={n} href={l} target="_blank" rel="noreferrer">{n} <span className="link-dot" aria-hidden="true"></span></a>)}</div><small>© 2026 Manassé Mukendi. Tous droits réservés.</small></footer>
 
