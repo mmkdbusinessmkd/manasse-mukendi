@@ -184,6 +184,29 @@ export default function Home() {
 
     <section className="trust-compact partners-return" aria-labelledby="trust-title"><div className="trust-copy"><p className="eyebrow">CONFIANCE &amp; EXPERTISE</p><h2 id="trust-title">Des compétences solides.<br/><em>Des collaborations réelles.</em></h2><div className="certification-chips">{certifications.map((certificate) => <span key={certificate}>{certificate}</span>)}</div></div><div className="partner-marquee partner-marquee-green" aria-label="Marques et organisations accompagnées"><div className="partner-track"><div className="partner-row">{partnerLogos.map(([name, logo]) => <div className="partner-card" key={name}><img src={logo} alt={name} loading="lazy" decoding="async"/></div>)}</div><div className="partner-row" aria-hidden="true">{partnerLogos.map(([name, logo]) => <div className="partner-card" key={`duplicate-${name}`}><img src={logo} alt="" loading="lazy" decoding="async"/></div>)}</div></div></div></section>
 
+    <section className="testimonial-section" id="temoignages" aria-labelledby="testimonial-title">
+      <div className="testimonial-heading"><p className="eyebrow">TÉMOIGNAGE</p><h2 id="testimonial-title">La confiance,<br/><em>dans leurs mots.</em></h2></div>
+      <figure className="testimonial-card">
+        <figcaption className="testimonial-author">
+          <img src="/images/peter-ngoyi.png" alt="Peter Ngoyi N." width="1120" height="1109" loading="lazy" decoding="async"/>
+          <div><h3>Peter Ngoyi N.</h3><p>Stratège en communication &amp; écrivain</p><p className="testimonial-specialties">Marque d’entreprises · Personal Branding · RSE</p></div>
+        </figcaption>
+        <div className="testimonial-content">
+          <blockquote className="testimonial-highlight"><p>« Il sait combiner simplicité, créativité, rapidité et efficacité quand vous travaillez avec lui dans des projets. »</p></blockquote>
+          <details className="testimonial-details">
+            <summary>Lire le témoignage complet <span aria-hidden="true">+</span></summary>
+            <blockquote>
+              <p>Manassé Mukendi est un professionnel tel qu’on n’en trouve pas tous les jours.</p>
+              <p>Il sait combiner simplicité, créativité, rapidité et efficacité quand vous travaillez avec lui dans des projets.</p>
+              <p>Je l’ai connu comme client (parce qu’il devait acheter un de mes livres), et très vite nous sommes devenus partenaires.</p>
+              <p>Je suis satisfait de collaborer avec lui, et je n’ai que de bons retours partout où je recommande ses services.</p>
+              <p>Si vous voulez du sérieux pour votre projet, en matière de design graphique et de communication digitale : prenez dès maintenant les services de Manassé Mukendi.</p>
+            </blockquote>
+          </details>
+        </div>
+      </figure>
+    </section>
+
     <section className="cta"><p className="eyebrow light">PROCHAINE ÉTAPE</p><h2>Votre communication<br/>peut faire <em>mieux.</em></h2><p>Parlons de votre image, de votre communication et de ce que vous souhaitez construire.</p><div className="actions"><a className="button white" href="#contact">Parler de mon projet <BrandGlyph/></a><a className="button button-ghost" href="#contact">Demander un devis <span className="button-dot" aria-hidden="true"></span></a></div></section>
 
     <section className="contact section" id="contact"><div className="section-head"><p className="eyebrow">04 / CONTACT</p><h2>Votre projet commence<br/>par un <em>échange.</em></h2><p>Décrivez brièvement votre besoin. Je vous recontacte personnellement pour définir la meilleure prochaine étape.</p><a className="mail" href={`mailto:${contact.email}`}>{contact.email} <span className="link-dot" aria-hidden="true"></span></a><a className="whatsapp-link contact-whatsapp" href={contact.whatsapp} target="_blank" rel="noreferrer">Ou écrivez-moi sur WhatsApp <span className="link-dot" aria-hidden="true"></span></a></div><form onSubmit={submit}><input className="honeypot" type="text" name="_honey" tabIndex={-1} autoComplete="off"/><input type="hidden" name="_subject" value="Nouvelle demande — site Manassé Mukendi"/><input type="hidden" name="_template" value="table"/>{contactFields.map((field) => <label key={field.label}><span>{field.label}</span><input name={field.name} required={field.required} type={field.type} placeholder={field.placeholder}/></label>)}<label><span>Service recherché</span><select name="service" required defaultValue=""><option disabled value="">Choisir un service</option>{services.map(x => <option key={x[1]}>{x[1]}</option>)}</select></label><label className="full"><span>Votre besoin</span><textarea name="message" required placeholder="Votre objectif et le résultat que vous souhaitez obtenir..."></textarea></label><div className="form-end"><p>{formMessage || "Vos informations servent uniquement à vous recontacter au sujet de votre demande."}</p><button className="button dark">Envoyer ma demande <BrandGlyph/></button></div></form></section>
