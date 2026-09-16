@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import "./identity.css";
+import "./polish.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.manasse-mukendi.com"),
