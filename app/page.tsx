@@ -91,12 +91,9 @@ export default function Home() {
     sections.forEach((section) => section.classList.add("reveal"));
     const observer = new IntersectionObserver(
       (entries) => entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
+        entry.target.classList.toggle("is-visible", entry.isIntersecting);
       }),
-      { threshold: 0, rootMargin: "0px 0px -40px 0px" },
+      { threshold: 0.12, rootMargin: "-4% 0px -8% 0px" },
     );
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
@@ -106,10 +103,7 @@ export default function Home() {
     const items = Array.from(document.querySelectorAll<HTMLElement>(".service, .consistent-projects .project, .why-grid article, .testimonial-card"));
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("motion-in");
-          observer.unobserve(entry.target);
-        }
+        entry.target.classList.toggle("motion-in", entry.isIntersecting);
       });
     }, { threshold: 0.08 });
     items.forEach((item, index) => {
@@ -120,7 +114,6 @@ export default function Home() {
     });
     return () => {
       observer.disconnect();
-      items.forEach((item) => item.classList.add("motion-in"));
     };
   }, [showAllProjects]);
   useEffect(() => {
