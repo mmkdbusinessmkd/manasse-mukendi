@@ -4,7 +4,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 
 const contact = {
   whatsapp: "https://wa.me/243838318812",
-  email: "mnssmukendi0@gmail.com",
+  email: "contact@manasse-mukendi.com",
   socials: {
     LinkedIn: "https://www.linkedin.com/in/manass%C3%A9-mukendi-75412b295/",
     Instagram: "https://www.instagram.com/sir_manasse_mukendi/?hl=fr",
@@ -170,7 +170,7 @@ export default function Home() {
     const form = e.currentTarget;
     setFormMessage("Envoi en cours…");
     try {
-      const response = await fetch("https://formsubmit.co/ajax/mnssmukendi0@gmail.com", {
+      const response = await fetch("https://formsubmit.co/ajax/contact@manasse-mukendi.com", {
         method: "POST",
         headers: { Accept: "application/json" },
         body: new FormData(form),
