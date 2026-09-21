@@ -109,3 +109,56 @@ footer{border-top-color:#d3e6c926}
  .hero-copy>.eyebrow,.hero-copy>h1,.hero-copy>.intro,.hero-copy>.actions{opacity:1;transform:none}
  .motion-ready,.motion-ready:not(.motion-in),.reveal,.reveal:not(.is-visible){opacity:1!important;transform:none!important}
 }
+
+/* Direction graphique issue de la charte : vert profond, lumière végétale, orange signature et surfaces ivoire. */
+:root{--forest:#043b21;--forest-deep:#022d19;--paper-warm:#f7f8ef;--lime-glow:#85ef72;--orange-brand:#ff7a1c;--accent:var(--orange-brand)}
+body{background:var(--paper-warm)}
+h1 em,h2 em,.motto em{font-family:Manrope,Arial,sans-serif;font-style:italic;font-weight:700;letter-spacing:-.07em}
+.hero,.work,footer{background-color:var(--forest-deep);background-image:radial-gradient(circle at -8% -5%,#85ef726b 0%,#85ef7219 16%,transparent 38%),radial-gradient(circle at 104% 92%,#85ef7254 0%,#85ef7210 18%,transparent 39%),linear-gradient(120deg,#033a20 0%,#04361e 46%,#022d19 100%)}
+.hero:after,.work:after,footer:after{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(112deg,transparent 0 47%,#b9ffad09 48% 48.2%,transparent 49% 100%),linear-gradient(24deg,transparent 0 49%,#b9ffad07 50% 50.2%,transparent 51% 100%);background-size:115px 115px;mix-blend-mode:screen;opacity:.7}
+.hero-copy,.hero .orbit,.hero-foot,.work-head,.work-proof,.project-grid,.work-actions,footer>div,footer>small{position:relative;z-index:1}
+.hero h1 em,.work h2 em,.cta h2 em{color:var(--orange-brand)}
+.hero .intro{max-width:600px;color:#f0f5ea;font-size:clamp(15px,1.25vw,18px)}
+.hero .intro:before{background:var(--orange-brand)}
+.hero .eyebrow,.eyebrow.light{color:#e6f5df}
+.hero .eyebrow span{color:var(--orange-brand)}
+.hero .orbit-core{background:radial-gradient(circle at 32% 28%,#ffb05c 0%,var(--orange-brand) 62%,#e9610a 100%);box-shadow:0 0 0 14px #85ef720b,0 0 0 34px #85ef7207,0 22px 58px #00000035}
+.hero .orbit-ring,.hero .orbit-ring:before,.hero .orbit-ring:after{border-color:#b7efad35}
+.hero .tag{color:#e9f5e5}.hero .dot{background:var(--orange-brand);box-shadow:0 0 0 9px #ff7a1c20}
+.button{border-radius:16px 999px 999px 16px!important;font-size:12px;letter-spacing:.015em}
+.button.white{background:var(--paper-warm);color:var(--forest)}
+.button.white:hover{background:var(--orange-brand);color:#fff}
+.button.button-ghost,.button.project-toggle{border-color:#dff1d770;background:#ffffff09;color:#fff}
+.button.button-ghost:hover,.button.project-toggle:hover{background:#e9f4e3;border-color:#e9f4e3;color:var(--forest)}
+.button:after{background:var(--orange-brand)}
+.services,.why,.testimonial-section,.contact{background:linear-gradient(145deg,#f8f9f0,#edf4e8)}
+.services:after,.why:after,.contact:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:linear-gradient(90deg,#05432108 1px,transparent 1px),linear-gradient(#05432108 1px,transparent 1px);background-size:64px 64px}
+.services>*,.why>*,.contact>*{position:relative;z-index:1}
+.section-head h2,.about-copy h2,.why-head h2,.trust-copy h2{color:var(--forest)}
+.section-head h2 em,.about-copy h2 em,.why-head h2 em,.trust-copy h2 em{color:#e96411}
+.service{background:#fbfcf6;border-color:#b7ccb8;border-radius:22px;box-shadow:0 2px 0 #fff inset,0 12px 30px #04391508}
+.service:before{height:4px;background:linear-gradient(90deg,var(--orange-brand),#ffb65b)}
+.service:hover{background:linear-gradient(145deg,#074622,#043a1f);border-color:#074622;box-shadow:0 20px 38px #0439151e}
+.service:hover h3,.service:hover p,.service:hover .service-cta{color:#fff!important}.service:hover .service-cta{border-color:#dff1d744}
+.about-short{background:#d8e8da;padding:clamp(12px,1.2vw,20px)}
+.about-short .portrait{background:linear-gradient(145deg,#0a4826,#03351c);border-color:#80a785;transform:rotate(-.65deg)}
+.about-short .portrait:after{content:"";position:absolute;inset:auto -10% -18% 35%;height:45%;background:radial-gradient(ellipse,#85ef7238,transparent 68%);pointer-events:none}
+.about-short .portrait-photo{position:relative;z-index:1;background-color:#f7f8ef}
+.about-short .portrait-note{position:relative;z-index:1;color:#f6faef}.about-short .portrait-note .brand-glyph{--glyph-bg:#f6faef;--glyph-main:var(--forest)}
+.about-short .about-copy{background:linear-gradient(135deg,#f9faf1,#eaf3e6)}
+.why-grid article{background:#f9faf3;border-radius:18px;border-color:#bcd1bb}.why-grid article>span{background:#e5f2df;color:var(--forest)}
+.work{background-color:var(--forest-deep)}
+.work-proof{border-color:#b8eead44;background:#ffffff08}.work-proof strong{color:#fff}.work-proof span{color:#d9ecda}
+.consistent-projects .project{border-radius:24px;border-color:#c4d4c0;box-shadow:0 20px 38px #0000002b}.consistent-projects .project-info{background:#f9faf2}.consistent-projects .project-info h3,.case-client strong{color:var(--forest)}
+.consistent-projects .project-art:before{background:linear-gradient(180deg,#022d1903 38%,#022d19b8)}
+.project-view-button{color:var(--forest);font-weight:800}.project-view-button:hover{color:#e96411}
+.partners-return{background:linear-gradient(135deg,#e6f3e1,#f5f8ed)}
+.partner-marquee-green{background:linear-gradient(90deg,#0a4826,#064321 55%,#0a4826)!important;border-top-color:#8ad47b55!important;border-bottom-color:#8ad47b55!important}
+.partner-marquee-green .partner-card{background:#eff7e8;border-color:#ccdfc6;box-shadow:0 3px 0 #fff inset}
+.testimonial-card{background:linear-gradient(145deg,#fbfcf5,#eaf3e5);border-color:#bfd2ba;box-shadow:0 20px 42px #0439150d}
+.cta{background:radial-gradient(circle at 6% 12%,#85ef7250,transparent 25%),radial-gradient(circle at 97% 90%,#85ef7240,transparent 28%),linear-gradient(125deg,#043b21,#022d19)}
+.cta:after{border-color:#b9efae3d}.cta>p:not(.eyebrow){color:#e5f0e2}
+.contact form{background:#fbfcf5;border-color:#b9cfb8;box-shadow:0 20px 45px #0439150b}
+footer{background-color:var(--forest-deep)}
+footer:before{border-color:#85ef7238}.footer-social-actions a{border-color:#dff1d766;background:#ffffff0b}.footer-social-actions a:hover{background:#f7f9ef;color:var(--forest)!important}
+@media(max-width:800px){.hero:after,.work:after,footer:after{background-size:72px 72px}.about-short .portrait{transform:none}.services:after,.why:after,.contact:after{background-size:42px 42px}.service{border-radius:18px}.consistent-projects .project{border-radius:18px}}
