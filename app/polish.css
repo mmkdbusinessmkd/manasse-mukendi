@@ -197,8 +197,6 @@ footer:before{border-color:#85ef7238}.footer-social-actions a{border-color:#dff1
 
 @media(max-width:800px){
   .hero{padding-bottom:110px}
-  .hero-foot{left:6%;right:6%;bottom:18px;line-height:1.55}
-  .hero-foot span:first-child{display:block;max-width:240px}
-  .hero-foot span:last-child{display:none}
+  .hero-foot{display:none}
   .hero .actions{position:relative;z-index:2}
 }
