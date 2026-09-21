@@ -157,11 +157,25 @@ h1 em,h2 em,.motto em{font-family:Manrope,Arial,sans-serif;font-style:italic;fon
 .project-view-button{color:var(--forest);font-weight:800}.project-view-button:hover{color:#e96411}
 .partners-return{background:linear-gradient(135deg,#e6f3e1,#f5f8ed)}
 .partner-marquee-green{background:linear-gradient(90deg,#0a4826,#064321 55%,#0a4826)!important;border-top-color:#8ad47b55!important;border-bottom-color:#8ad47b55!important}
-.partner-marquee-green .partner-card{background:#eff7e8;border-color:#ccdfc6;box-shadow:0 3px 0 #fff inset}
+.partner-marquee-green .partner-card{background:#fff;border-color:#fff;box-shadow:0 6px 18px #001c0d2e}
+.partner-marquee-green .partner-card img{background:#fff;filter:grayscale(1) contrast(1.28) brightness(.52);mix-blend-mode:normal;opacity:.88}
+.partner-marquee-green .partner-card:hover{background:#fff;border-color:#fff;box-shadow:0 10px 24px #001c0d44}
+.partner-marquee-green .partner-card:hover img{filter:grayscale(1) contrast(1.35) brightness(.38);opacity:1}
 .testimonial-card{background:linear-gradient(145deg,#fbfcf5,#eaf3e5);border-color:#bfd2ba;box-shadow:0 20px 42px #0439150d}
 .cta{background:radial-gradient(circle at 6% 12%,#85ef7250,transparent 25%),radial-gradient(circle at 97% 90%,#85ef7240,transparent 28%),linear-gradient(125deg,#043b21,#022d19)}
 .cta:after{border-color:#b9efae3d}.cta>p:not(.eyebrow){color:#e5f0e2}
 .contact form{background:#fbfcf5;border-color:#b9cfb8;box-shadow:0 20px 45px #0439150b}
 footer{background-color:var(--forest-deep)}
 footer:before{border-color:#85ef7238}.footer-social-actions a{border-color:#dff1d766;background:#ffffff0b}.footer-social-actions a:hover{background:#f7f9ef;color:var(--forest)!important}
+
+/* Un rythme de lecture commun : information compacte, alignée et sans zones vides inutiles. */
+.services .section-head,.work-head{column-gap:clamp(32px,6vw,90px)}
+.services .section-head .section-intro{max-width:410px;justify-self:end}
+.about-short .about-copy,.trust-copy,.testimonial-heading{min-width:0}
+.about-short .bio{max-width:560px}
+.work-head>div{min-width:0}.work-head>p{max-width:350px;margin:0}
+.work-proof span{padding:18px 20px;line-height:1.5}
+.trust-copy h2{max-width:510px}.certification-chips{max-width:540px}
+.testimonial-card{align-items:center}
+@media(max-width:1100px){.services .section-head .section-intro{justify-self:start}.work-head{row-gap:24px}.work-head>p{max-width:540px}}
 @media(max-width:800px){.hero:after,.work:after,footer:after{background-size:72px 72px}.about-short .portrait{transform:none}.services:after,.why:after,.contact:after{background-size:42px 42px}.service{border-radius:18px}.consistent-projects .project{border-radius:18px}}
