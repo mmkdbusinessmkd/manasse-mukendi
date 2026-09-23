@@ -200,3 +200,44 @@ footer:before{border-color:#85ef7238}.footer-social-actions a{border-color:#dff1
   .hero-foot{display:none}
   .hero .actions{position:relative;z-index:2}
 }
+
+/* Passe éditoriale : moins de bruit, plus de rythme et une lecture plus confortable. */
+.section,.work,.trust-compact,.testimonial-section,.cta{padding-top:clamp(76px,8vw,112px);padding-bottom:clamp(76px,8vw,112px)}
+.eyebrow{font-size:12px;line-height:1.45;letter-spacing:.09em}
+.hero .eyebrow{font-size:12px}
+.section-intro,.work-head>p,.contact .section-head>p:not(.eyebrow){font-size:16px;line-height:1.7}
+.service p,.why-grid p,.editorial-bio p,.footer-availability{font-size:15px;line-height:1.7}
+.service-cta,.project-view-button{font-size:13px}
+.section-head h2,.about-copy h2,.work h2,.why-head h2,.trust-copy h2,.cta h2{font-size:clamp(30px,3.6vw,48px);line-height:1.08}
+
+.services .section-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(280px,.48fr);align-items:end;gap:28px;margin-bottom:48px}
+.services .section-head .eyebrow,.services .section-head h2{grid-column:1}
+.services .section-head .section-intro{grid-column:2;grid-row:1 / span 2;justify-self:stretch;margin:0;padding:0 0 4px 22px;border-left:2px solid var(--orange-brand)}
+.service-grid{gap:14px;border:0}
+.service{min-height:270px;padding:26px;border-radius:18px}
+.service h3{margin:42px 0 12px;font-size:18px;line-height:1.25}
+.service-cta{margin-top:22px}
+
+.work-head{align-items:end}.work-proof{margin:24px 0 28px;border-radius:14px;overflow:hidden}
+.consistent-projects{gap:20px}.consistent-projects .project{border-radius:18px}
+.consistent-projects .project-art{height:280px}.consistent-projects .project-info{padding:24px}
+.consistent-projects .project-info h3{font-size:21px;line-height:1.18}
+.work-actions{margin-top:30px}
+
+.about-short{margin-top:40px;margin-bottom:40px}.about-short .about-copy{padding-block:52px}
+.why-grid{gap:14px}.why-grid article{border-radius:14px}
+.trust-compact{align-items:center}.partner-marquee-green{border-radius:16px}
+.testimonial-card{border-radius:18px}.cta{margin:0;border-radius:0}
+
+@media(min-width:1200px){.service-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.service{min-height:300px}}
+@media(max-width:800px){
+  .section,.work,.trust-compact,.testimonial-section,.cta{padding-top:68px;padding-bottom:68px}
+  .eyebrow,.hero .eyebrow{font-size:11px}
+  .section-intro,.work-head>p,.contact .section-head>p:not(.eyebrow),.service p,.why-grid p,.editorial-bio p,.footer-availability{font-size:14px}
+  .services .section-head{display:block;margin-bottom:34px}
+  .services .section-head .section-intro{margin-top:20px;padding:0 0 0 16px}
+  .service{min-height:0;padding:24px}
+  .service h3{margin-top:34px}
+  .consistent-projects .project-art{height:245px}
+  .about-short .about-copy{padding-block:30px}
+}
