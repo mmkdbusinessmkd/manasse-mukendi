@@ -241,3 +241,18 @@ footer:before{border-color:#85ef7238}.footer-social-actions a{border-color:#dff1
   .consistent-projects .project-art{height:245px}
   .about-short .about-copy{padding-block:30px}
 }
+
+/* Les cartes services conservent un contraste fort, y compris sur écran tactile. */
+.service:hover,.service:active,.service:focus-within{
+  background:#f7faf4!important;
+  color:var(--forest)!important;
+  border-color:#6c9579!important;
+  box-shadow:0 16px 34px #04391514!important;
+}
+.service:hover h3,.service:active h3,.service:focus-within h3,
+.service:hover p,.service:active p,.service:focus-within p,
+.service:hover .service-cta,.service:active .service-cta,.service:focus-within .service-cta{
+  color:var(--forest)!important;
+}
+.service:hover .service-cta,.service:active .service-cta,.service:focus-within .service-cta{border-color:#b8cfbd!important}
+@media(hover:hover) and (pointer:fine){.service:hover{transform:translateY(-4px)}}
