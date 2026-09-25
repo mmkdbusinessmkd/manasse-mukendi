@@ -130,7 +130,7 @@ h1 em,h2 em,.motto em{font-family:Manrope,Arial,sans-serif;font-style:italic;fon
 .hero .tag{color:#e9f5e5}.hero .dot{background:var(--orange-brand);box-shadow:0 0 0 9px #ff7a1c20}
 .button{border-radius:16px 999px 999px 16px!important;font-size:12px;letter-spacing:.015em}
 .button.white{background:var(--paper-warm);color:var(--forest)}
-.button.white:hover{background:var(--orange-brand);color:#fff}
+.button.white:hover{background:var(--orange-brand);color:var(--forest-deep)}
 .button.button-ghost,.button.project-toggle{border-color:#dff1d770;background:#ffffff09;color:#fff}
 .button.button-ghost:hover,.button.project-toggle:hover{background:#e9f4e3;border-color:#e9f4e3;color:var(--forest)}
 .button:after{background:var(--orange-brand)}
@@ -141,8 +141,6 @@ h1 em,h2 em,.motto em{font-family:Manrope,Arial,sans-serif;font-style:italic;fon
 .section-head h2 em,.about-copy h2 em,.why-head h2 em,.trust-copy h2 em{color:#e96411}
 .service{background:#fbfcf6;border-color:#b7ccb8;border-radius:22px;box-shadow:0 2px 0 #fff inset,0 12px 30px #04391508}
 .service:before{height:4px;background:linear-gradient(90deg,var(--orange-brand),#ffb65b)}
-.service:hover{background:linear-gradient(145deg,#074622,#043a1f);border-color:#074622;box-shadow:0 20px 38px #0439151e}
-.service:hover h3,.service:hover p,.service:hover .service-cta{color:#fff!important}.service:hover .service-cta{border-color:#dff1d744}
 .about-short{background:#d8e8da;padding:clamp(12px,1.2vw,20px)}
 .about-short .portrait{background:linear-gradient(145deg,#0a4826,#03351c);border-color:#80a785;transform:rotate(-.65deg)}
 .about-short .portrait:after{content:"";position:absolute;inset:auto -10% -18% 35%;height:45%;background:radial-gradient(ellipse,#85ef7238,transparent 68%);pointer-events:none}
@@ -216,7 +214,7 @@ footer:before{border-color:#85ef7238}.footer-social-actions a{border-color:#dff1
 .service-grid{gap:14px;border:0}
 .service{min-height:270px;padding:26px;border-radius:18px}
 .service h3{margin:42px 0 12px;font-size:18px;line-height:1.25}
-.service-cta{margin-top:22px}
+.service-cta{margin-top:auto;min-height:58px;gap:16px}
 
 .work-head{align-items:end}.work-proof{margin:24px 0 28px;border-radius:14px;overflow:hidden}
 .consistent-projects{gap:20px}.consistent-projects .project{border-radius:18px}
@@ -229,7 +227,11 @@ footer:before{border-color:#85ef7238}.footer-social-actions a{border-color:#dff1
 .trust-compact{align-items:center}.partner-marquee-green{border-radius:16px}
 .testimonial-card{border-radius:18px}.cta{margin:0;border-radius:0}
 
-@media(min-width:1200px){.service-grid{grid-template-columns:repeat(5,minmax(0,1fr))}.service{min-height:300px}}
+@media(min-width:1101px){
+  .service-grid{grid-template-columns:repeat(6,minmax(0,1fr));gap:20px}
+  .service{grid-column:span 2;min-height:290px}
+  .service:nth-child(n+4){grid-column:span 3}
+}
 @media(max-width:800px){
   .section,.work,.trust-compact,.testimonial-section,.cta{padding-top:68px;padding-bottom:68px}
   .eyebrow,.hero .eyebrow{font-size:11px}
@@ -256,3 +258,54 @@ footer:before{border-color:#85ef7238}.footer-social-actions a{border-color:#dff1
 }
 .service:hover .service-cta,.service:active .service-cta,.service:focus-within .service-cta{border-color:#b8cfbd!important}
 @media(hover:hover) and (pointer:fine){.service:hover{transform:translateY(-4px)}}
+
+/* Layout constraints belong to the component, not to decorative layers. */
+.contact form,.contact .section-head,.contact label,.form-end{min-width:0}
+.contact .section-head h2{margin-bottom:20px}
+.contact .contact-whatsapp{font:600 14px/1.6 Manrope,Arial,sans-serif;padding-block:12px}
+.contact input,.contact select,.contact textarea{min-width:0;max-width:100%;width:100%;font:inherit}
+.contact .mail{max-width:100%;overflow-wrap:anywhere;font-size:clamp(16px,1.6vw,23px)}
+.form-end{gap:20px;align-items:start}
+.form-end p{line-height:1.65;margin:0}
+.button:disabled{cursor:wait;opacity:.7;transform:none;box-shadow:none}
+.button{transition:transform .25s var(--ease-studio),box-shadow .25s ease}
+.button-ghost:hover,.button.project-toggle:hover{background:#e9f4e3!important;color:var(--forest)!important}
+a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #d75d00;outline-offset:5px}
+.project-modal-copy>div{margin-block:24px}
+.project-modal-copy p{line-height:1.75}
+.project-view-button .brand-glyph{flex-shrink:0}
+.project-view-button:hover .brand-glyph{transform:rotate(8deg)}
+.partner-marquee{max-width:100%}
+footer{position:relative;overflow:hidden}
+
+@media(min-width:801px){
+  .hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:center;gap:3vw;padding-top:84px;padding-bottom:108px}
+  .hero-copy{max-width:100%;min-width:0}
+  .hero h1{font-size:clamp(38px,4.7vw,72px)}
+  .hero .orbit{position:relative;inset:auto;width:100%;max-width:535px;justify-self:center;opacity:.92}
+  .hero .actions{flex-wrap:wrap}
+}
+@media(min-width:801px) and (max-width:1100px){
+  .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .service:last-child{grid-column:1/-1}
+}
+@media(max-width:800px){
+  .contact form{grid-template-columns:minmax(0,1fr)}
+  .contact label,.contact label.full,.form-end{grid-column:1}
+  .contact input,.contact select,.contact textarea{font-size:16px}
+  .form-end{display:flex;flex-direction:column;align-items:stretch}
+  .hero .actions{flex-wrap:wrap}
+  .hero .button{max-width:100%;min-width:0;gap:16px}
+  .service-closing a{display:flex;align-items:center;gap:14px;line-height:1.5}
+  .project-modal-card{max-height:90dvh;overflow-y:auto}
+  .motion-ready.motion-in{animation-duration:.4s!important}
+}
+@media(prefers-reduced-motion:no-preference){
+  .hero .orbit-ring{animation:spin 40s linear infinite!important}
+  .motion-ready.motion-in{animation-delay:var(--entry-delay,0ms)!important}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto!important}
+  .motion-ready,.motion-ready.motion-in,.reveal{opacity:1!important;transform:none!important}
+}
