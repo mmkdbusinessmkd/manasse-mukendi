@@ -271,6 +271,10 @@ footer:before{border-color:#85ef7238}.footer-social-actions a{border-color:#dff1
 .button{transition:transform .25s var(--ease-studio),box-shadow .25s ease}
 .button-ghost:hover,.button.project-toggle:hover{background:#e9f4e3!important;color:var(--forest)!important}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #d75d00;outline-offset:5px}
+.project-modal-card{height:min(820px,90dvh)}
+.project-modal-visual{position:relative;min-height:0;min-width:0}
+.project-modal-visual img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;object-position:center}
+.project-modal-copy{min-height:0}
 .project-modal-copy>div{margin-block:24px}
 .project-modal-copy p{line-height:1.75}
 .project-view-button .brand-glyph{flex-shrink:0}
@@ -297,7 +301,7 @@ footer{position:relative;overflow:hidden}
   .hero .actions{flex-wrap:wrap}
   .hero .button{max-width:100%;min-width:0;gap:16px}
   .service-closing a{display:flex;align-items:center;gap:14px;line-height:1.5}
-  .project-modal-card{max-height:90dvh;overflow-y:auto}
+  .project-modal-card{height:auto;max-height:90dvh;overflow-y:auto}
   .motion-ready.motion-in{animation-duration:.4s!important}
 }
 @media(prefers-reduced-motion:no-preference){
