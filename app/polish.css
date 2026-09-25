@@ -2,8 +2,8 @@
 :root{--ease-studio:cubic-bezier(.22,1,.36,1);--surface-studio:#f7f9f3}
 body{background:#edf3ec}
 ::selection{background:#ff7a1c;color:#082d19}
-.nav{background:#f2f7eff5;border-bottom:1px solid #183e2426}
-.nav.scrolled{background:#f2f7eff5;box-shadow:0 8px 32px #032c1410}
+.nav{background:#f2f7ef;border-bottom:1px solid #ffffffa6;box-shadow:inset 0 1px 0 #fff9;-webkit-backdrop-filter:none;backdrop-filter:none}
+.nav.scrolled{background:#edf4ec;box-shadow:inset 0 1px 0 #ffffffb3,0 8px 28px #032c141a}
 .hero,.work,footer{background-image:radial-gradient(ellipse at 95% 10%,#386b3c45,transparent 48%),linear-gradient(125deg,#092f20,#043915 58%,#032819)}
 .hero,.work,footer{background-size:cover;background-repeat:no-repeat}
 .hero{border-bottom:1px solid #c5dccd30}
@@ -22,11 +22,9 @@ body{background:#edf3ec}
 .hero-foot{border-top:1px solid #d6eadc25;padding-top:18px}
 .button{font-weight:700;box-shadow:0 5px 16px #032c140d;transition:transform .3s var(--ease-studio),box-shadow .3s ease,background-color .3s ease,color .3s ease;isolation:isolate}
 .button.white{background:#f7f9f3;color:#123b25}
-.button.button-ghost,.button.project-toggle{background:#ffffff05;color:#f4f8ef;border-color:#bfd2c566;box-shadow:none}
 .button:before{display:block;content:"";position:absolute;z-index:-1;inset:0;background:linear-gradient(112deg,transparent 26%,#ffffff8c 50%,transparent 74%);transform:translateX(-130%);transition:transform .62s var(--ease-studio)}
 .button:hover:before{transform:translateX(130%)}
 .button:hover{background:#f8a259;color:#103b24;box-shadow:0 10px 26px #021e1420}
-.button.button-ghost:hover,.button.project-toggle:hover{background:#e7eee1;color:#103b24;border-color:#e7eee1}
 .button .brand-glyph{box-shadow:none}
 .button:active{transform:translateY(1px) scale(.985);transition-duration:.12s}
 .button .brand-glyph{transition:transform .38s var(--ease-studio),background .28s ease,box-shadow .28s ease}
@@ -131,8 +129,9 @@ h1 em,h2 em,.motto em{font-family:Manrope,Arial,sans-serif;font-style:italic;fon
 .button{border-radius:16px 999px 999px 16px!important;font-size:12px;letter-spacing:.015em}
 .button.white{background:var(--paper-warm);color:var(--forest)}
 .button.white:hover{background:var(--orange-brand);color:var(--forest-deep)}
-.button.button-ghost,.button.project-toggle{border-color:#dff1d770;background:#ffffff09;color:#fff}
-.button.button-ghost:hover,.button.project-toggle:hover{background:#e9f4e3;border-color:#e9f4e3;color:var(--forest)}
+.button.button-ghost,.button.project-toggle{border-color:#dff1d773;background:linear-gradient(135deg,#ffffff0d,transparent 65%),#123f2c;color:#f7faf4;box-shadow:inset 0 1px 0 #ffffff26,inset 0 -1px 0 #00180c29,0 8px 24px #001b0d14}
+.button.button-ghost:hover,.button.project-toggle:hover,.button.button-ghost:focus-visible,.button.project-toggle:focus-visible{background:linear-gradient(135deg,#ffffff12,transparent 65%),#1a4d36;border-color:#dff1d7b3;color:#fff;box-shadow:inset 0 1px 0 #ffffff40,0 10px 26px #001b0d24}
+.button.button-ghost:before,.button.project-toggle:before{display:none}
 .button:after{background:var(--orange-brand)}
 .services,.why,.testimonial-section,.contact{background:linear-gradient(145deg,#f8f9f0,#edf4e8)}
 .services:after,.why:after,.contact:after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;background-image:linear-gradient(90deg,#05432108 1px,transparent 1px),linear-gradient(#05432108 1px,transparent 1px);background-size:64px 64px}
@@ -269,9 +268,9 @@ footer:before{border-color:#85ef7238}.footer-social-actions a{border-color:#dff1
 .form-end p{line-height:1.65;margin:0}
 .button:disabled{cursor:wait;opacity:.7;transform:none;box-shadow:none}
 .button{transition:transform .25s var(--ease-studio),box-shadow .25s ease}
-.button-ghost:hover,.button.project-toggle:hover{background:#e9f4e3!important;color:var(--forest)!important}
 a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #d75d00;outline-offset:5px}
-.project-modal-card{height:min(820px,90dvh)}
+.project-modal{background:#032b1be6;-webkit-backdrop-filter:none;backdrop-filter:none}
+.project-modal-card{height:min(820px,90dvh);border-color:#e4f6e473;box-shadow:0 32px 90px #00180ca6,inset 0 1px 0 #ffffff80}
 .project-modal-visual{position:relative;min-height:0;min-width:0}
 .project-modal-visual img{position:absolute;inset:0;display:block;width:100%;height:100%;object-fit:contain;object-position:center}
 .project-modal-copy{min-height:0}
@@ -281,6 +280,14 @@ a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid #d7
 .project-view-button:hover .brand-glyph{transform:rotate(8deg)}
 .partner-marquee{max-width:100%}
 footer{position:relative;overflow:hidden}
+
+/* Verre teinté uniquement sur les surfaces de navigation, jamais sous les textes longs. */
+@supports ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){
+  .nav.scrolled{background:#edf4eceb;-webkit-backdrop-filter:blur(14px) saturate(115%);backdrop-filter:blur(14px) saturate(115%)}
+  .button.button-ghost,.button.project-toggle{background:linear-gradient(135deg,#ffffff0d,transparent 65%),#123f2cbf;-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .button.button-ghost:hover,.button.project-toggle:hover,.button.button-ghost:focus-visible,.button.project-toggle:focus-visible{background:linear-gradient(135deg,#ffffff12,transparent 65%),#1a4d36e6}
+  .project-modal{background:#032b1bbf;-webkit-backdrop-filter:blur(10px) saturate(85%);backdrop-filter:blur(10px) saturate(85%)}
+}
 
 @media(min-width:801px){
   .hero{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);align-items:center;gap:3vw;padding-top:84px;padding-bottom:108px}
@@ -294,6 +301,9 @@ footer{position:relative;overflow:hidden}
   .service:last-child{grid-column:1/-1}
 }
 @media(max-width:800px){
+  .nav.scrolled{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .button.button-ghost,.button.project-toggle{-webkit-backdrop-filter:none;backdrop-filter:none}
+  .project-modal{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
   .contact form{grid-template-columns:minmax(0,1fr)}
   .contact label,.contact label.full,.form-end{grid-column:1}
   .contact input,.contact select,.contact textarea{font-size:16px}
@@ -312,4 +322,10 @@ footer{position:relative;overflow:hidden}
   *,*::before,*::after{animation:none!important;transition:none!important}
   html{scroll-behavior:auto!important}
   .motion-ready,.motion-ready.motion-in,.reveal{opacity:1!important;transform:none!important}
+}
+@media(prefers-reduced-transparency:reduce){
+  .nav,.nav.scrolled{background:#edf4ec;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .button.button-ghost,.button.project-toggle{background:#123f2c;-webkit-backdrop-filter:none;backdrop-filter:none}
+  .button.button-ghost:hover,.button.project-toggle:hover,.button.button-ghost:focus-visible,.button.project-toggle:focus-visible{background:#1a4d36}
+  .project-modal{background:#032b1b;-webkit-backdrop-filter:none;backdrop-filter:none}
 }
