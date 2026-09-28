@@ -120,6 +120,11 @@ h1 em,h2 em,.motto em{font-family:Manrope,Arial,sans-serif;font-style:italic;fon
 @media(max-width:1100px) and (min-width:801px){.hero .orbit{right:-5%;top:14%}}
 .hero h1 em,.work h2 em,.cta h2 em{color:var(--orange-brand)}
 .hero .intro{max-width:600px;color:#f0f5ea;font-size:clamp(15px,1.25vw,18px)}
+.hero-proof{margin-top:28px;padding-top:18px;border-top:1px solid #d6eadc33;max-width:590px;color:#e7f1e7}
+.hero-proof>span{display:block;font-size:11px;font-weight:600;letter-spacing:.06em}
+.hero-proof p{margin:8px 0;font-size:13px;font-weight:700;line-height:1.7;text-wrap:pretty}
+.hero-proof a{display:inline-block;padding:6px 0;font-size:12px;text-decoration:underline;text-underline-offset:5px;color:#f7faf4}
+.hero-proof a:hover{color:#ffba80}
 .hero .intro:before{background:var(--orange-brand)}
 .hero .eyebrow,.eyebrow.light{color:#e6f5df}
 .hero .eyebrow span{color:var(--orange-brand)}
@@ -214,6 +219,13 @@ footer:before{border-color:#85ef7238}.footer-social-actions a{border-color:#dff1
 .service{min-height:270px;padding:26px;border-radius:18px}
 .service h3{margin:42px 0 12px;font-size:18px;line-height:1.25}
 .service-cta{margin-top:auto;min-height:58px;gap:16px}
+.engagements{margin-top:36px;padding:28px 0 4px;border-top:1px solid #b8cfbd}
+.engagements>h3{margin:0 0 22px;font-size:18px;line-height:1.4;letter-spacing:-.02em;color:var(--forest)}
+.engagement-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.engagement-grid>div{min-width:0;padding-left:16px;border-left:2px solid #d16a28}
+.engagement-grid h4{margin:0 0 8px;font-size:14px;line-height:1.4;color:var(--forest)}
+.engagement-grid p,.engagement-note{margin:0;font-size:14px;line-height:1.7;color:#365443}
+.engagements .engagement-note{margin-top:22px;font-size:12px;max-width:660px}
 
 .work-head{align-items:end}.work-proof{margin:24px 0 28px;border-radius:14px;overflow:hidden}
 .consistent-projects{gap:20px}.consistent-projects .project{border-radius:18px}
@@ -302,6 +314,11 @@ footer{position:relative;overflow:hidden}
 }
 @media(max-width:800px){
   .nav.scrolled{-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+  .hero{padding-top:70px;padding-bottom:64px;min-height:0}
+  .hero-proof{margin-top:22px;padding-top:16px}
+  .hero-proof p{font-size:12px}
+  .engagement-grid{grid-template-columns:1fr;gap:22px}
+  .engagements{margin-top:28px;padding-top:24px}
   .button.button-ghost,.button.project-toggle{-webkit-backdrop-filter:none;backdrop-filter:none}
   .project-modal{-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
   .contact form{grid-template-columns:minmax(0,1fr)}
