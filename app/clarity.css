@@ -1,0 +1,130 @@
+/* Editorial restraint: one clear hierarchy, fewer competing surfaces. */
+body{background:#f7f8f2}
+.hero,.work,footer{background-image:none;background-color:#043b27}
+.hero:before,.hero:after,.work:before,.work:after,footer:before,footer:after,.services:before,.services:after,.why:after,.contact:after{display:none}
+.services,.why,.testimonial-section,.contact,.about-short,.partners-return{background:#f7f8f2}
+.section,.work,.trust-compact,.testimonial-section,.contact.section{padding-block:96px}
+.hero .intro{max-width:520px}
+.button,.button:hover{box-shadow:none}
+.button:before{display:none}
+.button{border-radius:10px!important}
+.hero .button-ghost{background:transparent;-webkit-backdrop-filter:none;backdrop-filter:none;border-color:#adc6b8}
+.about-short{margin-block:0;padding-block:72px}
+.about-short .about-copy{background:none}
+.about-short .portrait{transform:none;box-shadow:none;border:0;padding:0;background:none}
+.about-short .portrait:after{display:none}
+.about-short .portrait-photo{border-radius:16px}
+.about-short .portrait-note{display:none}
+.about-short .bio{border:0;padding-left:0}
+.about-short .bio:before,.about-short .bio:after{display:none}
+.services .section-head{margin-bottom:40px}
+.services .section-head .section-intro{border:0;padding:0}
+.service-list{border-top:1px solid #c7d3c9}
+.service-disclosure{border-bottom:1px solid #c7d3c9}
+.service-disclosure summary{display:grid;grid-template-columns:40px minmax(0,1fr) 32px;align-items:center;gap:20px;min-height:88px;padding:24px 0;cursor:pointer;list-style:none;color:#143f2c}
+.service-disclosure summary::-webkit-details-marker,.engagement-options summary::-webkit-details-marker{display:none}
+.service-number{font-size:12px;color:#51705c}
+.service-disclosure h3{font-size:22px;font-weight:600;line-height:1.4;letter-spacing:-.035em;margin:0}
+.disclosure-sign{font-size:26px;text-align:center;font-weight:400;transition:transform .2s ease}
+.service-disclosure[open] .disclosure-sign,.engagement-options[open] summary>span{transform:rotate(45deg)}
+.service-description{padding:0 52px 28px 60px;max-width:760px}
+.service-description p{font-size:16px;line-height:1.75;color:#365443;margin:0 0 18px}
+.service-description .service-cta{width:max-content;max-width:100%;display:flex;align-items:center;gap:20px;border:0;padding:6px 0;min-height:44px;margin:0;font-size:14px;color:#143f2c}
+.service-disclosure[open]{background:#edf2e9}
+.service-disclosure summary:hover{color:#9b4510}
+.engagement-options{margin-top:28px;max-width:700px}
+.engagement-options summary{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:48px;font-size:14px;line-height:1.6;list-style:none;cursor:pointer;color:#365443}
+.engagement-options summary>span{font-size:22px;transition:transform .2s ease}
+.engagement-options p{font-size:15px;line-height:1.75;color:#365443;margin:12px 0 0;max-width:580px}
+.why{border:0}
+.why-grid{gap:0}
+.why-grid article,.why-grid article:hover{background:transparent;border:0;border-bottom:1px solid #ccd7cc;border-radius:0;padding:26px 0;box-shadow:none;transform:none}
+.why-grid article:first-child{padding-top:0}
+.why-grid article>span{background:none;color:#57735d}
+.why-grid h3{font-size:18px;font-weight:600}
+.work-head{border:0;padding:0;margin-bottom:44px}
+.work-head:after{display:none}.work-head>p{padding-left:0;border:0}
+.consistent-projects{gap:36px}
+.consistent-projects .project{box-shadow:none;border:0;background:none;border-radius:14px}
+.consistent-projects .project-art:before,.consistent-projects .project-art>b,.consistent-projects .project-topline{display:none}
+.consistent-projects .project-info:after{display:none}
+.consistent-projects .project-info{min-height:0;padding:26px;background:#f7f8f2}
+.consistent-projects .project-info h3{margin:12px 0 24px}
+.consistent-projects .project-view-button{font-size:14px}
+.partners-return{border:0}.partner-marquee-green{box-shadow:none}
+.certification-chips{gap:0 14px;margin-top:24px}
+.certification-chips span{background:transparent;border:0;border-radius:0;padding:4px 0;font-size:12px;color:#46614e}
+.testimonial-card{background:none;border:0;border-radius:0;box-shadow:none;padding:0;gap:48px}
+.testimonial-card:hover{box-shadow:none}
+.testimonial-highlight p{font-size:clamp(21px,2.1vw,28px);font-weight:500;line-height:1.6}
+.contact form{border:0;border-radius:0;background:none;box-shadow:none;padding:0}
+.contact input,.contact select,.contact textarea{background:#edf2e9;border-radius:6px;border:1px solid #bdcebe;padding:14px}
+.contact input:focus,.contact select:focus,.contact textarea:focus{box-shadow:none}
+.footer-social-actions a{border-radius:8px;box-shadow:none}
+
+@media(max-width:800px){
+  .hero{padding:64px 24px 68px}
+  .hero .eyebrow{font-size:10px;letter-spacing:.04em;max-width:300px;margin-bottom:28px}
+  .hero h1{font-size:clamp(31px,8.5vw,40px);line-height:1.16}
+  .hero .intro{padding:0;margin:28px 0 32px;font-size:16px;line-height:1.75}
+  .hero .intro:before{display:none}
+  .hero .actions{gap:16px}
+  .hero .button-ghost{border:0;padding-left:0!important;padding-right:0!important;justify-content:space-between;min-height:44px;box-shadow:none}
+  .hero .button-ghost .brand-glyph{background:transparent;border:0}
+  .section,.section.services,.section.why,.work,.trust-compact,.testimonial-section,.contact.section{padding:72px 24px}
+  .section-head h2,.about-copy h2,.work h2,.why-head h2,.trust-copy h2,.testimonial-heading h2,.contact h2{font-size:clamp(27px,7.1vw,32px);line-height:1.22;letter-spacing:-.04em}
+  .eyebrow{margin-bottom:20px}
+  .about-short{padding:64px 24px 0;gap:32px}
+  .about-short .portrait{width:min(100%,240px)}
+  .about-short .about-copy{padding:0}
+  .about-short .bio p{font-size:16px;line-height:1.8;margin:0 0 16px}
+  .about-short .about-copy h2{margin-bottom:28px}
+  .services .section-head{margin-bottom:32px}
+  .services .section-head .section-intro{margin-top:20px;padding:0;font-size:15px}
+  .service-disclosure summary{grid-template-columns:22px minmax(0,1fr) 24px;gap:12px;padding:26px 0;min-height:82px}
+  .service-disclosure h3{font-size:18px;line-height:1.5}
+  .service-description{padding:0 12px 26px 34px}
+  .service-description p{font-size:15px;line-height:1.8}
+  .service-description .service-cta{width:100%;justify-content:space-between}
+  .service-disclosure[open]{background:transparent}
+  .engagement-options{margin-top:26px}
+  .engagement-options summary{font-size:13px}
+  .why{gap:32px}
+  .why-grid article{grid-template-columns:24px minmax(0,1fr);gap:8px 14px;padding:24px 0}
+  .why-grid p{grid-column:2;font-size:15px;line-height:1.75}
+  .why-grid article>span{grid-row:1/3}
+  .work-head{margin-bottom:36px}
+  .work-head>p{margin-top:24px;font-size:15px;line-height:1.8}
+  .consistent-projects{gap:36px}
+  .consistent-projects .project-info{padding:22px;min-height:0}
+  .consistent-projects .project-info h3{font-size:20px;line-height:1.35;margin:12px 0 24px}
+  .consistent-projects .case-client{line-height:1.7}
+  .work-actions{margin-top:32px}
+  .trust-compact{gap:32px}
+  .testimonial-heading{margin-bottom:32px}
+  .testimonial-card{gap:28px;padding:0}
+  .testimonial-highlight p{font-size:21px;line-height:1.7}
+  .testimonial-author img{width:64px;height:72px}
+  .contact.section{gap:36px}
+  .contact .section-head>p:not(.eyebrow){font-size:16px;line-height:1.8}
+  .contact form{padding:0;gap:24px}
+  .contact .mail{font-size:15px;letter-spacing:0;overflow-wrap:anywhere}
+  .contact label{gap:10px}
+  footer{padding:44px 24px 28px}
+  .footer-social-actions>div{gap:12px}
+}
+/* Motion replays on both scroll directions without leaving content hidden. */
+@media(prefers-reduced-motion:no-preference){
+  .motion-ready.motion-in{animation:clarity-enter .65s cubic-bezier(.22,1,.36,1) both!important;animation-delay:var(--entry-delay,0ms)!important}
+  .service-disclosure[open] .service-description,.engagement-options[open]>p{animation:disclosure-enter .35s ease-out both}
+  .button,.footer-social-actions a{transition:transform .28s ease,background-color .28s ease,box-shadow .28s ease}
+  .service-disclosure summary{transition:color .25s ease}
+  .project-view-button .brand-glyph{transition:transform .3s ease}
+  @keyframes clarity-enter{from{transform:translateY(18px)}to{transform:translateY(0)}}
+  @keyframes disclosure-enter{from{opacity:.45;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+  @media(max-width:800px){
+    .motion-ready.motion-in{animation-name:clarity-enter-mobile!important;animation-duration:.55s!important}
+    @keyframes clarity-enter-mobile{from{transform:translateY(12px)}to{transform:translateY(0)}}
+  }
+}
+@media(prefers-reduced-motion:reduce){.disclosure-sign,.engagement-options summary>span{transition:none}.motion-ready.motion-in{animation:none!important}}

@@ -104,7 +104,7 @@
   .project-modal-copy>div{margin-block:18px;padding-block:14px}
   .project-modal-copy p{font-size:15px;line-height:1.7}
   /* Repeated entry animations remain, but do not flash or shift whole sections. */
-  .reveal :is(.eyebrow,h2,.section-head,.work-head,.portrait,.about-copy,form){opacity:1!important;transform:none!important}
+  .reveal :is(.eyebrow,h2,.section-head,.work-head,.portrait,.about-copy,form):not(.motion-ready){opacity:1!important;transform:none!important}
   .motion-ready.motion-in{animation-name:mobile-reenter!important;animation-duration:.32s!important;animation-delay:0ms!important}
   @keyframes mobile-reenter{from{opacity:.82;transform:translateY(6px)}to{opacity:1;transform:none}}
 }

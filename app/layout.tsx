@@ -4,6 +4,7 @@ import "./globals.css";
 import "./identity.css";
 import "./polish.css";
 import "./mobile.css";
+import "./clarity.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.manasse-mukendi.com"),

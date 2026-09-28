@@ -7,7 +7,7 @@ Après vérification de l'abonnement et accord du propriétaire, définir `NEXT_
 Événements prévus dans Web Analytics :
 
 - `Project opened` : ouverture volontaire d'une fiche projet.
-- `WhatsApp clicked` : clic sur l'un des deux liens WhatsApp ; ce n'est pas une conversation confirmée.
+- `WhatsApp clicked` : clic sur le lien WhatsApp ; ce n'est pas une conversation confirmée.
 - `Service selected` : clic sur « Parler de ce besoin » depuis une carte service.
 - `Contact request accepted` : FormSubmit a répondu positivement, pas une preuve de réception dans la boîte e-mail.
 
