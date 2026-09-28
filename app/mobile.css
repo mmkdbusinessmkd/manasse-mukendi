@@ -1,0 +1,123 @@
+/* Responsive component rules, kept together after the legacy visual layers. */
+/* The old generic button-span rule collapses the four pieces of the brand mark. */
+.project-view-button .brand-glyph{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;width:30px;height:30px;flex:0 0 30px;padding:6px;place-items:stretch;border-radius:8px}
+.project-view-button .brand-glyph>span{transform:none!important}
+.project-modal-toolbar{display:contents}
+
+@media(max-width:800px){
+  .nav,.nav.scrolled{height:68px;padding-inline:20px}
+  .nav nav{top:100%;max-height:calc(100dvh - 68px);overflow-y:auto;padding:12px 20px 20px;background:#f2f7ef}
+  .nav nav a{min-height:48px;display:flex;align-items:center;padding:12px 8px;font-size:16px}
+  .nav nav a:after{display:none}
+  .nav nav a.active{background:#e1eddf;border-radius:8px;border-bottom-color:transparent}
+  .menu{width:44px;height:44px;font-size:25px}
+  section[id]{scroll-margin-top:80px}
+  .hero{padding:42px 20px 44px;min-height:0}
+  .hero h1{font-size:clamp(30px,8.7vw,42px);line-height:1.13;letter-spacing:-.055em;margin:0}
+  .hero h1 .headline-lead{display:inline;white-space:normal}
+  .hero .eyebrow{font-size:10px;line-height:1.8;letter-spacing:.065em;margin-bottom:22px}
+  .hero .intro{margin:24px 0;font-size:15px;line-height:1.7;padding-left:14px}
+  .actions{width:100%;max-width:none;gap:12px}
+  .button{min-height:52px;font-size:14px;line-height:1.4;letter-spacing:0;gap:12px;white-space:normal}
+  .hero .button{min-height:52px}
+  .hero-proof{margin-top:24px;padding-top:18px}
+  .hero-proof p{font-size:12px;line-height:1.8}
+  .hero-proof a{min-height:44px;display:inline-flex;align-items:center;font-size:13px}
+  .section,.section.services,.section.why,.work,.trust-compact,.testimonial-section,.cta,.contact.section{padding:52px 20px}
+  .section-head h2,.about-copy h2,.work h2,.why-head h2,.trust-copy h2,.testimonial-heading h2,.cta h2{font-size:clamp(28px,7.5vw,34px);line-height:1.16;letter-spacing:-.045em}
+  .section-intro,.work-head>p,.contact .section-head>p:not(.eyebrow),.service p,.why-grid p,.about-short .bio p{font-size:15px;line-height:1.7}
+  .eyebrow{font-size:11px;line-height:1.6;margin-bottom:16px}
+  .about-short{margin:0;padding:32px 20px 12px;gap:22px;background:#eef4e9}
+  .about-short .portrait{width:min(100%,280px);padding:10px;transform:none}
+  .about-short .portrait-photo{height:auto;aspect-ratio:3/4;background-size:contain}
+  .about-short .portrait-note{margin-top:10px;font-size:12px}
+  .about-short .about-copy{padding:8px 0 24px;background:none}
+  .about-short .bio{padding-left:14px}
+  .about-short .about-cta{width:100%;margin-top:16px}
+  .services .section-head{margin-bottom:26px}
+  .service-grid{gap:12px}
+  .service{display:grid;grid-template-columns:32px minmax(0,1fr);grid-template-rows:auto 1fr auto;align-content:start;gap:10px 12px;padding:20px;min-height:0}
+  .service>span:first-child{width:30px;min-width:0;height:30px;padding:0;display:grid;place-items:center;font-size:10px}
+  .service h3{grid-column:2;margin:3px 0 0;max-width:none;font-size:18px;line-height:1.35}
+  .service p{grid-column:1/-1;max-width:none;margin:0}
+  .service .service-cta{grid-column:1/-1;margin-top:4px;padding-top:12px;min-height:48px;font-size:14px}
+  .service-closing{margin-top:24px;padding:18px;gap:10px}
+  .service-closing a{min-height:44px;font-size:14px}
+  .engagements{margin-top:24px;padding-top:24px}
+  .engagement-grid{gap:20px}.engagement-grid p{font-size:14px}
+  .why{gap:24px}.why-grid{gap:12px}
+  .why-grid article{padding:18px;grid-template-columns:28px minmax(0,1fr);gap:8px 12px}
+  .why-grid article>span{width:28px;height:28px;grid-row:1}
+  .why-grid h3{font-size:17px;align-self:center}
+  .why-grid p{grid-column:1/-1}
+  .work-head{padding-bottom:20px}.work-head>p{margin-top:18px;padding-left:14px}
+  .work-proof{margin:20px 0 24px}
+  .work-proof span{min-height:0;padding:12px 16px;display:flex;align-items:baseline;gap:12px;font-size:12px}
+  .work-proof strong{font-size:20px;flex-shrink:0}
+  .consistent-projects{gap:20px}
+  .consistent-projects .project-art{height:auto;aspect-ratio:1;min-height:0;padding:0}
+  .consistent-projects .project-art img{object-fit:contain;transform:none!important}
+  .consistent-projects .project-art:before,.consistent-projects .project-art>b,.consistent-projects .project-topline{display:none}
+  .consistent-projects .project-info{min-height:0;padding:18px}
+  .consistent-projects .project-info:after{display:none}
+  .consistent-projects .case-client{padding:0;gap:4px 7px;font-size:11px}
+  .consistent-projects .case-client span{font-size:11px}
+  .consistent-projects .project-info h3{font-size:21px;line-height:1.3;margin:10px 0 20px}
+  .consistent-projects .project-view-button{min-height:48px;font-size:14px}
+  .work-actions{gap:12px;margin-top:24px}
+  .trust-compact{gap:24px}.certification-chips{gap:8px}.certification-chips span{font-size:12px;line-height:1.5}
+  .partner-marquee{width:100%;margin-inline:0;mask-image:none;-webkit-mask-image:none}
+  .partner-row .partner-card{width:140px;flex-basis:140px;height:84px;padding:16px}
+  .testimonial-heading{margin-bottom:24px}
+  .testimonial-card{padding:20px;gap:22px}
+  .testimonial-author{display:grid;grid-template-columns:64px minmax(0,1fr);gap:14px;align-items:start}
+  .testimonial-author img{width:64px;height:72px}
+  .testimonial-author h3{font-size:17px;margin-bottom:6px}
+  .testimonial-author p,.testimonial-author .testimonial-specialties{font-size:13px;line-height:1.6}
+  .testimonial-highlight{margin-bottom:20px}.testimonial-highlight p{font-size:19px;line-height:1.6}
+  .testimonial-details summary{font-size:13px;min-height:44px;gap:8px}
+  .testimonial-details blockquote p{font-size:15px;line-height:1.7}
+  .cta>p:not(.eyebrow){font-size:15px;max-width:none}
+  .contact.section{gap:28px}
+  .contact .section-head>p:not(.eyebrow){max-width:none}
+  .contact .mail{font-size:16px;line-height:1.6;min-height:44px;margin-top:14px;letter-spacing:0}
+  .contact .contact-whatsapp{margin-top:8px;min-height:44px}
+  .contact form{padding:22px 18px;gap:20px;border-radius:18px}
+  .contact input,.contact select{min-height:48px;font-size:16px}
+  .contact textarea{min-height:128px;font-size:16px}
+  .contact label span{font:600 13px/1.5 Manrope,Arial,sans-serif}
+  .form-end p{font-size:12px}.form-end{gap:18px}
+  footer{padding:36px 20px 24px;gap:24px;grid-template-columns:1fr}
+  footer .motto{display:none}
+  .footer-links{grid-row:auto;margin:0}
+  footer .footer-availability{max-width:none;font-size:13px!important;line-height:1.7!important}
+  .footer-social-actions a{min-height:44px;font-size:13px}
+  footer small{font-size:11px;line-height:1.7}
+  .project-modal{padding:12px;align-items:center}
+  .project-modal-card{width:100%;max-height:calc(100dvh - 24px);border-radius:18px;display:block;overscroll-behavior:contain}
+  .project-modal-toolbar{display:flex;justify-content:flex-end;position:sticky;top:0;padding:8px 10px;z-index:4;background:#f4f9f5;border-bottom:1px solid #d7e5da}
+  .project-modal-close{position:static;margin:0;width:44px;height:44px;background:#043b21}
+  .project-modal-visual{height:auto;aspect-ratio:1;margin-top:0}
+  .project-modal-copy{overflow:visible;padding:24px 20px max(24px,env(safe-area-inset-bottom));}
+  .project-modal-copy h2{font-size:27px;line-height:1.18;margin-bottom:24px}
+  .project-modal-copy .eyebrow{font-size:11px;margin-bottom:16px}
+  .project-modal-copy>div{margin-block:18px;padding-block:14px}
+  .project-modal-copy p{font-size:15px;line-height:1.7}
+  /* Repeated entry animations remain, but do not flash or shift whole sections. */
+  .reveal :is(.eyebrow,h2,.section-head,.work-head,.portrait,.about-copy,form){opacity:1!important;transform:none!important}
+  .motion-ready.motion-in{animation-name:mobile-reenter!important;animation-duration:.32s!important;animation-delay:0ms!important}
+  @keyframes mobile-reenter{from{opacity:.82;transform:translateY(6px)}to{opacity:1;transform:none}}
+}
+@media(hover:none) and (pointer:coarse){
+  .button:before{display:none}
+  .button:hover .brand-glyph,.project-view-button:hover .brand-glyph,.service:hover,.consistent-projects .project:hover{transform:none}
+}
+@media(min-width:600px) and (max-width:800px){
+  .hero,.section,.section.services,.section.why,.work,.trust-compact,.testimonial-section,.cta,.contact.section{padding-inline:32px}
+  .hero-copy{max-width:620px;margin-inline:auto}
+  .hero .actions{flex-direction:row}.hero .button{flex:1}
+  .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.service:last-child{grid-column:1/-1}
+  .consistent-projects{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .about-short{padding-inline:32px}
+}
+@media(prefers-reduced-motion:reduce){.motion-ready.motion-in{animation:none!important}}
