@@ -128,3 +128,29 @@ body{background:#f7f8f2}
   }
 }
 @media(prefers-reduced-motion:reduce){.disclosure-sign,.engagement-options summary>span{transition:none}.motion-ready.motion-in{animation:none!important}}
+
+/* One typographic voice: comfortable tracking, consistent labels and controls. */
+body{font-family:Manrope,Arial,sans-serif;font-weight:400}
+button,input,select,textarea{font-family:Manrope,Arial,sans-serif}
+.hero h1{letter-spacing:-.035em;line-height:1.16}
+.section-head h2,.about-copy h2,.work h2,.why-head h2,.trust-copy h2,.testimonial-heading h2,.contact h2,.project-modal-copy h2{letter-spacing:-.03em;line-height:1.2;font-weight:700}
+h1 em,h2 em,.hero h1 em,.motto em{font-family:inherit;letter-spacing:inherit;font-weight:inherit}
+.service-disclosure h3,.consistent-projects .project-info h3,.why-grid h3,.testimonial-author h3{letter-spacing:-.015em;line-height:1.4;font-weight:600}
+.eyebrow,.hero .eyebrow{font-size:12px;line-height:1.7;letter-spacing:.065em;font-weight:600}
+.hero-foot,.hero .tag,.orbit-core span{font-size:11px;line-height:1.6;letter-spacing:.04em}
+.hero .intro,.bio p,.service-description p,.why-grid p,.work-head>p,.project-modal-copy p{font-size:16px;line-height:1.75;letter-spacing:0}
+.button,.nav-cta,.project-view-button,.service-description .service-cta,.footer-social-actions a,.testimonial-details summary{font-family:Manrope,Arial,sans-serif;font-size:14px;font-weight:600;line-height:1.5;letter-spacing:0}
+.nav nav a{font-size:13px;font-weight:600;letter-spacing:0}
+.consistent-projects .case-client,.case-study .case-client strong{font-family:Manrope,Arial,sans-serif;font-size:12px;line-height:1.65;letter-spacing:.015em}
+.project-modal-copy small,.contact label span{font-family:Manrope,Arial,sans-serif;font-size:13px;font-weight:600;line-height:1.6;letter-spacing:.02em}
+.contact input,.contact select,.contact textarea{font-size:16px;line-height:1.6;letter-spacing:0}
+.testimonial-highlight p{letter-spacing:-.01em;line-height:1.65}
+.testimonial-author p,.testimonial-author small,.certification-chips span,footer small,.footer-social-actions>p{font-family:Manrope,Arial,sans-serif;font-size:12px;line-height:1.7;letter-spacing:.015em}
+.service-number,.why-grid article>span{font-size:12px;font-weight:500;font-variant-numeric:tabular-nums}
+@media(max-width:800px){
+  .hero h1{font-size:clamp(30px,8.2vw,38px);letter-spacing:-.035em;line-height:1.18}
+  .hero .eyebrow{font-size:11px;max-width:340px;letter-spacing:.035em;line-height:1.8}
+  .section-head h2,.about-copy h2,.work h2,.why-head h2,.trust-copy h2,.testimonial-heading h2,.contact h2,.project-modal-copy h2{letter-spacing:-.025em;line-height:1.25}
+  .service-description p,.why-grid p,.work-head>p{font-size:16px;line-height:1.75}
+  .engagement-options summary{font-size:14px;line-height:1.7}
+}
