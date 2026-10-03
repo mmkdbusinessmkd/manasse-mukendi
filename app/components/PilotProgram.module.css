@@ -1,0 +1,34 @@
+.banner {
+  scroll-margin-top: 100px;
+  margin: 28px 4.6% 0;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  gap: 32px;
+  border: 1px solid #bdcebe;
+  border-left: 3px solid #ff7a1c;
+  border-radius: 14px;
+  background: #edf2e9;
+  color: #143f2c;
+}
+.copy { flex: 1; min-width: 0; max-width: 900px; }
+.label { margin: 0 0 10px; font-size: 12px; font-weight: 600; letter-spacing: .035em; }
+.copy h2 { margin: 0; font-size: clamp(20px, 1.8vw, 25px); line-height: 1.4; letter-spacing: -.02em; font-weight: 600; }
+.copy strong { font-weight: 700; text-decoration: underline; text-decoration-color: #ff7a1c; text-decoration-thickness: 2px; text-underline-offset: 4px; }
+.description { max-width: 800px; margin: 12px 0 0; font-size: 14px; line-height: 1.75; color: #365443; }
+.apply { display: inline-flex; align-items: center; justify-content: space-between; gap: 24px; flex-shrink: 0; min-height: 50px; padding: 10px 12px 10px 20px; border: 1px solid #143f2c; border-radius: 10px; background: #043b27; color: #fff; font-size: 14px; font-weight: 600; transition: background-color .25s, transform .25s; }
+.apply:hover { background: #14533a; transform: translateY(-2px); }
+.apply:focus-visible { outline: 2px solid #9b4510; outline-offset: 4px; }
+.fields { grid-column: 1 / -1; min-width: 0; margin: 0; padding: 24px 0 0; border: 0; border-top: 1px solid #bdcebe; }
+.fields legend { padding: 0 12px 0 0; font-size: 15px; line-height: 1.5; font-weight: 600; color: #143f2c; max-width: 100%; }
+.fieldGrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px 20px; }
+.fieldGrid label { min-width: 0; }
+.wide { grid-column: 1 / -1; }
+.notice { margin: 20px 0 0; font-size: 13px; line-height: 1.75; color: #365443; }
+@media(max-width:800px) {
+  .banner { margin: 24px 24px 0; padding: 22px; flex-direction: column; align-items: stretch; gap: 20px; }
+  .copy h2 { font-size: 20px; }
+  .apply { align-self: flex-start; min-width: 150px; }
+  .fieldGrid { grid-template-columns: minmax(0, 1fr); }
+}
+@media(prefers-reduced-motion:reduce) { .apply { transition: none; } .apply:hover { transform: none; } }
