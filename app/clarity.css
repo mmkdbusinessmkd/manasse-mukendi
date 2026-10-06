@@ -1,4 +1,9 @@
 /* Editorial restraint: one clear hierarchy, fewer competing surfaces. */
+/* Document covers stay complete inside the existing card dimensions. */
+.consistent-projects .project-art.project-document,.project-modal-visual.project-document{background:#074574}
+.consistent-projects .project-art.project-document img,.project-modal-visual.project-document img{object-fit:contain!important;object-position:center!important;transform:none!important;padding:14px}
+.project-modal-copy .project-confidentiality{font-size:13px;line-height:1.65;color:#365443;margin:24px 0}
+@media(max-width:800px){.project-modal-visual.project-document{aspect-ratio:1132/1600}.project-modal-visual.project-document img{padding:12px}}
 body{background:#f7f8f2}
 .hero,.work,footer{background-image:none;background-color:#043b27}
 .hero:before,.hero:after,.work:before,.work:after,footer:before,footer:after,.services:before,.services:after,.why:after,.contact:after{display:none}
@@ -17,6 +22,11 @@ body{background:#f7f8f2}
 .about-short .portrait-note{display:none}
 .about-short .bio{border:0;padding-left:0}
 .about-short .bio:before,.about-short .bio:after{display:none}
+.about-short .bio p{margin:0 0 20px}
+.about-short .about-references{max-width:560px;margin:28px 0 0;padding:0;border-top:1px solid #c7d3c9}
+.about-references>div{padding-top:22px}
+.about-references dt{font-size:11px;line-height:1.6;font-weight:700;letter-spacing:.065em;color:#143f2c;margin-bottom:8px}
+.about-references dd{font-size:14px;line-height:1.8;color:#365443;margin:0;overflow-wrap:break-word}
 .services .section-head{margin-bottom:40px}
 .services .section-head .section-intro{border:0;padding:0}
 .service-list{border-top:1px solid #c7d3c9}

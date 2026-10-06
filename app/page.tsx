@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useRef, useState } from "react";
 import { trackConversion } from "../lib/conversion-analytics";
 import { SHOW_PILOT_PROGRAM, PILOT_PROGRAM_OPTION } from "../lib/pilot-program";
 import { PilotProgramBanner, PilotProgramFields } from "./components/PilotProgram";
+import { snelStrategy } from "../lib/snel-strategy";
 
 const contact = {
   whatsapp: "https://wa.me/243838318812",
@@ -23,11 +24,19 @@ const services = [
   ["05", "Publicité digitale", "Accélérer votre visibilité et toucher les bonnes personnes avec un budget maîtrisé."],
 ];
 
-const projects = [
+type Project = {
+  name: string; client: string; type: string; sector: string;
+  context: string; intervention: string; result: string; image: string;
+  approach?: string; measured?: boolean; cover?: boolean;
+  role?: string; resultLabel?: string; confidentiality?: string;
+};
+
+const projects: Project[] = [
   { name: "Simplifier le parcours client", client: "ZOOM TECH", type: "Social Media", sector: "Technologie", context: "Sensibiliser les entreprises à l’importance d’un suivi client rapide, clair et accessible.", intervention: "Conception éditoriale et visuelle d’un contenu pédagogique reliant la digitalisation à une meilleure expérience client.", approach: "Partir d’une difficulté concrète — un client sans nouvelles — puis relier la solution à la digitalisation. Le visuel hiérarchise le problème, l’explication et l’appel à l’action.", result: "Un visuel pédagogique sur le suivi des demandes clients, avec un appel à l’action et les coordonnées de Zoom Tech.", image: "/images/projects/zoom-tech-semaine.webp" },
   { name: "Événement de la semaine", client: "EVANTURA", type: "Social Media", sector: "Événementiel", context: "Rendre l’offre événementielle immédiatement compréhensible et attractive.", intervention: "Direction artistique et conception d’un visuel de promotion pour la plateforme.", approach: "Associer une question simple à un aperçu de l’application : le public comprend l’usage du service avant de découvrir les moyens d’y accéder.", result: "Un visuel de découverte de l’offre événementielle, présentant l’application et ses points d’accès.", image: "/images/projects/evantura-evenement-semaine.webp" },
-  { name: "Fête du travail — SNEL SA", client: "SNEL SA", type: "Communication", sector: "Institutionnel", context: "Prendre la parole à l’occasion du 1er mai tout en valorisant les agents et techniciens de l’entreprise.", intervention: "Conception d’un visuel institutionnel aligné avec les codes de marque et adapté aux réseaux sociaux.", result: "Un message lisible, valorisant et cohérent avec la dimension nationale de l’entreprise.", image: "/images/projects/snel-fete-travail.jpg" },
+  snelStrategy,
   { name: "Septembre, c’est la rentrée", client: "SAFIA BELLA", type: "Social Media", sector: "Marque personnelle", context: "Créer une prise de parole de rentrée alignée avec l’univers personnel de Safia Bella.", intervention: "Direction artistique, composition graphique et adaptation du message pour les réseaux sociaux.", result: "Un contenu de saison expressif, cohérent et immédiatement identifiable.", image: "/images/projects/safia-bella-rentree.webp" },
+  { name: "Fête du travail — SNEL SA", client: "SNEL SA", type: "Communication", sector: "Institutionnel", context: "Prendre la parole à l’occasion du 1er mai tout en valorisant les agents et techniciens de l’entreprise.", intervention: "Conception d’un visuel institutionnel aligné avec les codes de marque et adapté aux réseaux sociaux.", result: "Un message lisible, valorisant et cohérent avec la dimension nationale de l’entreprise.", image: "/images/projects/snel-fete-travail.jpg" },
   { name: "Hello Monday — Garder le cap", client: "SAFIA BELLA", type: "Social Media", sector: "Marque personnelle", context: "Une prise de parole du lundi autour de la clarté et de l’attention.", intervention: "Composition d’un visuel pour les réseaux sociaux, associant photographie, message et identité Safia Bella.", result: "Un visuel Hello Monday daté du 28 septembre 2026, conçu autour du message « Protège ton attention et garde le cap ».", image: "/images/projects/safia-bella-hello-monday.webp" },
   { name: "Campagne de trafic FLMDA", client: "FLMDA RDC", type: "Publicité", sector: "Événementiel", context: "Renforcer la visibilité digitale de l’événement.", intervention: "Stratégie éditoriale, création de contenus, gestion des canaux et suivi de la communication.", measured: true, result: "29 992 personnes touchées lors de la campagne FLMDA. Cet indicateur décrit la portée, et non des ventes ou des inscriptions.", image: "/images/projects/flmda-campaign.jpeg" },
   { name: "Contenu immobilier", client: "IMMO KONNECT", type: "Social Media", sector: "Immobilier", context: "Valoriser l’offre immobilière et soutenir sa visibilité en ligne.", intervention: "Création de contenus promotionnels adaptés aux réseaux sociaux.", result: "Des messages plus lisibles et une présence visuelle plus professionnelle.", image: "/images/projects/immo-konnect.jpeg" },
@@ -221,7 +230,21 @@ export default function Home() {
 
     {SHOW_PILOT_PROGRAM && <PilotProgramBanner onApply={() => setRequestedService(PILOT_PROGRAM_OPTION)} icon={<BrandGlyph className="compact"/>}/>}
 
-    <section className="about about-short" id="a-propos"><div className="portrait"><div className="portrait-photo" role="img" aria-label="Portrait de Manassé Mukendi, consultant en marketing et communication digitale"></div><div className="portrait-note">MANASSÉ<br/>MUKENDI <BrandGlyph className="outline"/></div></div><div className="about-copy"><p className="eyebrow">01 / À PROPOS</p><h2>Votre ambition.<br/>Une direction <em>claire.</em></h2><div className="bio editorial-bio"><p className="about-lead">Je suis Manassé Mukendi.</p><p>Je pars de vos objectifs pour construire une communication claire et cohérente. Stratégie, contenus et réseaux sociaux : un accompagnement à distance ou sur le terrain, en Afrique et à l’international.</p></div></div></section>
+    <section className="about about-short" id="a-propos">
+      <div className="portrait"><div className="portrait-photo" role="img" aria-label="Portrait de Manassé Mukendi, consultant en marketing et communication digitale"></div><div className="portrait-note">MANASSÉ<br/>MUKENDI <BrandGlyph className="outline"/></div></div>
+      <div className="about-copy">
+        <p className="eyebrow">01 / À PROPOS</p><h2>Votre ambition.<br/>Une direction <em>claire.</em></h2>
+        <div className="bio editorial-bio">
+          <p className="about-lead">Je suis Manassé Mukendi, consultant en marketing et communication digitale, spécialisé en stratégie de contenu et en Social Media Management.</p>
+          <p>Depuis 2024, j’accompagne des entreprises, des institutions et des marques personnelles en RDC et à l’international, notamment dans la technologie, l’événementiel, la santé et l’immobilier.</p>
+          <p>Mon approche : comprendre vos objectifs, définir les bons messages et choisir les canaux adaptés. Je transforme ensuite cette direction en contenus et en actions sur les réseaux sociaux pour rendre votre marque plus claire, plus cohérente et plus visible.</p>
+        </div>
+        <dl className="about-references">
+          <div><dt>QUELQUES RÉFÉRENCES</dt><dd>J’ai notamment travaillé sur des projets pour SNEL SA, Zoom Tech, Evantura et le FLMDA, en associant réflexion stratégique, création de contenus et communication digitale.</dd></div>
+          <div><dt>COMMENT COLLABORER</dt><dd>À distance ou sur le terrain, j’interviens en mission ponctuelle ou en accompagnement mensuel.</dd></div>
+        </dl>
+      </div>
+    </section>
 
     <section className="section services" id="services">
       <div className="section-head"><p className="eyebrow">02 / SERVICES</p><h2>Le bon accompagnement<br/>pour votre <em>marque.</em></h2><p className="section-intro">Découvrez chaque service selon votre besoin.</p></div>
@@ -234,7 +257,27 @@ export default function Home() {
 
     <section className="section why"><div className="why-head"><p className="eyebrow">COMMENT TRAVAILLER ENSEMBLE</p><h2>De votre besoin<br/>à un plan <em>concret.</em></h2></div><div className="why-grid">{[["01","Échange initial","Votre activité, votre audience et vos objectifs."],["02","Proposition","Une direction, un calendrier et un budget validés ensemble."],["03","Réalisation","Les contenus et les actions, avec vos points de validation."],["04","Suivi","Un bilan et les ajustements utiles, selon la mission."]].map(([n,t,d]) => <article key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></article>)}</div></section>
 
-    <section className="work" id="realisations"><div className="work-head"><div><p className="eyebrow light">03 / RÉALISATIONS</p><h2>Des marques.<br/>Des projets <em>concrets.</em></h2></div><p>Une sélection de projets représentatifs. D’autres réalisations peuvent être présentées selon votre secteur.</p></div><div className="project-grid consistent-projects" id="project-list">{visibleProjects.map((p,i) => <article className="project case-study" key={p.name}><div className="project-art"><img src={p.image} alt={`${p.name} — ${p.client}`} loading="lazy" decoding="async"/><div className="project-topline"><span>{p.type}</span><BrandGlyph className="card-glyph light"/></div><b>{String(i+1).padStart(2,"0")}</b></div><div className="project-info"><p className="case-client">CLIENT <strong>{p.client}</strong> <span>/ {p.sector}</span></p><h3>{p.name}</h3><div className="case-details"><div className="case-detail"><small>CONTEXTE</small><p>{p.context}</p></div><div className="case-detail"><small>INTERVENTION</small><p>{p.intervention}</p></div><div className="case-result"><small>{p.measured ? "PORTÉE DE LA CAMPAGNE" : "CE QUI A ÉTÉ RÉALISÉ"}</small><strong>{p.result}</strong></div></div><button className="project-view-button" onClick={() => { setSelectedProject(p); trackConversion("Project opened"); }}>Découvrir le projet <BrandGlyph className="compact"/></button></div></article>)}</div><div className="work-actions">{projects.length > 4 && <button className="button project-toggle" aria-expanded={showAllProjects} aria-controls="project-list" onClick={() => setShowAllProjects(!showAllProjects)}>{showAllProjects ? "Réduire la sélection" : `Voir ${projects.length - 4} autres projets`} <span aria-hidden="true">{showAllProjects ? "−" : "+"}</span></button>}</div></section>
+    <section className="work" id="realisations">
+      <div className="work-head"><div><p className="eyebrow light">03 / RÉALISATIONS</p><h2>Des marques.<br/>Des projets <em>concrets.</em></h2></div><p>Une sélection de projets représentatifs. D’autres réalisations peuvent être présentées selon votre secteur.</p></div>
+      <div className="project-grid consistent-projects" id="project-list">
+        {visibleProjects.map((p,i) => <article className="project case-study" key={p.name}>
+          <div className={`project-art${p.cover ? " project-document" : ""}`}>
+            <img src={p.image} alt={`${p.cover ? "Couverture — " : ""}${p.name} — ${p.client}`} loading="lazy" decoding="async"/>
+            {!p.cover && <><div className="project-topline"><span>{p.type}</span><BrandGlyph className="card-glyph light"/></div><b>{String(i+1).padStart(2,"0")}</b></>}
+          </div>
+          <div className="project-info">
+            <p className="case-client">CLIENT <strong>{p.client}</strong> <span>/ {p.sector}</span></p><h3>{p.name}</h3>
+            <div className="case-details">
+              <div className="case-detail"><small>CONTEXTE</small><p>{p.context}</p></div>
+              <div className="case-detail"><small>INTERVENTION</small><p>{p.intervention}</p></div>
+              <div className="case-result"><small>{p.resultLabel ?? (p.measured ? "PORTÉE DE LA CAMPAGNE" : "CE QUI A ÉTÉ RÉALISÉ")}</small><strong>{p.result}</strong></div>
+            </div>
+            <button className="project-view-button" onClick={() => { setSelectedProject(p); trackConversion("Project opened"); }}>Découvrir le projet <BrandGlyph className="compact"/></button>
+          </div>
+        </article>)}
+      </div>
+      <div className="work-actions">{projects.length > 4 && <button className="button project-toggle" aria-expanded={showAllProjects} aria-controls="project-list" onClick={() => setShowAllProjects(!showAllProjects)}>{showAllProjects ? "Réduire la sélection" : `Voir ${projects.length - 4} autres projets`} <span aria-hidden="true">{showAllProjects ? "−" : "+"}</span></button>}</div>
+    </section>
 
 
     <section className="trust-compact partners-return" aria-labelledby="trust-title"><div className="trust-copy"><p className="eyebrow">CONFIANCE &amp; EXPERTISE</p><h2 id="trust-title">Des collaborations <em>réelles.</em></h2><div className="certification-chips">{certifications.map((certificate) => <span key={certificate}>{certificate}</span>)}</div></div><div className="partner-marquee partner-marquee-green" aria-label="Marques et organisations accompagnées"><div className="partner-track"><div className="partner-row">{partnerLogos.map(([name, logo]) => <div className="partner-card" key={name}><img src={logo} alt={name} loading="lazy" decoding="async"/></div>)}</div><div className="partner-row" aria-hidden="true">{partnerLogos.map(([name, logo]) => <div className="partner-card" key={`duplicate-${name}`}><img src={logo} alt="" loading="lazy" decoding="async"/></div>)}</div></div></div></section>
@@ -268,6 +311,21 @@ export default function Home() {
 
     <footer><div><a className="brand footer-mark" href="#accueil" aria-label="Retour à l'accueil"><img src="/images/brand/icon-mm.png" alt="Manassé Mukendi"/></a><p>Consultant en marketing &amp; communication digitale<br/>Stratégie · Contenus · Social Media</p></div><p className="motto">Stratégie.<br/><em>Créativité.</em><br/>Résultats.</p><div className="footer-links"><p className="footer-availability">Disponible pour des missions ponctuelles, des accompagnements mensuels et des collaborations en RDC comme à l’international.</p><div className="footer-social-actions"><p>Suivez mon actualité</p><div>{Object.entries(contact.socials).map(([n,l]) => <a key={n} href={l} target="_blank" rel="noreferrer" aria-label={`Ouvrir mon profil ${n}`}>{n} <BrandGlyph className="compact"/></a>)}</div></div></div><small>© 2026 Manassé Mukendi. Tous droits réservés.</small></footer>
 
-    {selectedProject && <div className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" onMouseDown={() => setSelectedProject(null)}><article className="project-modal-card" onMouseDown={(event) => event.stopPropagation()}><div className="project-modal-toolbar"><button ref={modalCloseRef} className="project-modal-close" onClick={() => setSelectedProject(null)} aria-label="Fermer le projet">×</button></div><div className="project-modal-visual"><img src={selectedProject.image} alt={`${selectedProject.name} — ${selectedProject.client}`}/></div><div className="project-modal-copy"><p className="eyebrow">{selectedProject.client} / {selectedProject.sector}</p><h2 id="project-modal-title">{selectedProject.name}</h2><div><small>CONTEXTE</small><p>{selectedProject.context}</p></div><div><small>INTERVENTION</small><p>{selectedProject.intervention}</p></div>{selectedProject.approach && <div><small>LE PARTI PRIS</small><p>{selectedProject.approach}</p></div>}<div className="project-modal-result"><small>{selectedProject.measured ? "PORTÉE DE LA CAMPAGNE" : "CE QUI A ÉTÉ RÉALISÉ"}</small><strong>{selectedProject.result}</strong></div><a className="button dark" href="#contact" onClick={() => setSelectedProject(null)}>Parler d’un projet similaire <BrandGlyph/></a></div></article></div>}
+    {selectedProject && <div className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" onMouseDown={() => setSelectedProject(null)}>
+      <article className="project-modal-card" onMouseDown={(event) => event.stopPropagation()}>
+        <div className="project-modal-toolbar"><button ref={modalCloseRef} className="project-modal-close" onClick={() => setSelectedProject(null)} aria-label="Fermer le projet">×</button></div>
+        <div className={`project-modal-visual${selectedProject.cover ? " project-document" : ""}`}><img src={selectedProject.image} alt={`${selectedProject.cover ? "Couverture — " : ""}${selectedProject.name} — ${selectedProject.client}`}/></div>
+        <div className="project-modal-copy">
+          <p className="eyebrow">{selectedProject.client} / {selectedProject.sector}</p><h2 id="project-modal-title">{selectedProject.name}</h2>
+          <div><small>CONTEXTE</small><p>{selectedProject.context}</p></div>
+          {selectedProject.role && <div><small>MON RÔLE</small><p>{selectedProject.role}</p></div>}
+          <div><small>INTERVENTION</small><p>{selectedProject.intervention}</p></div>
+          {selectedProject.approach && <div><small>LE PARTI PRIS</small><p>{selectedProject.approach}</p></div>}
+          <div className="project-modal-result"><small>{selectedProject.resultLabel ?? (selectedProject.measured ? "PORTÉE DE LA CAMPAGNE" : "CE QUI A ÉTÉ RÉALISÉ")}</small><strong>{selectedProject.result}</strong></div>
+          {selectedProject.confidentiality && <p className="project-confidentiality">{selectedProject.confidentiality}</p>}
+          <a className="button dark" href="#contact" onClick={() => setSelectedProject(null)}>Parler d’un projet similaire <BrandGlyph/></a>
+        </div>
+      </article>
+    </div>}
   </main>;
 }
