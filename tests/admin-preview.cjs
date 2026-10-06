@@ -1,0 +1,18 @@
+// Visual harness only. Binds loopback, uses fictitious records, never built/deployed.
+// This does not bypass the application authentication or connect to Supabase.
+const fs=require('node:fs');
+const path=require('node:path');
+const http=require('node:http');
+const ts=require('typescript');
+const React=require('react');
+const {renderToStaticMarkup}=require('react-dom/server');
+const root=path.join(__dirname,'..');
+for(const ext of ['.ts','.tsx'])require.extensions[ext]=(m,f)=>m._compile(ts.transpileModule(fs.readFileSync(f,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,jsx:ts.JsxEmit.ReactJSX,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText,f);
+require.extensions['.css']=(m)=>{m.exports=new Proxy({},{get:(_,k)=>k==='__esModule'?false:`admin_${String(k)}`});};
+const {Dashboard}=require('../app/admin/Views.tsx');
+const {today,entities,routes,titles}=require('../lib/admin/model.ts');
+const day=today(),base={owner_id:'fixture',created_at:day,updated_at:day};
+const data={clients:[{...base,id:'fixture-client',name:'Client exemple',company:'Entreprise fictive',status:'actif'}],missions:[{...base,id:'fixture-mission',client_id:'fixture-client',title:'Accompagnement de communication',currency:'USD',amount_cents:40000,status:'actif',end_date:day,due_date:'2026-01-01'}],payments:[{...base,id:'fixture-payment',client_id:'fixture-client',mission_id:'fixture-mission',amount_cents:15000,currency:'USD',paid_on:day}],tasks:[{...base,id:'fixture-task',client_id:'fixture-client',mission_id:'fixture-mission',title:'Préparer le calendrier éditorial',status:'en_cours',priority:'normale',due_date:day}],deliverables:[{...base,id:'fixture-delivery',client_id:'fixture-client',title:'Calendrier éditorial',status:'a_faire',planned_on:day}],notes:[]};
+const css=fs.readFileSync(path.join(root,'app/admin/admin.module.css'),'utf8').replace(/\.([a-zA-Z_][\w-]*)/g,'.admin_$1');
+const html=`<!doctype html><html lang="fr"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aperçu local · Données fictives</title><style>body{margin:0} ${css}</style><div class="admin_root"><div style="background:#fff0dc;color:#75400b;padding:10px 20px;font:14px Arial">APERÇU LOCAL — Données fictives, aucune connexion à la base réelle</div><div class="admin_shell"><aside class="admin_sidebar"><a class="admin_brand" href="/"><img src="/logo.png" width="36" height="36" alt=""><span>Mon activité<small>Espace privé · Manassé Mukendi</small></span></a><nav class="admin_nav" aria-label="Gestion privée"><a href="/" aria-current="page">Vue d’ensemble</a>${entities.map(e=>`<a href="#">${titles[e]}</a>`).join('')}<a href="#">Échéances</a></nav><div class="admin_sidebarBottom">Aperçu de présentation uniquement</div></aside><div class="admin_workspace"><header class="admin_topbar"><span>Gestion freelance</span><form><input placeholder="Client, mission, tâche…" aria-label="Recherche"><button class="admin_secondary" type="button">Rechercher</button></form></header><main class="admin_main">${renderToStaticMarkup(React.createElement(Dashboard,{data}))}</main></div></div></div></html>`;
+http.createServer((req,res)=>{res.setHeader('Cache-Control','no-store');if(req.url==='/logo.png'){res.setHeader('Content-Type','image/png');res.end(fs.readFileSync(path.join(root,'public/images/brand/favicon-mm.png')));}else if(req.url==='/'){res.setHeader('Content-Type','text/html; charset=utf-8');res.end(html);}else{res.statusCode=404;res.end('Aperçu statique : revenir à la page principale.');}}).listen(3002,'127.0.0.1',()=>console.log('Visual-only fixture: http://127.0.0.1:3002'));
