@@ -9,7 +9,7 @@ import "./clarity.css";
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.manasse-mukendi.com"),
   title: "Manassé Mukendi / Marketing et Communication Digitale",
-  description: "Consultant en marketing et communication digitale, mobile et disponible pour des projets en Afrique et à l’international. Stratégie, contenus et Social Media.",
+  description: "Manassé Mukendi accompagne votre entreprise : stratégie de communication digitale, création de contenus et gestion des réseaux sociaux, en RDC et à l’international.",
   keywords: ["marketing et communication digitale", "consultant en communication digitale international", "marketing digital Afrique", "marketing digital Kinshasa", "Social Media Manager", "stratégie digitale", "communication digitale RDC"],
   applicationName: "Manassé Mukendi",
   alternates: {
@@ -21,12 +21,12 @@ export const metadata: Metadata = {
     url: "/",
     siteName: "Manassé Mukendi",
     title: "Manassé Mukendi / Marketing et Communication Digitale",
-    description: "Conseil, stratégie, contenus et Social Media pour des entreprises en RDC, en Afrique et à l’international.",
+    description: "Une direction claire pour votre communication, des contenus pour votre offre et un pilotage de vos réseaux sociaux. Découvrez mes réalisations et parlons de votre projet.",
   },
   twitter: {
     card: "summary",
     title: "Manassé Mukendi / Marketing et Communication Digitale",
-    description: "Conseil, stratégie, contenus et Social Media pour des entreprises en RDC, en Afrique et à l’international.",
+    description: "Une direction claire pour votre communication, des contenus pour votre offre et un pilotage de vos réseaux sociaux. Découvrez mes réalisations et parlons de votre projet.",
   },
   verification: {
     google: "4d_ZXQs7PN55JeZ_tB2xVSSPkjddHri67WOEBsxviEo",
