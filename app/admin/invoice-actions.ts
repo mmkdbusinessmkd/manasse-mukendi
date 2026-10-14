@@ -7,7 +7,7 @@ import { billingSchema,draftSchema } from '../../lib/admin/invoice-model';
 import { uuid } from '../../lib/admin/model';
 export type InvoiceState={error:string;saved:boolean};
 const fail=(error:string):InvoiceState=>({error,saved:false});
-function message(code:string){return code==='P0409'?'Les informations ont changé. Rechargez la page, enregistrez le brouillon puis relisez-le.':code==='23514'?'Complétez les adresses, la mention fiscale et une échéance à partir d’aujourd’hui. Vérifiez aussi que le montant de la mission est positif.':'Enregistrement non confirmé. Réessayez sans créer une autre mission.';}
+function message(code:string){return code==='P0409'?'Les informations ont changé. Rechargez la page, enregistrez le brouillon puis relisez-le.':code==='23514'?'Complétez les adresses et une échéance à partir d’aujourd’hui. Vérifiez aussi que le montant de la mission est positif.':'Enregistrement non confirmé. Réessayez sans créer une autre mission.';}
 export async function saveBilling(_:InvoiceState,form:FormData):Promise<InvoiceState>{
   const {db,user}=await requireAdmin(); const parsed=billingSchema.safeParse(Object.fromEntries(form));
   if(!parsed.success)return fail('Vérifiez les coordonnées et la longueur des champs.');

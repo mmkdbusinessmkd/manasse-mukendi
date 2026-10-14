@@ -13,6 +13,7 @@ async function main(){
   await db.exec(`create role anon nologin;create role authenticated nologin;create role service_role nologin;create schema auth;create table auth.users(id uuid primary key);create function auth.uid() returns uuid language sql stable as $$select nullif(current_setting('request.jwt.claim.sub',true),'')::uuid$$;grant usage on schema auth,public to authenticated,anon;grant execute on function auth.uid() to authenticated,anon;insert into auth.users values('${admin}'),('${other}');`);
   await db.exec(fs.readFileSync('supabase/migrations/202610060001_freelance.sql','utf8'));
   await db.exec(fs.readFileSync('supabase/migrations/202610140001_invoices.sql','utf8'));
+  await db.exec(fs.readFileSync('supabase/migrations/202610140002_simple_invoices.sql','utf8'));
   await db.query('insert into private.admin_users(user_id) values($1)',[admin]);
   await db.query("insert into clients(id,owner_id,name,company,email,whatsapp) values($1,$2,'Client démonstration','Entreprise exemple','test@example.com','+243838000000')",[client,admin]);
   await db.query("insert into missions(id,owner_id,client_id,title,amount_cents,currency) values($1,$2,$3,'Communication digitale - Octobre',100000,'USD')",[mission,admin,client]);
@@ -21,7 +22,7 @@ async function main(){
   await assert.rejects(()=>db.query('select * from invoices'),e=>e.code==='42501');
   await role('authenticated',other);await assert.rejects(()=>db.query('select public.prepare_invoice($1)',[mission]),e=>e.code==='42501');
   await role('authenticated',admin);
-  await db.query("insert into invoice_settings(owner_id,name,email,phone,address,tax_note,payment_details) values($1,'Manassé Mukendi','contact@manasse-mukendi.com','+243838318812','Adresse fictive de démonstration','Mention fiscale de démonstration - à remplacer.','Règlement selon les modalités convenues.')",[admin]);
+  await db.query("insert into invoice_settings(owner_id,name,email,phone,address,tax_note,payment_details) values($1,'Manassé Mukendi','contact@manasse-mukendi.com','+243838318812','Kinshasa, RDC','','')",[admin]);
   const id=(await db.query('select public.prepare_invoice($1) as id',[mission])).rows[0].id;
   assert.equal((await db.query('select public.prepare_invoice($1) as id',[mission])).rows[0].id,id);
   const read=async()=>(await db.query('select * from invoices where id=$1',[id])).rows[0];
@@ -35,6 +36,7 @@ async function main(){
   await assert.rejects(()=>db.query("select public.save_invoice_draft($1,$2,'Stale edit','','',null)",[id,stale]),e=>e.code==='P0409');
   await db.query('select public.issue_invoice($1,$2)',[id,inv.updated_at]);inv=await read();
   assert.match(inv.number,/^MM-\d{4}-000001$/);assert.equal(inv.state,'issued');
+  assert.equal(inv.issuer.tax_note,'');assert.equal(inv.issuer.registration,'');
   await db.query('select public.issue_invoice($1,$2)',[id,inv.updated_at]);assert.equal((await read()).number,inv.number);
   await assert.rejects(()=>db.query('update invoices set amount_cents=1 where id=$1',[id]),e=>e.code==='42501');
   await assert.rejects(()=>db.query('delete from invoices where id=$1',[id]),e=>e.code==='42501');

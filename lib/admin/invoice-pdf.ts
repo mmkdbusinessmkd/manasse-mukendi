@@ -55,9 +55,11 @@ export async function renderInvoice(invoice:Invoice,payments:Row[]) {
  page.drawText(`Reçu : ${safe(moneyLabel(balance.paid,invoice.currency))}`,{x:58,y:y-38,font:regular,size:11,color:green});
  page.drawText(`Reste à régler : ${safe(moneyLabel(balance.remaining,invoice.currency))}`,{x:58,y:y-65,font:bold,size:13,color:green});y-=112;
  text(`Statut : ${balance.label} | Situation des paiements au ${dateLabel(today())}`,9,false,muted);
- section('MENTIONS ET REGLEMENT');
- text(invoice.issuer.tax_note||'Mention fiscale à renseigner avant émission.',9);
- if(invoice.issuer.payment_details)text(invoice.issuer.payment_details,9);
+ if(invoice.issuer.tax_note||invoice.issuer.payment_details){
+   section(invoice.issuer.tax_note?'INFORMATIONS COMPLEMENTAIRES':'REGLEMENT');
+   if(invoice.issuer.tax_note)text(invoice.issuer.tax_note,9);
+   if(invoice.issuer.payment_details)text(invoice.issuer.payment_details,9);
+ }
  const received=payments.filter(p=>p.mission_id===invoice.mission_id);
  if(received.length){section('PAIEMENTS ENREGISTRES');for(const payment of received)text(`${dateLabel(payment.paid_on)} | ${moneyLabel(Number(payment.amount_cents),invoice.currency)}${payment.method?` | ${payment.method}`:''}`,9);}
  for(const [index,p] of pdf.getPages().entries()){
