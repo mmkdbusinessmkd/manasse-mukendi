@@ -8,7 +8,7 @@ export type SaveState={error:string;fields:Record<string,string>;values:Record<s
 const fail=(error:string,values:Record<string,string>,attempt:number,fields:Record<string,string>={}):SaveState=>({error,values,fields,attempt});
 function dbMessage(code:string) {
   if(code==='23503'||code==='23001')return 'Cette fiche est liée à d’autres éléments, ou la mission ne correspond pas au client. Vérifie les liens. Pour conserver l’historique, privilégie le statut « Terminé ».';
-  if(code==='23514')return 'Vérifie les dates et les montants. Un paiement ne peut pas dépasser le solde, ni une mission descendre sous le montant déjà reçu. Une livraison doit être datée.';
+  if(code==='23514')return 'Vérifie les dates et les montants. Un paiement ne peut pas dépasser le solde. Le montant, la devise et le client d’une mission facturée ne peuvent plus être modifiés. Une livraison doit être datée.';
   return 'Enregistrement impossible. Vérifie la connexion et réessaie ; aucune confirmation n’a été reçue.';
 }
 export async function saveRecord(entity:Entity,id:string|null,previous:SaveState,form:FormData):Promise<SaveState>{

@@ -7,6 +7,6 @@ import s from './admin.module.css';
 export default function AdminNav(){
   const path=usePathname();
   const [open,setOpen]=useState(false);
-  const links=[['/admin','Vue d’ensemble'],['/admin/demandes','Demandes reçues'],...entities.map(e=>[`/admin/${routes[e]}`,titles[e]]),['/admin/calendrier','Échéances']];
+  const links=[['/admin','Vue d’ensemble'],['/admin/demandes','Demandes reçues'],['/admin/factures','Factures'],...entities.map(e=>[`/admin/${routes[e]}`,titles[e]]),['/admin/calendrier','Échéances']];
   return <div><button type="button" className={s.menuToggle} aria-expanded={open} aria-controls="admin-navigation" onClick={()=>setOpen(!open)}>{open?'Fermer le menu':'Menu de gestion'}</button><nav id="admin-navigation" className={s.nav} data-open={open} aria-label="Gestion privée">{links.map(([href,label])=><Link key={href} href={href} onClick={()=>setOpen(false)} aria-current={(href==='/admin'?path===href:path.startsWith(href))?'page':undefined}>{label}</Link>)}</nav></div>;
 }
