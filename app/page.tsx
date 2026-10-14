@@ -1,9 +1,10 @@
 "use client";
 
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { trackConversion } from "../lib/conversion-analytics";
 import { SHOW_PILOT_PROGRAM, PILOT_PROGRAM_OPTION } from "../lib/pilot-program";
-import { PilotProgramBanner, PilotProgramFields } from "./components/PilotProgram";
+import { PilotProgramBanner } from "./components/PilotProgram";
+import ContactForm from "./components/ContactForm";
 import { snelStrategy } from "../lib/snel-strategy";
 
 const contact = {
@@ -44,12 +45,6 @@ const projects: Project[] = [
   { name: "Votre image parle avant vous", client: "LE COMMUNITY MANAGER", type: "Social Media", sector: "Marque personnelle", context: "Expliquer le rôle de l’image dans la manière dont une marque personnelle est perçue.", intervention: "Conception éditoriale et visuelle de contenus de sensibilisation.", result: "Un contenu de sensibilisation qui relie l’image de marque à la perception du public.", image: "/images/projects/le-community-manager.webp" },
 ];
 
-const contactFields = [
-  { label: "Nom", type: "text", name: "name", placeholder: "Votre nom", required: true },
-  { label: "E-mail", type: "email", name: "email", placeholder: "votre@email.com", required: true },
-  { label: "Téléphone / WhatsApp", type: "tel", name: "phone", placeholder: "Votre numéro avec indicatif pays", required: true },
-];
-
 const certifications = [
   "Community Management",
   "Social Media",
@@ -82,11 +77,7 @@ function BrandGlyph({ className = "" }: { className?: string }) {
 export default function Home() {
   const [menu, setMenu] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
-  const [formMessage, setFormMessage] = useState("");
   const [requestedService, setRequestedService] = useState("");
-  const isPilotApplication = SHOW_PILOT_PROGRAM && requestedService === PILOT_PROGRAM_OPTION;
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const submittingRef = useRef(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState("accueil");
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[number] | null>(null);
@@ -191,37 +182,6 @@ export default function Home() {
     };
   }, [selectedProject]);
   const visibleProjects = showAllProjects ? projects : projects.slice(0, 4);
-  const submit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (submittingRef.current) return;
-    const form = e.currentTarget;
-    submittingRef.current = true;
-    setIsSubmitting(true);
-    setFormMessage("Envoi en cours…");
-    const controller = new AbortController();
-    const timeout = window.setTimeout(() => controller.abort(), 20000);
-    try {
-      const response = await fetch("https://formsubmit.co/ajax/contact@manasse-mukendi.com", {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(form),
-        signal: controller.signal,
-      });
-      if (!response.ok) throw new Error("Submission failed");
-      const result = await response.json();
-      if (result.success !== true && result.success !== "true") throw new Error("Submission not accepted");
-      form.reset();
-      setRequestedService("");
-      setFormMessage(isPilotApplication ? "Merci, votre candidature a bien été envoyée. Seules 2 entreprises seront sélectionnées." : "Merci, votre demande a bien été envoyée.");
-      trackConversion("Contact request accepted");
-    } catch {
-      setFormMessage("L’envoi a échoué. Veuillez réessayer ou me contacter par WhatsApp.");
-    } finally {
-      window.clearTimeout(timeout);
-      submittingRef.current = false;
-      setIsSubmitting(false);
-    }
-  };
   return <main>
     <div className="scroll-progress" aria-hidden="true" style={{ transform: `scaleX(${scrollProgress})` }}></div>
     <header className={`nav ${scrollProgress > .015 ? "scrolled" : ""}`}><a className="brand brand-logo" href="#accueil" aria-label="Accueil — Manassé Mukendi"><img src="/images/brand/logo-mm.png" alt="Manassé Mukendi"/></a><nav className={menu ? "open" : ""}>{navigation.map(({ label, target }) => <a aria-current={activeSection === target ? "page" : undefined} className={activeSection === target ? "active" : ""} onClick={() => setMenu(false)} href={`#${target}`} key={target}>{label}</a>)}</nav><a className="nav-cta" href="#contact">Échangeons <BrandGlyph className="compact"/></a><button className="menu" aria-expanded={menu} aria-label={menu ? "Fermer le menu" : "Ouvrir le menu"} onClick={() => setMenu(!menu)}>{menu ? "×" : "☰"}</button></header>
@@ -307,7 +267,7 @@ export default function Home() {
 
 
 
-    <section className="contact section" id="contact"><div className="section-head"><p className="eyebrow">04 / CONTACT</p><h2>Votre prochain projet<br/>commence par un <em>échange.</em></h2><p>Présentez-moi votre entreprise et ce que vous souhaitez améliorer. Je vous recontacte personnellement pour préciser votre besoin et voir comment vous accompagner.</p><a className="mail" href={`mailto:${contact.email}`}>{contact.email} <span className="link-dot" aria-hidden="true"></span></a><a className="whatsapp-link contact-whatsapp" href={contact.whatsapp} onClick={() => trackConversion("WhatsApp clicked")} target="_blank" rel="noreferrer">Échanger sur WhatsApp <span className="link-dot" aria-hidden="true"></span></a></div><form onSubmit={submit} aria-busy={isSubmitting}><input className="honeypot" type="text" name="_honey" tabIndex={-1} autoComplete="off"/><input type="hidden" name="_subject" value={isPilotApplication ? "Candidature – Programme 30 jours — Manassé Mukendi" : "Nouvelle demande — site Manassé Mukendi"}/><input type="hidden" name="_template" value="table"/>{contactFields.map((field) => <label key={field.label}><span>{field.label}</span><input name={field.name} required={field.required} type={field.type} autoComplete={field.name === "phone" ? "tel" : field.name} placeholder={field.placeholder}/></label>)}<label><span>Votre besoin principal</span><select name="service" required value={requestedService} onChange={(event) => setRequestedService(event.target.value)}><option disabled value="">Choisir un accompagnement</option><option>J’ai besoin de conseils pour choisir</option>{services.map(x => <option key={x[1]}>{x[1]}</option>)}{SHOW_PILOT_PROGRAM && <option value={PILOT_PROGRAM_OPTION}>{PILOT_PROGRAM_OPTION}</option>}</select></label>{isPilotApplication ? <PilotProgramFields/> : <label className="full"><span>Parlez-moi de votre projet</span><textarea name="message" required placeholder="Votre entreprise, votre besoin et, si vous les connaissez, votre échéance et votre budget…"></textarea></label>}<div className="form-end"><p role="status" aria-live="polite">{formMessage || "Vos coordonnées me permettent de vous répondre au sujet de votre projet."}</p><button className="button dark" disabled={isSubmitting}>{isSubmitting ? "Envoi en cours…" : "Envoyer ma demande"} <BrandGlyph/></button></div></form></section>
+    <section className="contact section" id="contact"><div className="section-head"><p className="eyebrow">04 / CONTACT</p><h2>Votre prochain projet<br/>commence par un <em>échange.</em></h2><p>Présentez-moi votre entreprise et ce que vous souhaitez améliorer. Je vous recontacte personnellement pour préciser votre besoin et voir comment vous accompagner.</p><a className="mail" href={`mailto:${contact.email}`}>{contact.email} <span className="link-dot" aria-hidden="true"></span></a><a className="whatsapp-link contact-whatsapp" href={contact.whatsapp} onClick={() => trackConversion("WhatsApp clicked")} target="_blank" rel="noreferrer">Échanger sur WhatsApp <span className="link-dot" aria-hidden="true"></span></a></div><ContactForm service={requestedService} onServiceChange={setRequestedService} icon={<BrandGlyph/>}/></section>
 
     <footer><div><a className="brand footer-mark" href="#accueil" aria-label="Retour à l'accueil"><img src="/images/brand/icon-mm.png" alt="Manassé Mukendi"/></a><p>Marketing &amp; communication digitale<br/>Stratégie · Contenus · Social Media Management</p></div><p className="motto">Comprendre.<br/><em>Créer.</em><br/>Faire avancer.</p><div className="footer-links"><p className="footer-availability">Un interlocuteur pour votre stratégie et vos réseaux sociaux. Missions ponctuelles ou suivi mensuel, en RDC et à l’international.</p><div className="footer-social-actions"><p>Retrouvez mes publications</p><div>{Object.entries(contact.socials).map(([n,l]) => <a key={n} href={l} target="_blank" rel="noreferrer" aria-label={`Ouvrir mon profil ${n}`}>{n} <BrandGlyph className="compact"/></a>)}</div></div></div><small>© 2026 Manassé Mukendi. Tous droits réservés.</small></footer>
 

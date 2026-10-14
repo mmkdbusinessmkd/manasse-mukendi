@@ -102,6 +102,9 @@
 .root .danger { background: #862e25; color: #fff; border: 1px solid #862e25; cursor: pointer; }
 .root .danger:disabled { opacity: .6; }
 .root .footer { position: static; padding: 20px 36px 32px; font-size: 11px; color: #506958; border: 0; background: transparent; }
+.root .requestDetails { display: grid; gap: 20px; margin: 0 0 24px; }
+.root .requestDetails dt { color: #506958; font-size: 12px; font-weight: 700; margin-bottom: 6px; }
+.root .requestDetails dd { margin: 0; font-size: 15px; line-height: 1.7; overflow-wrap: anywhere; white-space: pre-wrap; }
 .srOnly, .skip:not(:focus) { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
 .root .skip:focus { position: fixed; z-index: 100; top: 8px; left: 8px; background: #fff; padding: 16px; color: #145533; }
 @media (max-width: 1150px) { .root .shell { grid-template-columns: 210px minmax(0,1fr); } .root .main { padding: 28px 24px; } .root .columns { grid-template-columns: 1fr; gap: 0; } .root .topbar { padding: 18px 24px; } }
