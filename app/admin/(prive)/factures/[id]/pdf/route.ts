@@ -4,7 +4,7 @@ import { renderInvoice } from '../../../../../../lib/admin/invoice-pdf';
 import { Row } from '../../../../../../lib/admin/model';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
-export async function GET(_:Request,{params}:{params:Promise<{id:string}>}){
+export async function GET(request:Request,{params}:{params:Promise<{id:string}>}){
  const {db,user}=await requireAdmin();
  const invoice=await getInvoice((await params).id);
  const payments:Row[]=[];
@@ -14,7 +14,8 @@ export async function GET(_:Request,{params}:{params:Promise<{id:string}>}){
   payments.push(...data as Row[]);if(data.length<500)break;
   if(offset>=9500)return new Response('Trop de paiements pour un seul document. Contactez le support.',{status:422});
  }
- const bytes=await renderInvoice(invoice,payments);
- const filename=invoice.number||`brouillon-${invoice.id.slice(0,8)}`;
+ const proforma=new URL(request.url).searchParams.get('document')==='proforma';
+ const bytes=await renderInvoice(invoice,payments,proforma?'proforma':invoice.state==='draft'?'draft':'invoice');
+ const filename=proforma?`proforma-${invoice.id.slice(0,8)}`:invoice.number||`brouillon-${invoice.id.slice(0,8)}`;
  return new Response(Buffer.from(bytes),{headers:{'Content-Type':'application/pdf','Content-Disposition':`attachment; filename="${filename}.pdf"`,'Cache-Control':'private, no-store, max-age=0','X-Content-Type-Options':'nosniff'}});
 }

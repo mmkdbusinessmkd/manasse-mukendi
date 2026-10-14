@@ -4,7 +4,7 @@ const ts=require('typescript');
 const {randomUUID}=require('node:crypto');
 const {PGlite}=require('@electric-sql/pglite');
 require.extensions['.ts']=(m,f)=>m._compile(ts.transpileModule(fs.readFileSync(f,'utf8'),{compilerOptions:{module:ts.ModuleKind.CommonJS,target:ts.ScriptTarget.ES2022,esModuleInterop:true}}).outputText,f);
-const {invoiceBalance,invoiceReply}=require('../lib/admin/invoice-model.ts');
+const {invoiceBalance,invoiceReply,invoiceDocumentTitle}=require('../lib/admin/invoice-model.ts');
 const {renderInvoice}=require('../lib/admin/invoice-pdf.ts');
 const admin=randomUUID(),other=randomUUID(),client=randomUUID(),mission=randomUUID();
 async function main(){
@@ -14,6 +14,7 @@ async function main(){
   await db.exec(fs.readFileSync('supabase/migrations/202610060001_freelance.sql','utf8'));
   await db.exec(fs.readFileSync('supabase/migrations/202610140001_invoices.sql','utf8'));
   await db.exec(fs.readFileSync('supabase/migrations/202610140002_simple_invoices.sql','utf8'));
+  await db.exec(fs.readFileSync('supabase/migrations/202610140003_optional_invoice_addresses.sql','utf8'));
   await db.query('insert into private.admin_users(user_id) values($1)',[admin]);
   await db.query("insert into clients(id,owner_id,name,company,email,whatsapp) values($1,$2,'Client démonstration','Entreprise exemple','test@example.com','+243838000000')",[client,admin]);
   await db.query("insert into missions(id,owner_id,client_id,title,amount_cents,currency) values($1,$2,$3,'Communication digitale - Octobre',100000,'USD')",[mission,admin,client]);
@@ -22,13 +23,13 @@ async function main(){
   await assert.rejects(()=>db.query('select * from invoices'),e=>e.code==='42501');
   await role('authenticated',other);await assert.rejects(()=>db.query('select public.prepare_invoice($1)',[mission]),e=>e.code==='42501');
   await role('authenticated',admin);
-  await db.query("insert into invoice_settings(owner_id,name,email,phone,address,tax_note,payment_details) values($1,'Manassé Mukendi','contact@manasse-mukendi.com','+243838318812','Kinshasa, RDC','','')",[admin]);
+  await db.query("insert into invoice_settings(owner_id,name,email,phone,address,tax_note,payment_details) values($1,'Manassé Mukendi','contact@manasse-mukendi.com','+243838318812','','','')",[admin]);
   const id=(await db.query('select public.prepare_invoice($1) as id',[mission])).rows[0].id;
   assert.equal((await db.query('select public.prepare_invoice($1) as id',[mission])).rows[0].id,id);
   const read=async()=>(await db.query('select * from invoices where id=$1',[id])).rows[0];
   let inv=await read();
   await assert.rejects(()=>db.query('select public.issue_invoice($1,$2)',[id,inv.updated_at]),e=>e.code==='23514');
-  const save=()=>db.query("select public.save_invoice_draft($1,$2,'Stratégie et création de contenus','Adresse client fictive','',current_date+30)",[id,inv.updated_at]);
+  const save=()=>db.query("select public.save_invoice_draft($1,$2,'Stratégie et création de contenus','','',current_date-1)",[id,inv.updated_at]);
   await save();inv=await read();const stale=inv.updated_at;
   await db.query('update missions set amount_cents=120000 where id=$1',[mission]);
   await assert.rejects(()=>db.query('select public.issue_invoice($1,$2)',[id,inv.updated_at]),e=>e.code==='P0409');
@@ -37,6 +38,18 @@ async function main(){
   await db.query('select public.issue_invoice($1,$2)',[id,inv.updated_at]);inv=await read();
   assert.match(inv.number,/^MM-\d{4}-000001$/);assert.equal(inv.state,'issued');
   assert.equal(inv.issuer.tax_note,'');assert.equal(inv.issuer.registration,'');
+  assert.equal(inv.issuer.address,'');assert.equal(inv.client_address,'');
+  // The same optional address can be reused on several different clients.
+  for(let n=0;n<2;n++){
+    const client2=randomUUID(), mission2=randomUUID();
+    await db.query("insert into clients(id,owner_id,name) values($1,$2,'Test adresse répétée')",[client2,admin]);
+    await db.query("insert into missions(id,owner_id,client_id,title,amount_cents,currency) values($1,$2,$3,'Test partage adresse',100,'USD')",[mission2,admin,client2]);
+    const id2=(await db.query('select public.prepare_invoice($1) as id',[mission2])).rows[0].id;
+    let inv2=(await db.query('select * from invoices where id=$1',[id2])).rows[0];
+    await db.query("select public.save_invoice_draft($1,$2,'Test partage adresse','Kinshasa, RDC','',current_date)",[id2,inv2.updated_at]);
+    inv2=(await db.query('select * from invoices where id=$1',[id2])).rows[0];
+    await db.query('select public.issue_invoice($1,$2)',[id2,inv2.updated_at]);
+  }
   await db.query('select public.issue_invoice($1,$2)',[id,inv.updated_at]);assert.equal((await read()).number,inv.number);
   await assert.rejects(()=>db.query('update invoices set amount_cents=1 where id=$1',[id]),e=>e.code==='42501');
   await assert.rejects(()=>db.query('delete from invoices where id=$1',[id]),e=>e.code==='42501');
@@ -47,6 +60,11 @@ async function main(){
   await db.query("insert into payments(owner_id,client_id,mission_id,amount_cents,currency,paid_on) values($1,$2,$3,40000,'USD',current_date)",[admin,client,mission]);
   assert.equal(invoiceBalance(inv,[p]).label,'Partiellement payée');assert.equal(invoiceBalance(inv,[p]).remaining,80000);
   assert.equal(invoiceBalance(inv,[{...p,amount_cents:120000}]).label,'Payée');
+  assert.equal(invoiceDocumentTitle(inv,[],'invoice'),'Facture');
+  assert.equal(invoiceDocumentTitle(inv,[p],'invoice'),'Facture');
+  assert.equal(invoiceDocumentTitle(inv,[{...p,amount_cents:120000}],'invoice'),'Facture acquittée');
+  assert.equal(invoiceDocumentTitle({...inv,state:'draft'},[{...p,amount_cents:120000}],'draft'),'Brouillon');
+  assert.equal(invoiceDocumentTitle(inv,[{...p,amount_cents:120000}],'proforma'),'Pro forma');
   assert.ok(invoiceReply(inv).email.startsWith('mailto:test%40example.com'));assert.ok(invoiceReply(inv).whatsapp.startsWith('https://wa.me/243838000000?text='));
   await role('authenticated',other);assert.equal((await db.query('select * from invoices')).rows.length,0);
   await assert.rejects(()=>db.query('select public.issue_invoice($1,$2)',[id,inv.updated_at]),e=>e.code==='42501');
@@ -56,7 +74,9 @@ async function main(){
   await fs.promises.writeFile('tmp/pdfs/invoice-example.pdf',await renderInvoice(inv,[p]));
   const long={...inv,state:'draft',number:null,issued_on:null,description:('Prestation détaillée : stratégie, création de contenus et suivi de campagne. ').repeat(40),client_address:'Longue adresse '.repeat(35)};
   await fs.promises.writeFile('tmp/pdfs/invoice-long-draft.pdf',await renderInvoice(long,[]));
-  console.log('PASS: private ACLs, idempotent prepare/issue, numbering, stale updates, incomplete issue rejection, frozen snapshots, mission lock, partial/full balances, reply links and PDF fixtures.');
+  await fs.promises.writeFile('tmp/pdfs/invoice-proforma.pdf',await renderInvoice({...inv,state:'draft',number:null,issued_on:null},[],'proforma'));
+  await fs.promises.writeFile('tmp/pdfs/invoice-paid.pdf',await renderInvoice(inv,[{...p,amount_cents:120000}],'invoice'));
+  console.log('PASS: optional/reusable addresses, proforma/paid titles, private ACLs, idempotent prepare/issue, numbering, stale updates, missing date rejection, frozen snapshots, mission lock, partial/full balances, reply links and PDF fixtures.');
  }finally{await db.close();}
 }
 main().catch(e=>{console.error(e);process.exitCode=1;});
