@@ -1,0 +1,107 @@
+/* Shared public-page rhythm. Does not style the private dashboard or hero module. */
+.public-site {--page-gutter:max(5%,calc((100vw - 1440px)/2));--section-space:88px}
+.public-site :is(.section,.work,.trust-compact,.testimonial-section){padding:var(--section-space) var(--page-gutter)}
+.public-site :is(.section-head,.about-copy,.why-head,.work-head,.trust-copy,.testimonial-heading) h2{
+  font-size:clamp(30px,3.1vw,46px);line-height:1.18;letter-spacing:-.045em;text-wrap:balance;
+}
+.public-site :is(.section-head,.about-copy,.why-head,.trust-copy,.testimonial-heading) h2 em{color:#a44b15}
+.public-site :is(.about-copy,.section-head,.service-list,.why-grid,.testimonial-content,.testimonial-author,.contact>div,.footer-links){min-width:0}
+.public-site .about-short{max-width:none;margin:0;padding:80px var(--page-gutter);grid-template-columns:minmax(240px,.7fr) minmax(0,1.3fr);gap:8%;align-items:center}
+.public-site .about-short .portrait{width:100%;max-width:340px;min-height:0;margin-inline:auto}
+.public-site .about-short .portrait-photo{aspect-ratio:3/4;border-radius:24px;box-shadow:0 12px 30px #043b270a}
+.public-site .about-short .about-copy{padding:0}
+.public-site .about-short .bio{max-width:64ch}
+.public-site .about-short .bio p{font-size:16px;line-height:1.8}
+.public-site .about-references{max-width:none;display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.public-site .about-references dd{line-height:1.75}
+.public-site .services{border-top:1px solid #d9e0d5;border-bottom:1px solid #d9e0d5}
+.public-site .services .section-head{margin-bottom:36px}
+.public-site .service-list{border-top:0;display:grid;gap:10px}
+.public-site .service-disclosure{border:1px solid #c9d5c9;border-radius:14px;background:#fbfcf7;overflow:clip}
+.public-site .service-disclosure summary{padding:22px 24px;min-height:82px;grid-template-columns:30px minmax(0,1fr) 30px;gap:18px}
+.public-site .service-disclosure h3{font-size:20px;line-height:1.4;color:#143f2c}
+.public-site .disclosure-sign{display:grid;place-items:center;width:30px;height:30px;border:1px solid #c2d2c4;border-radius:50%;font-size:20px;color:#143f2c}
+.public-site .service-disclosure[open]{background:#eef4e9;border-color:#93b39d}
+.public-site .service-disclosure[open] .disclosure-sign{background:#043b27;color:#fff;border-color:#043b27}
+.public-site .service-description{max-width:860px;padding:0 72px 26px}
+.public-site .service-description .service-cta{width:100%;justify-content:space-between;min-height:48px}
+.public-site .why-grid article{grid-template-columns:38px minmax(0,1fr);gap:10px 18px;align-items:start}
+.public-site .why-grid article>span{grid-row:1/3;width:34px;height:34px;border:1px solid #bccfbf;background:#edf2e9;color:#143f2c}
+.public-site .why-grid h3{align-self:center;font-size:19px;line-height:1.45}
+.public-site .why-grid p{grid-column:2;max-width:57ch;font-size:15px;line-height:1.75}
+.public-site .work-head{gap:36px;align-items:end;margin-bottom:36px}
+.public-site .work-head>p{max-width:45ch;line-height:1.75;font-size:15px}
+.public-site .consistent-projects{gap:32px;align-items:stretch}
+.public-site .consistent-projects .project{border-radius:18px}
+.public-site .consistent-projects .project-info{flex:1;padding:26px;min-height:0}
+.public-site .consistent-projects .case-client{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 7px;line-height:1.65;font-size:11px}
+.public-site .consistent-projects .project-info h3{font-size:24px;line-height:1.35;margin:14px 0 24px}
+.public-site .project-view-button{min-height:48px}
+.public-site .button{min-height:52px;line-height:1.5;border-radius:12px!important}
+.public-site .partners-return{gap:32px}
+.public-site .testimonial-section{border-top:1px solid #d9e0d5}
+.public-site .testimonial-heading{margin-bottom:32px}
+.public-site .testimonial-card{max-width:none;margin:0;padding:32px;gap:40px;border:1px solid #cad6c9;border-radius:20px;background:#fcfcf6}
+.public-site .testimonial-author img{width:120px;height:120px;object-fit:contain;background:#fbf8ef;border-radius:14px;box-shadow:none}
+.public-site .testimonial-highlight{margin:0 0 24px}
+.public-site .testimonial-highlight p{font-size:clamp(21px,2vw,27px);line-height:1.65;margin:0;color:#143f2c}
+.public-site .testimonial-details summary{min-height:48px;line-height:1.6}
+.public-site .testimonial-details blockquote{margin:20px 0 0}
+.public-site .testimonial-details blockquote p{font-size:15px;line-height:1.8}
+.public-site .contact.section{border-top:1px solid #d9e0d5;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:7%;align-items:start}
+.public-site .contact .section-head>p:not(.eyebrow){max-width:45ch;font-size:16px;line-height:1.8;margin-top:24px}
+.public-site .contact .mail,.public-site .contact .contact-whatsapp{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;max-width:390px;padding:12px 14px;min-height:52px;border:1px solid #b5c9b9;border-radius:12px;background:#fcfcf7;color:#143f2c!important;opacity:1;font-size:14px;font-weight:650;line-height:1.6}
+.public-site .contact-action-label{min-width:0;overflow-wrap:anywhere}
+.public-site .contact .mail{margin-top:28px}.public-site .contact .contact-whatsapp{margin-top:10px}
+.public-site .contact .form-end{flex-direction:column;align-items:stretch;gap:20px}
+.public-site .contact .form-end p{max-width:none;font-size:12px;line-height:1.7;margin:0}
+.public-site .contact .form-end .button{width:100%;justify-content:space-between}
+.public-site .contact label{min-width:0;gap:8px}
+.public-site .contact label>span{font-size:13px;line-height:1.6;font-weight:600;color:#254a34}
+.public-site .contact :is(input,select,textarea){width:100%;min-width:0;max-width:100%;font-size:16px;line-height:1.5;background:#fcfcf7;border-color:#a9bfaf;border-radius:10px}
+.public-site .contact textarea{min-height:150px;resize:vertical}
+.public-site .contact input,.public-site .contact select{min-height:50px}
+.public-site .contact h3[tabindex]{scroll-margin-top:100px}
+.public-site :is(a,button,summary){-webkit-tap-highlight-color:#ff8b3826;touch-action:manipulation}
+.public-site :is(button,a,summary):focus-visible{outline:2px solid #a44b15;outline-offset:4px}
+.public-site .work :is(button,a):focus-visible,.public-site footer a:focus-visible{outline-color:#ffad6f}
+.public-site .skip-link{position:fixed;top:8px;left:16px;z-index:120;padding:14px 20px;background:#f5f5e9;color:#043b27;border:2px solid #043b27;border-radius:10px;transform:translateY(-180%)}
+.public-site .skip-link:focus{transform:none}
+.public-site > footer{padding-inline:var(--page-gutter);gap:32px}
+@media(hover:hover){
+  .public-site .service-disclosure:hover{border-color:#8eac98}
+  .public-site .contact .mail:hover,.public-site .contact .contact-whatsapp:hover{background:#eaf1e5;border-color:#6a9077}
+}
+@media(max-width:1100px){.public-site .contact.section{grid-template-columns:1fr;gap:40px}.public-site .contact .section-head>p:not(.eyebrow){max-width:65ch}}
+@media(max-width:800px){
+  .public-site{--page-gutter:24px;--section-space:64px}
+  .public-site :is(.section-head,.about-copy,.why-head,.work-head,.trust-copy,.testimonial-heading) h2{font-size:clamp(28px,7.5vw,34px);line-height:1.22;letter-spacing:-.04em}
+  .public-site .about-short{padding:56px var(--page-gutter) 64px;grid-template-columns:1fr;gap:32px}
+  .public-site .about-short .portrait{width:208px}
+  .public-site .about-references{grid-template-columns:1fr;gap:0;margin-top:26px}
+  .public-site .about-references>div{padding-top:18px}
+  .public-site .about-short .bio p{font-size:16px;line-height:1.75;margin-bottom:18px}
+  .public-site .service-disclosure summary{padding:18px 16px;gap:10px;grid-template-columns:22px minmax(0,1fr) 28px;min-height:76px}
+  .public-site .service-disclosure h3{font-size:17px}.public-site .disclosure-sign{width:28px;height:28px}
+  .public-site .service-description{padding:0 16px 22px}.public-site .service-description p{font-size:15px;line-height:1.75}
+  .public-site .service-description .service-cta{font-size:13px;gap:10px}
+  .public-site .why{gap:30px}.public-site .why-grid article{grid-template-columns:32px minmax(0,1fr);gap:8px 14px;padding:22px 0}
+  .public-site .why-grid h3{font-size:18px}.public-site .why-grid article>span{width:30px;height:30px}.public-site .why-grid p{font-size:15px}
+  .public-site .work-head{display:block;margin-bottom:28px}.public-site .work-head>p{margin-top:22px}
+  .public-site .consistent-projects{gap:28px}.public-site .consistent-projects .project-info{padding:20px}
+  .public-site .consistent-projects .project-info h3{font-size:21px;margin:12px 0 20px;line-height:1.35;text-wrap:pretty}
+  .public-site .project-toggle{font-size:13px}
+  .public-site .testimonial-card{padding:22px 20px;gap:26px;border-radius:16px}
+  .public-site .testimonial-author{grid-template-columns:72px minmax(0,1fr);gap:14px}
+  .public-site .testimonial-author img{width:72px;height:72px}.public-site .testimonial-author h3{font-size:16px}
+  .public-site .testimonial-author p,.public-site .testimonial-author .testimonial-specialties{font-size:12px;line-height:1.65;overflow-wrap:break-word}
+  .public-site .testimonial-highlight p{font-size:20px;line-height:1.65}.public-site .testimonial-details summary{font-size:12px}
+  .public-site .contact.section{gap:32px}.public-site .contact .mail,.public-site .contact .contact-whatsapp{max-width:none;font-size:13px}
+  .public-site .contact form{gap:22px}.public-site .contact .form-end .button{font-size:14px}
+  .public-site .project-modal-copy .button{font-size:13px;min-width:0}
+  .public-site .project-modal-copy{overscroll-behavior:contain}
+  .public-site > footer{gap:28px}.public-site .footer-social-actions a{font-size:13px}
+}
+@media(max-width:360px){.public-site{--page-gutter:20px}.public-site .testimonial-card{padding:20px 16px}.public-site .testimonial-author{grid-template-columns:60px minmax(0,1fr);gap:10px}.public-site .testimonial-author img{width:60px;height:60px}.public-site .service-disclosure summary{padding-inline:12px}.public-site .service-disclosure h3{font-size:16px}.public-site .contact .mail{font-size:12px}}
+@media(min-width:600px) and (max-width:800px){.public-site{--page-gutter:32px}.public-site .about-short{grid-template-columns:180px minmax(0,1fr);gap:32px;align-items:start}.public-site .about-short .portrait{width:180px}.public-site .testimonial-author{grid-template-columns:80px minmax(0,1fr)}.public-site .testimonial-author img{width:80px;height:80px}}
+@media(prefers-reduced-motion:reduce){.public-site .skip-link{transition:none}}

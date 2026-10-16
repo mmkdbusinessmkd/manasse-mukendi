@@ -178,6 +178,9 @@ export default function Home() {
   useEffect(() => {
     if (!selectedProject) return;
     const previouslyFocused = document.activeElement as HTMLElement | null;
+    // The modal is the only interactive surface until it is closed.
+    const background = Array.from(document.querySelectorAll<HTMLElement>(".public-site > header, .public-site > section, .public-site > footer, .public-site > .skip-link"));
+    background.forEach(element => { element.inert = true; });
     const closeOnEscape = (event: KeyboardEvent) => {
       if (event.key === "Escape") setSelectedProject(null);
       if (event.key === "Tab") {
@@ -196,14 +199,16 @@ export default function Home() {
     modalCloseRef.current?.focus();
     return () => {
       document.body.classList.remove("modal-open");
+      background.forEach(element => { element.inert = false; });
       window.removeEventListener("keydown", closeOnEscape);
-      previouslyFocused?.focus();
+      previouslyFocused?.focus({ preventScroll: true });
     };
   }, [selectedProject]);
   const visibleProjects = showAllProjects ? projects : projects.slice(0, 4);
   return <main className="public-site">
+    <a className="skip-link" href="#accueil">Aller au contenu</a>
     <div className="scroll-progress" aria-hidden="true" style={{ transform: `scaleX(${scrollProgress})` }}></div>
-    <header className={`nav ${scrollProgress > .015 ? "scrolled" : ""}`}><a className="brand brand-logo" href="#accueil" aria-label="Accueil — Manassé Mukendi"><img src="/images/brand/logo-mm.png" alt="Manassé Mukendi"/></a><nav className={menu ? "open" : ""}>{navigation.map(({ label, target }) => <a aria-current={activeSection === target ? "page" : undefined} className={activeSection === target ? "active" : ""} onClick={() => setMenu(false)} href={`#${target}`} key={target}>{label}</a>)}</nav><a className="nav-cta" href="#contact">Échangeons <BrandGlyph className="compact"/></a><button className="menu" aria-expanded={menu} aria-label={menu ? "Fermer le menu" : "Ouvrir le menu"} onClick={() => setMenu(!menu)}>{menu ? "×" : "☰"}</button></header>
+    <header className={`nav ${scrollProgress > .015 ? "scrolled" : ""}`}><a className="brand brand-logo" href="#accueil" aria-label="Accueil — Manassé Mukendi"><img src="/images/brand/logo-mm.png" alt="Manassé Mukendi"/></a><nav id="main-navigation" aria-label="Navigation principale" className={menu ? "open" : ""}>{navigation.map(({ label, target }) => <a aria-current={activeSection === target ? "page" : undefined} className={activeSection === target ? "active" : ""} onClick={() => setMenu(false)} href={`#${target}`} key={target}>{label}</a>)}</nav><a className="nav-cta" href="#contact">Échangeons <BrandGlyph className="compact"/></a><button className="menu" aria-controls="main-navigation" aria-expanded={menu} aria-label={menu ? "Fermer le menu" : "Ouvrir le menu"} onClick={() => setMenu(!menu)}>{menu ? "×" : "☰"}</button></header>
 
     <HomeHero icon={<BrandGlyph/>}/>
 
@@ -286,7 +291,7 @@ export default function Home() {
 
 
 
-    <section className="contact section" id="contact"><div className="section-head"><p className="eyebrow">04 / CONTACT</p><h2>Votre prochain projet<br/>commence par un <em>échange.</em></h2><p>Présentez-moi votre entreprise et ce que vous souhaitez améliorer. Je vous recontacte personnellement pour préciser votre besoin et voir comment vous accompagner.</p><a className="mail" href={`mailto:${contact.email}`}>{contact.email} <span className="link-dot" aria-hidden="true"></span></a><a className="whatsapp-link contact-whatsapp" href={contact.whatsapp} onClick={() => trackConversion("WhatsApp clicked")} target="_blank" rel="noreferrer">Échanger sur WhatsApp <span className="link-dot" aria-hidden="true"></span></a></div><ContactForm service={requestedService} onServiceChange={setRequestedService} icon={<BrandGlyph/>}/></section>
+    <section className="contact section" id="contact"><div className="section-head"><p className="eyebrow">04 / CONTACT</p><h2>Votre prochain projet<br/>commence par un <em>échange.</em></h2><p>Présentez-moi votre entreprise et ce que vous souhaitez améliorer. Je vous recontacte personnellement pour préciser votre besoin et voir comment vous accompagner.</p><a className="mail" href={`mailto:${contact.email}`}><span className="contact-action-label">{contact.email}</span><BrandGlyph className="compact"/></a><a className="whatsapp-link contact-whatsapp" href={contact.whatsapp} onClick={() => trackConversion("WhatsApp clicked")} target="_blank" rel="noreferrer"><span className="contact-action-label">Échanger sur WhatsApp</span><BrandGlyph className="compact"/></a></div><ContactForm service={requestedService} onServiceChange={setRequestedService} icon={<BrandGlyph/>}/></section>
 
     <footer><div><a className="brand footer-mark" href="#accueil" aria-label="Retour à l'accueil"><img src="/images/brand/icon-mm.png" alt="Manassé Mukendi"/></a><p>Marketing &amp; communication digitale<br/>Stratégie · Contenus · Social Media Management</p></div><p className="motto">Comprendre.<br/><em>Créer.</em><br/>Faire avancer.</p><div className="footer-links"><p className="footer-availability">Un interlocuteur pour votre stratégie et vos réseaux sociaux. Missions ponctuelles ou suivi mensuel, en RDC et à l’international.</p><div className="footer-social-actions"><p>Retrouvez mes publications</p><div>{Object.entries(contact.socials).map(([n,l]) => <a key={n} href={l} target="_blank" rel="noreferrer" aria-label={`Ouvrir mon profil ${n}`}>{n} <BrandGlyph className="compact"/></a>)}</div></div></div><small>© 2026 Manassé Mukendi. Tous droits réservés.</small></footer>
 

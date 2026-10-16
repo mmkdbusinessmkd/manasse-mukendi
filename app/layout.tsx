@@ -7,6 +7,7 @@ import "./mobile.css";
 import "./clarity.css";
 import "./brand-textures.css";
 import "./mobile-refinements.css";
+import "./site-layout.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.manasse-mukendi.com"),
