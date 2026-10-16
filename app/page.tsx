@@ -291,7 +291,22 @@ export default function Home() {
 
 
 
-    <section className="contact section" id="contact"><div className="section-head"><p className="eyebrow">04 / CONTACT</p><h2>Votre prochain projet<br/>commence par un <em>échange.</em></h2><p>Présentez-moi votre entreprise et ce que vous souhaitez améliorer. Je vous recontacte personnellement pour préciser votre besoin et voir comment vous accompagner.</p><a className="mail" href={`mailto:${contact.email}`}><span className="contact-action-label">{contact.email}</span><BrandGlyph className="compact"/></a><a className="whatsapp-link contact-whatsapp" href={contact.whatsapp} onClick={() => trackConversion("WhatsApp clicked")} target="_blank" rel="noreferrer"><span className="contact-action-label">Échanger sur WhatsApp</span><BrandGlyph className="compact"/></a></div><ContactForm service={requestedService} onServiceChange={setRequestedService} icon={<BrandGlyph/>}/></section>
+    <section className="contact section" id="contact">
+      <div className="section-head">
+        <p className="eyebrow">04 / VOTRE PROJET</p>
+        <h2>Votre prochain projet<br/>commence <em>ici.</em></h2>
+        <p>Présentez votre besoin dans le formulaire. Je vous recontacterai personnellement par e-mail ou sur WhatsApp pour préciser votre projet.</p>
+      </div>
+      <div className="contact-request-column">
+        <ContactForm service={requestedService} onServiceChange={setRequestedService} icon={<BrandGlyph/>}/>
+        <details className="contact-alternatives">
+          <summary>Autres moyens de contact <span aria-hidden="true">+</span></summary>
+          <p>Vous ne pouvez pas utiliser le formulaire ?</p>
+          <a className="mail" href={`mailto:${contact.email}`}><span className="contact-action-label">Écrire par e-mail</span><BrandGlyph className="compact"/></a>
+          <a className="whatsapp-link contact-whatsapp" href={contact.whatsapp} onClick={() => trackConversion("WhatsApp clicked")} target="_blank" rel="noreferrer"><span className="contact-action-label">Échanger sur WhatsApp</span><BrandGlyph className="compact"/></a>
+        </details>
+      </div>
+    </section>
 
     <footer><div><a className="brand footer-mark" href="#accueil" aria-label="Retour à l'accueil"><img src="/images/brand/icon-mm.png" alt="Manassé Mukendi"/></a><p>Marketing &amp; communication digitale<br/>Stratégie · Contenus · Social Media Management</p></div><p className="motto">Comprendre.<br/><em>Créer.</em><br/>Faire avancer.</p><div className="footer-links"><p className="footer-availability">Un interlocuteur pour votre stratégie et vos réseaux sociaux. Missions ponctuelles ou suivi mensuel, en RDC et à l’international.</p><div className="footer-social-actions"><p>Retrouvez mes publications</p><div>{Object.entries(contact.socials).map(([n,l]) => <a key={n} href={l} target="_blank" rel="noreferrer" aria-label={`Ouvrir mon profil ${n}`}>{n} <BrandGlyph className="compact"/></a>)}</div></div></div><small>© 2026 Manassé Mukendi. Tous droits réservés.</small></footer>
 

@@ -45,7 +45,7 @@ export default function ContactForm({ service, onServiceChange, icon }: { servic
     } finally { busy.current = false; setSending(false); }
   }
   return <div className={s.container}>
-    <form ref={form} onSubmit={review} hidden={!!draft} className={draft ? s.hidden : undefined}>
+    <form ref={form} aria-label="Présenter mon projet" onSubmit={review} hidden={!!draft} className={draft ? s.hidden : undefined}>
       <input className="honeypot" type="text" name="_honey" aria-hidden="true" tabIndex={-1} autoComplete="off"/>
       <label><span>Nom</span><input name="name" autoComplete="name" placeholder="Votre nom" minLength={2} maxLength={160} required/></label>
       <label><span>E-mail</span><input name="email" type="email" autoComplete="email" placeholder="votre@email.com" maxLength={254} required/></label>

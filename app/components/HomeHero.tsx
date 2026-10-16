@@ -14,7 +14,7 @@ export default function HomeHero({ icon }: { icon: ReactNode }) {
         <h1 id="home-title" className={styles.title}>La communication<br/>qui <em>déplace</em><br/>les marques<span className={styles.period}>.</span></h1>
         <p className={styles.intro}><strong>Votre entreprise a du savoir-faire.<br/>{" "}Faisons-le savoir.</strong>Je clarifie vos messages, crée vos contenus et pilote vos réseaux sociaux pour rendre votre offre plus visible, plus compréhensible et plus convaincante.</p>
         <div className={styles.actions}>
-          <a className={styles.primary} href="#contact">Parlons de votre projet {icon}</a>
+          <a className={styles.primary} href="#contact">Présenter mon projet {icon}</a>
           <a className={styles.secondary} href="#realisations">Voir mes réalisations {icon}</a>
         </div>
       </div>

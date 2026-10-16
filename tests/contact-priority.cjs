@@ -1,0 +1,15 @@
+const assert = require('node:assert/strict');
+const fs = require('node:fs');
+const page = fs.readFileSync('app/page.tsx', 'utf8');
+const hero = fs.readFileSync('app/components/HomeHero.tsx', 'utf8');
+const form = fs.readFileSync('app/components/ContactForm.tsx', 'utf8');
+const contact = page.slice(page.indexOf('<section className="contact section"'), page.indexOf('<footer>'));
+assert(contact.indexOf('<ContactForm ') < contact.indexOf('<details className="contact-alternatives">'));
+const details = contact.slice(contact.indexOf('<details'), contact.indexOf('</details>'));
+assert(!/\bopen(?:\s|=|>)/.test(details.split('>')[0]), 'Direct contacts stay collapsed initially');
+assert(details.includes('mailto:') && details.includes('contact.whatsapp'), 'Preserve both fallback channels');
+assert(!contact.slice(0, contact.indexOf('<ContactForm ')).includes('mailto:'));
+assert(hero.includes('href="#contact">Présenter mon projet'));
+assert(form.includes('aria-label="Présenter mon projet"'));
+assert(/name="phone"[^>]*required/.test(form), 'Phone remains required');
+console.log('Contact priority: form first, direct channels secondary, phone required.');
