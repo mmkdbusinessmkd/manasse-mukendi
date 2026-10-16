@@ -83,6 +83,24 @@ export default function Home() {
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[number] | null>(null);
   const modalCloseRef = useRef<HTMLButtonElement>(null);
   useEffect(() => {
+    if (!menu) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenu(false);
+        document.querySelector<HTMLButtonElement>(".public-site .menu")?.focus();
+      }
+    };
+    const closeOutside = (event: PointerEvent) => {
+      if (event.target instanceof Element && !event.target.closest(".nav")) setMenu(false);
+    };
+    document.addEventListener("keydown", closeOnEscape);
+    document.addEventListener("pointerdown", closeOutside);
+    return () => {
+      document.removeEventListener("keydown", closeOnEscape);
+      document.removeEventListener("pointerdown", closeOutside);
+    };
+  }, [menu]);
+  useEffect(() => {
     if (window.location.hostname === "manasse-mukendi.vercel.app") {
       window.location.replace(`https://www.manasse-mukendi.com${window.location.pathname}${window.location.search}${window.location.hash}`);
     }

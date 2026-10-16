@@ -1,0 +1,95 @@
+/* Final mobile layer. Public site only; desktop and private dashboard unchanged. */
+@media (max-width: 800px) {
+  .public-site .nav,.public-site .nav.scrolled {
+    height:64px;padding-inline:20px;background:#f3f7ef;
+    backdrop-filter:none;-webkit-backdrop-filter:none;
+    box-shadow:0 2px 12px #043b270a;
+  }
+  .public-site .brand-logo{width:116px}
+  .public-site .menu{width:44px;height:44px;border-radius:12px;border-color:#a6bcad}
+  .public-site .nav nav{
+    top:calc(100% + 8px);left:12px;right:12px;width:auto;
+    max-height:calc(100dvh - 88px);padding:8px;gap:4px;
+    border:1px solid #c7d3c9;border-radius:16px;
+    background:#f7f8f2;box-shadow:0 12px 32px #00281724;
+  }
+  .public-site .nav nav a{padding:14px 16px;min-height:48px;font-size:15px;border-radius:10px}
+  .public-site section[id]{scroll-margin-top:72px}
+  .public-site .hero{padding:44px 24px 48px;min-height:0}
+  .public-site .hero .eyebrow{font-size:10px;line-height:1.75;letter-spacing:.035em;margin-bottom:24px;max-width:32ch}
+  .public-site .hero h1{font-size:clamp(29px,8vw,38px);line-height:1.2;text-wrap:balance}
+  .public-site .hero .intro{font-size:16px;line-height:1.7;margin:24px 0 28px}
+  .public-site .hero .actions{display:grid;grid-template-columns:1fr;gap:12px}
+  .public-site .hero .button,.public-site .hero .button-ghost{
+    width:100%;min-height:54px;justify-content:space-between;
+    padding:9px 10px 9px 18px!important;gap:14px;font-size:14px;
+  }
+  .public-site .hero .button-ghost{border:1px solid #9bb7a5;background:#ffffff05;color:#f7f8f2}
+  .public-site .hero .button-ghost .brand-glyph{background:#043b27;border:1px solid #ffffff30}
+  .public-site .hero .button-ghost:after{display:none}
+  .public-site .section,.public-site .section.services,.public-site .section.why,
+  .public-site .work,.public-site .trust-compact,.public-site .testimonial-section,
+  .public-site .contact.section{padding:64px 24px}
+  .public-site .about-short{padding:56px 24px 0;gap:28px}
+  .public-site .about-short .portrait{width:min(100%,208px);margin-inline:auto}
+  .public-site .about-short .portrait-photo{border-radius:18px}
+  .public-site .about-short .bio p{line-height:1.75}
+  .public-site .about-short .about-copy h2{margin-bottom:24px}
+  .public-site .about-references{margin-top:24px}
+  .public-site .about-references dd{font-size:14px;line-height:1.75}
+  .public-site .service-disclosure summary{min-height:76px;padding:22px 0;gap:12px}
+  .public-site .service-disclosure h3{font-size:18px;line-height:1.4}
+  .public-site .service-description{padding:0 0 24px 34px}
+  .public-site .why-grid article{padding-block:22px}
+  .public-site .work-head{margin-bottom:28px}
+  .public-site .work-head>p{margin-top:20px}
+  .public-site .consistent-projects{gap:28px}
+  .public-site .consistent-projects .project-info{padding:20px}
+  .public-site .consistent-projects .project-info h3{font-size:20px;line-height:1.4;margin:12px 0 20px}
+  .public-site .consistent-projects .project-art img{object-fit:contain;object-position:center;transform:none!important}
+  .public-site .project-view-button{min-height:48px}
+  .public-site .work-actions .project-toggle{width:100%;min-height:54px;justify-content:space-between}
+  .public-site .testimonial-card{gap:24px}
+  .public-site .testimonial-highlight p{font-size:20px;line-height:1.65}
+  .public-site .contact.section{gap:32px}
+  .public-site .contact .mail,.public-site .contact .contact-whatsapp{
+    display:flex;align-items:center;min-height:48px;width:100%;max-width:100%;
+    border:1px solid #c1d1c4;border-radius:10px;padding:12px 14px;
+    font-size:14px;line-height:1.5;overflow-wrap:anywhere;
+  }
+  .public-site .contact form{gap:22px}
+  .public-site .contact input,.public-site .contact select,.public-site .contact textarea{
+    border-radius:10px;min-width:0;width:100%;font-size:16px;
+  }
+  .public-site .contact input:focus-visible,.public-site .contact select:focus-visible,
+  .public-site .contact textarea:focus-visible{outline:2px solid #236647;outline-offset:3px}
+  .public-site > footer{padding:40px 24px max(28px,env(safe-area-inset-bottom));gap:28px}
+  .public-site .footer-links,.public-site .footer-social-actions,.public-site .footer-social-actions>div{width:100%;min-width:0;justify-self:stretch}
+  .public-site .footer-social-actions>div{display:grid;grid-template-columns:1fr;gap:10px}
+  .public-site .footer-social-actions a{display:flex;justify-content:space-between;width:100%;min-height:50px;padding:10px 14px}
+  .public-site .project-modal{padding:10px}
+  .public-site .project-modal-card{max-height:calc(100dvh - 20px);border-radius:16px;overflow-y:auto;overflow-x:hidden}
+  .public-site .project-modal-toolbar{padding:6px 8px;background:#f7f8f2}
+  .public-site .project-modal-visual,.public-site .project-modal-visual.project-document{
+    height:min(46svh,360px);min-height:0;aspect-ratio:auto;display:flex;align-items:center;justify-content:center;
+  }
+  .public-site .project-modal-visual img{width:100%;height:100%;object-fit:contain!important;object-position:center!important}
+  .public-site .project-modal-copy{padding:24px 20px max(28px,env(safe-area-inset-bottom))}
+  .public-site .project-modal-copy h2{font-size:25px;line-height:1.25;overflow-wrap:break-word}
+  .public-site .project-modal-copy .button{width:100%;max-width:100%;white-space:normal}
+}
+@media (max-width:360px){
+  .public-site .hero,.public-site .section,.public-site .section.services,.public-site .section.why,
+  .public-site .work,.public-site .trust-compact,.public-site .testimonial-section,
+  .public-site .contact.section,.public-site .about-short,.public-site > footer{padding-inline:20px}
+  .public-site .hero h1{font-size:29px}
+  .public-site .hero .button{font-size:13px;gap:10px}
+  .public-site .contact .mail{font-size:13px}
+}
+@media (min-width:600px) and (max-width:800px){
+  .public-site .hero,.public-site .section,.public-site .section.services,.public-site .section.why,
+  .public-site .work,.public-site .trust-compact,.public-site .testimonial-section,
+  .public-site .contact.section,.public-site .about-short,.public-site > footer{padding-inline:32px}
+  .public-site .hero .actions{grid-template-columns:1fr 1fr}
+  .public-site .footer-social-actions>div{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
