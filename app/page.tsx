@@ -265,7 +265,7 @@ export default function Home() {
       <div className="testimonial-heading"><p className="eyebrow">TÉMOIGNAGE</p><h2 id="testimonial-title">La confiance,<br/><em>dans leurs mots.</em></h2></div>
       <figure className="testimonial-card">
         <figcaption className="testimonial-author">
-          <img src="/images/peter-ngoyi.png" alt="Peter Ngoyi N." width="1120" height="1109" loading="lazy" decoding="async"/>
+          <img src="/images/peter-ngoyi-portrait.jpg" alt="Peter Ngoyi N." width="2036" height="2048" loading="lazy" decoding="async"/>
           <div><h3>Peter Ngoyi N.</h3><p>Stratège en communication &amp; écrivain</p><p className="testimonial-specialties">Marques d’entreprise · Personal branding · RSE</p></div>
         </figcaption>
         <div className="testimonial-content">
