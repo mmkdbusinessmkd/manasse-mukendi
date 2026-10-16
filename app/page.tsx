@@ -5,6 +5,7 @@ import { trackConversion } from "../lib/conversion-analytics";
 import { SHOW_PILOT_PROGRAM, PILOT_PROGRAM_OPTION } from "../lib/pilot-program";
 import { PilotProgramBanner } from "./components/PilotProgram";
 import ContactForm from "./components/ContactForm";
+import HomeHero from "./components/HomeHero";
 import { snelStrategy } from "../lib/snel-strategy";
 
 const contact = {
@@ -106,7 +107,7 @@ export default function Home() {
     }
   }, []);
   useEffect(() => {
-    const sections = Array.from(document.querySelectorAll<HTMLElement>("main > section:not(.hero), main > footer"));
+    const sections = Array.from(document.querySelectorAll<HTMLElement>("main > section:not(.hero):not(.home-hero), main > footer"));
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
     if (prefersReducedMotion) {
@@ -126,7 +127,7 @@ export default function Home() {
   }, []);
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const items = Array.from(document.querySelectorAll<HTMLElement>(".hero-copy > h1, .hero-copy > .intro, .hero-copy > .actions, .section-head, .about-copy, .why-head, .work-head, .trust-copy, .testimonial-heading, .service-disclosure, .consistent-projects .project, .why-grid article, .testimonial-card"));
+    const items = Array.from(document.querySelectorAll<HTMLElement>(".signature-copy > h1, .signature-copy > p, .signature-copy > div, .section-head, .about-copy, .why-head, .work-head, .trust-copy, .testimonial-heading, .service-disclosure, .consistent-projects .project, .why-grid article, .testimonial-card"));
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         entry.target.classList.toggle("motion-in", entry.isIntersecting);
@@ -204,7 +205,7 @@ export default function Home() {
     <div className="scroll-progress" aria-hidden="true" style={{ transform: `scaleX(${scrollProgress})` }}></div>
     <header className={`nav ${scrollProgress > .015 ? "scrolled" : ""}`}><a className="brand brand-logo" href="#accueil" aria-label="Accueil — Manassé Mukendi"><img src="/images/brand/logo-mm.png" alt="Manassé Mukendi"/></a><nav className={menu ? "open" : ""}>{navigation.map(({ label, target }) => <a aria-current={activeSection === target ? "page" : undefined} className={activeSection === target ? "active" : ""} onClick={() => setMenu(false)} href={`#${target}`} key={target}>{label}</a>)}</nav><a className="nav-cta" href="#contact">Échangeons <BrandGlyph className="compact"/></a><button className="menu" aria-expanded={menu} aria-label={menu ? "Fermer le menu" : "Ouvrir le menu"} onClick={() => setMenu(!menu)}>{menu ? "×" : "☰"}</button></header>
 
-    <section className="hero" id="accueil"><div className="hero-copy"><p className="eyebrow light">MANASSÉ MUKENDI <span>/</span> MARKETING ET COMMUNICATION DIGITALE</p><h1><span className="headline-lead">La communication</span> qui <em>déplace</em> les marques.</h1><p className="intro">Votre entreprise a du savoir-faire. Faisons-le savoir. Je clarifie vos messages, crée vos contenus et pilote vos réseaux sociaux pour rendre votre offre plus visible, plus compréhensible et plus convaincante.</p><div className="actions"><a className="button white" href="#contact">Parlons de votre projet <BrandGlyph/></a><a className="button button-ghost" href="#realisations">Voir mes réalisations <BrandGlyph/></a></div></div><div className="orbit" aria-hidden="true"><div className="orbit-ring"></div><div className="orbit-core"><span>digital</span><strong>impact</strong></div><span className="tag t1">STRATÉGIE</span><span className="tag t2">SOCIAL</span><span className="tag t3">CONTENU</span><span className="dot d1"></span><span className="dot d2"></span></div><div className="hero-foot"><span>Stratégie · Contenus · Réseaux sociaux</span><span>PROJETS LOCAUX &amp; INTERNATIONAUX <b>●</b></span></div></section>
+    <HomeHero icon={<BrandGlyph/>}/>
 
     {SHOW_PILOT_PROGRAM && <PilotProgramBanner onApply={() => setRequestedService(PILOT_PROGRAM_OPTION)} icon={<BrandGlyph className="compact"/>}/>}
 
