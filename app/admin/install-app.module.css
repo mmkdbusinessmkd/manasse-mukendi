@@ -1,0 +1,18 @@
+.card { margin-top: 24px; padding: 20px; border: 1px solid #c8d8cd; border-radius: 14px; background: #eef4ef; color: #183b29; text-align: left; min-width: 0; }
+.identity { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.identity img { flex: 0 0 40px; border-radius: 9px; }
+.identity strong { display: block; font-size: 15px; line-height: 1.4; }
+.identity span { display: block; margin-top: 3px; font-size: 13px; line-height: 1.5; }
+.install { display: block; width: 100%; min-height: 46px; padding: 12px 14px; border: 1px solid #145533; border-radius: 9px; background: #145533; color: #fff; font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; transition: background .2s ease, border-color .2s ease; }
+.install:hover { background: #0b3a22; border-color: #0b3a22; color: #fff; }
+.install:focus-visible, .help a:focus-visible { outline: 3px solid #ff8018; outline-offset: 4px; }
+.install:disabled { opacity: .7; cursor: wait; }
+.card .note { margin: 12px 0 0; font-size: 12px; line-height: 1.6; color: inherit; }
+.card .message { margin: 12px 0 0; font-size: 13px; line-height: 1.6; color: inherit; }
+.help { margin-top: 16px; padding-top: 16px; border-top: 1px solid #b6cabe; font-size: 13px; line-height: 1.65; overflow-wrap: anywhere; }
+.card .help p { margin: 10px 0 0; color: inherit; font-size: inherit; line-height: inherit; }
+.help a { color: inherit; text-decoration: underline; text-underline-offset: 3px; }
+.dark { margin-top: 0; padding: 14px; background: #194d34; color: #fff; border-color: #547862; }
+.dark .install { background: #f4f7f5; color: #103f28; border-color: #f4f7f5; }
+.dark .install:hover { background: #dcebe0; color: #103f28; }
+@media (prefers-reduced-motion: reduce) { .install { transition: none; } }
