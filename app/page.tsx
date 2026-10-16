@@ -28,7 +28,7 @@ const services = [
 type Project = {
   name: string; client: string; type: string; sector: string;
   context: string; intervention: string; result: string; image: string;
-  approach?: string; measured?: boolean; cover?: boolean; anonymous?: boolean;
+  approach?: string; measured?: boolean; cover?: boolean;
   role?: string; resultLabel?: string; confidentiality?: string;
 };
 
@@ -36,22 +36,14 @@ const projects: Project[] = [
   { name: "Simplifier le parcours client", client: "ZOOM TECH", type: "Social Media", sector: "Technologie", context: "Sensibiliser les entreprises à l’importance d’un suivi client rapide, clair et accessible.", intervention: "Conception éditoriale et visuelle d’un contenu pédagogique reliant la digitalisation à une meilleure expérience client.", approach: "Partir d’une difficulté concrète — un client sans nouvelles — puis relier la solution à la digitalisation. Le visuel hiérarchise le problème, l’explication et l’appel à l’action.", result: "Un visuel pédagogique sur le suivi des demandes clients, avec un appel à l’action et les coordonnées de Zoom Tech.", image: "/images/projects/zoom-tech-semaine.webp" },
   { name: "Événement de la semaine", client: "EVANTURA", type: "Social Media", sector: "Événementiel", context: "Rendre l’offre événementielle immédiatement compréhensible et attractive.", intervention: "Direction artistique et conception d’un visuel de promotion pour la plateforme.", approach: "Associer une question simple à un aperçu de l’application : le public comprend l’usage du service avant de découvrir les moyens d’y accéder.", result: "Un visuel de découverte de l’offre événementielle, présentant l’application et ses points d’accès.", image: "/images/projects/evantura-evenement-semaine.webp" },
   { name: "Septembre, c’est la rentrée", client: "SAFIA BELLA", type: "Social Media", sector: "Marque personnelle", context: "Faire de la rentrée une occasion de prendre la parole dans l’univers de Safia Bella : clarté, identité et guérison.", intervention: "Direction artistique, composition graphique et adaptation du message pour les réseaux sociaux.", result: "Un visuel de rentrée qui associe un message de motivation, le portrait de Safia Bella et ses codes de marque.", image: "/images/projects/safia-bella-rentree.webp" },
-  { name: "Campagne de trafic FLMDA", client: "FLMDA RDC", type: "Publicité", sector: "Événementiel", context: "Faire connaître l’événement auprès d’un public plus large grâce à la communication digitale.", intervention: "Stratégie éditoriale, création de contenus, gestion des canaux et suivi de la communication.", measured: true, result: "29 992 personnes touchées lors de la campagne FLMDA. Ce chiffre mesure la portée, pas les ventes ni les inscriptions.", image: "/images/projects/flmda-campaign.jpeg" },
-  { name: "Hello Monday — Garder le cap", client: "SAFIA BELLA", type: "Social Media", sector: "Marque personnelle", context: "Une prise de parole du lundi autour de la clarté et de l’attention.", intervention: "Composition d’un visuel pour les réseaux sociaux, associant photographie, message et identité Safia Bella.", result: "Un visuel Hello Monday daté du 28 septembre 2026, conçu autour du message « Protège ton attention et garde le cap ».", image: "/images/projects/safia-bella-hello-monday.webp" },
   { name: "Contenu immobilier", client: "IMMO KONNECT", type: "Social Media", sector: "Immobilier", context: "Présenter l’offre immobilière aux personnes qui la découvrent sur les réseaux sociaux.", intervention: "Création de contenus promotionnels adaptés aux réseaux sociaux.", result: "Des contenus promotionnels qui mettent en avant l’offre et l’identité d’Immo Konnect.", image: "/images/projects/immo-konnect.jpeg" },
+  { name: "Hello Monday — Garder le cap", client: "SAFIA BELLA", type: "Social Media", sector: "Marque personnelle", context: "Une prise de parole du lundi autour de la clarté et de l’attention.", intervention: "Composition d’un visuel pour les réseaux sociaux, associant photographie, message et identité Safia Bella.", result: "Un visuel Hello Monday daté du 28 septembre 2026, conçu autour du message « Protège ton attention et garde le cap ».", image: "/images/projects/safia-bella-hello-monday.webp" },
+  { name: "Campagne de trafic FLMDA", client: "FLMDA RDC", type: "Publicité", sector: "Événementiel", context: "Faire connaître l’événement auprès d’un public plus large grâce à la communication digitale.", intervention: "Stratégie éditoriale, création de contenus, gestion des canaux et suivi de la communication.", measured: true, result: "29 992 personnes touchées lors de la campagne FLMDA. Ce chiffre mesure la portée, pas les ventes ni les inscriptions.", image: "/images/projects/flmda-campaign.jpeg" },
   { name: "Couverture du FLMDA 2026", client: "FESTIVAL DES LANGUES MATERNELLES", type: "Communication", sector: "Événementiel", context: "Permettre à la communauté de suivre les temps forts du festival, même à distance.", intervention: "Couverture en direct, rédaction et publication de contenus événementiels.", result: "Des publications en direct pour raconter le déroulement du festival et partager ses temps forts.", image: "/images/projects/flmda-live.jpeg" },
   { name: "Votre image parle avant vous", client: "LE COMMUNITY MANAGER", type: "Social Media", sector: "Marque personnelle", context: "Expliquer le rôle de l’image dans la manière dont une marque personnelle est perçue.", intervention: "Conception éditoriale et visuelle de contenus de sensibilisation.", result: "Un contenu de sensibilisation qui relie l’image de marque à la perception du public.", image: "/images/projects/le-community-manager.webp" },
   snelStrategy,
-  { name: "Valoriser les équipes", client: "Client institutionnel", type: "Communication", sector: "Institutionnel", context: "Prendre la parole à l’occasion du 1er mai tout en valorisant les équipes de l’entreprise.", intervention: "Conception d’un visuel institutionnel aligné avec les codes de marque et adapté aux réseaux sociaux.", result: "Un visuel institutionnel qui met à l’honneur les équipes et leur contribution au quotidien.", image: "", anonymous: true, confidentiality: "Présentation anonymisée. L’identité du client et le visuel original ne sont pas affichés. L’aperçu est une illustration éditoriale du projet." },
+  { name: "Fête du travail — SNEL SA", client: "SNEL SA", type: "Communication", sector: "Institutionnel", context: "Prendre la parole à l’occasion du 1er mai tout en valorisant les agents et techniciens de l’entreprise.", intervention: "Conception d’un visuel institutionnel aligné avec les codes de marque et adapté aux réseaux sociaux.", result: "Un visuel institutionnel qui met à l’honneur les équipes et leur contribution à la continuité du service électrique.", image: "/images/projects/snel-fete-travail.jpg" },
 ];
-
-function AnonymousProjectCover({ project }: { project: Project }) {
-  return <div className="anonymous-project-cover" role="img" aria-label={`Aperçu anonymisé : ${project.name}`}>
-    <span className="anonymous-cover-label">COMMUNICATION INSTITUTIONNELLE</span>
-    <div className="anonymous-cover-symbol" aria-hidden="true"><span/><span/><span/></div>
-    <div className="anonymous-cover-caption"><strong>{project.name}</strong><span>ÉTUDE DE CAS · CLIENT ANONYMISÉ</span></div>
-  </div>;
-}
 
 const certifications = [
   "Community Management",
@@ -229,9 +221,9 @@ export default function Home() {
       <div className="work-head"><div><p className="eyebrow light">03 / RÉALISATIONS</p><h2>De la stratégie<br/>aux <em>réalisations.</em></h2></div><p>Le besoin de départ, mon intervention et le travail réalisé : voici une sélection de mes projets. D’autres exemples peuvent être présentés selon votre secteur.</p></div>
       <div className="project-grid consistent-projects" id="project-list">
         {visibleProjects.map((p,i) => <article className="project case-study" key={p.name}>
-          <div className={`project-art${p.cover ? " project-document" : ""}${p.anonymous ? " project-anonymous" : ""}`}>
-            {p.anonymous ? <AnonymousProjectCover project={p}/> : <img src={p.image} alt={`${p.cover ? "Couverture — " : ""}${p.name} — ${p.client}`} loading="lazy" decoding="async"/>}
-            {!p.cover && !p.anonymous && <><div className="project-topline"><span>{p.type}</span><BrandGlyph className="card-glyph light"/></div><b>{String(i+1).padStart(2,"0")}</b></>}
+          <div className={`project-art${p.cover ? " project-document" : ""}`}>
+            <img src={p.image} alt={`${p.cover ? "Couverture — " : ""}${p.name} — ${p.client}`} loading="lazy" decoding="async"/>
+            {!p.cover && <><div className="project-topline"><span>{p.type}</span><BrandGlyph className="card-glyph light"/></div><b>{String(i+1).padStart(2,"0")}</b></>}
           </div>
           <div className="project-info">
             <p className="case-client">CLIENT <strong>{p.client}</strong> <span>/ {p.sector}</span></p><h3>{p.name}</h3>
@@ -282,7 +274,7 @@ export default function Home() {
     {selectedProject && <div className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" onMouseDown={() => setSelectedProject(null)}>
       <article className="project-modal-card" onMouseDown={(event) => event.stopPropagation()}>
         <div className="project-modal-toolbar"><button ref={modalCloseRef} className="project-modal-close" onClick={() => setSelectedProject(null)} aria-label="Fermer le projet">×</button></div>
-        <div className={`project-modal-visual${selectedProject.cover ? " project-document" : ""}${selectedProject.anonymous ? " project-anonymous" : ""}`}>{selectedProject.anonymous ? <AnonymousProjectCover project={selectedProject}/> : <img src={selectedProject.image} alt={`${selectedProject.cover ? "Couverture — " : ""}${selectedProject.name} — ${selectedProject.client}`}/>}</div>
+        <div className={`project-modal-visual${selectedProject.cover ? " project-document" : ""}`}><img src={selectedProject.image} alt={`${selectedProject.cover ? "Couverture — " : ""}${selectedProject.name} — ${selectedProject.client}`}/></div>
         <div className="project-modal-copy">
           <p className="eyebrow">{selectedProject.client} / {selectedProject.sector}</p><h2 id="project-modal-title">{selectedProject.name}</h2>
           <div><small>CONTEXTE</small><p>{selectedProject.context}</p></div>
