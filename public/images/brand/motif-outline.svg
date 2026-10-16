@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="440" height="440" viewBox="0 0 440 440" fill="none">
+  <!-- Four curved modules echo the existing brand glyph, without replacing it. -->
+  <g stroke="#c5ddcf" stroke-opacity=".18" stroke-width="1.25">
+    <path d="M30 30C140 30 140 200 30 200Z"/>
+    <path d="M30 410C30 300 200 300 200 410Z"/>
+    <path d="M410 240C300 240 300 410 410 410Z"/>
+    <path d="M50 50C128 62 128 168 50 180Z"/>
+    <path d="M50 390C62 312 168 312 180 390Z"/>
+    <path d="M390 260C312 272 312 378 390 390Z"/>
+  </g>
+  <path d="M240 30H410V200C316 200 240 124 240 30Z" fill="#ff801f" fill-opacity=".055" stroke="#ff963f" stroke-opacity=".32" stroke-width="1.25"/>
+</svg>

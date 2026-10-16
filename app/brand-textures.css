@@ -1,0 +1,46 @@
+/* Decorative backgrounds only: never cover text, intercept clicks or affect layout. */
+.public-site .hero,
+.public-site .work,
+.public-site > footer {
+  background-color: #043b27;
+  background-image: url('/images/brand/paper-grain.svg'), url('/images/brand/motif-outline.svg'), radial-gradient(ellipse at 100% 0, #16563b 0, transparent 66%);
+  background-size: 192px 192px, 440px 440px, 100% 100%;
+  background-position: 0 0, right -60px top -65px, center;
+  background-repeat: repeat, no-repeat, no-repeat;
+}
+.public-site .hero {
+  background-size: 192px 192px, clamp(340px, 36vw, 530px) auto, 100% 100%;
+  background-position: 0 0, right -55px top 30px, center;
+}
+.public-site .work {
+  background-position: 0 0, right -170px top -160px, center;
+}
+.public-site > footer {
+  background-size: 192px 192px, 360px 360px, 100% 100%;
+  background-position: 0 0, right -100px bottom -110px, center;
+}
+.public-site .services,
+.public-site .testimonial-section {
+  background-image: url('/images/brand/paper-grain.svg'), url('/images/brand/motif-paper.svg');
+  background-size: 192px 192px, 240px 240px;
+  background-position: 0 0, right -100px bottom -90px;
+  background-repeat: repeat, no-repeat;
+}
+/* On small screens, keep the signature in the margins and the reading area calm. */
+@media (max-width: 800px) {
+  .public-site .hero {
+    background-size: 192px 192px, 230px 230px, 100% 100%;
+    background-position: 0 0, right -95px top -85px, center;
+  }
+  .public-site .work,
+  .public-site > footer {
+    background-size: 192px 192px, 230px 230px, 100% 100%;
+    background-position: 0 0, right -140px bottom -100px, center;
+  }
+  .public-site .services,
+  .public-site .testimonial-section { background-image: url('/images/brand/paper-grain.svg'); }
+}
+@media (forced-colors: active), print {
+  .public-site .hero,.public-site .work,.public-site > footer,
+  .public-site .services,.public-site .testimonial-section { background-image: none; }
+}
