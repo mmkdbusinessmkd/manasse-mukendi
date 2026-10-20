@@ -31,9 +31,28 @@ type Project = {
   context: string; intervention: string; result: string; image: string;
   approach?: string; measured?: boolean; cover?: boolean;
   role?: string; resultLabel?: string; confidentiality?: string;
+  website?: string;
+  deliverables?: { title: string; description: string }[];
 };
 
 const projects: Project[] = [
+  {
+    name: "Une boutique en ligne. Une gestion centralisée.",
+    client: "ESENGO TECH", type: "Site & application web", sector: "Solutions technologiques",
+    context: "Présenter les équipements et services d’Esengo Tech en ligne, tout en donnant à l’entreprise un espace pour suivre son activité au quotidien.",
+    role: "Conception et réalisation du site e-commerce et de l’espace privé de gestion.",
+    intervention: "Création d’un parcours de découverte des produits et services, d’une boutique et de formulaires de demande, complétés par un tableau de bord réservé à l’entreprise.",
+    approach: "Penser les deux côtés du service : un parcours clair pour le visiteur, et des outils de suivi pour l’équipe qui prend en charge sa demande.",
+    deliverables: [
+      { title: "Côté client : découvrir et commander", description: "Catalogue avec recherche, catégories et tri, fiches produits, panier et demandes de devis, d’installation ou de réabonnement Starlink." },
+      { title: "Côté entreprise : organiser et suivre", description: "Espace privé pour les demandes, les clients, les commandes et le stock, avec suivi des paiements, des factures, des abonnements et des interventions." },
+    ],
+    result: "Un site marchand et un espace de gestion réunis dans un même projet : présenter l’offre, recueillir les demandes et organiser leur suivi.",
+    resultLabel: "LA SOLUTION LIVRÉE",
+    confidentiality: "L’aperçu présente uniquement le site public. Les données et les écrans internes du client ne sont pas exposés.",
+    image: "/images/projects/esengo-tech-site.png",
+    website: "https://esengotech.com/",
+  },
   { name: "Simplifier le parcours client", client: "ZOOM TECH", type: "Social Media", sector: "Technologie", context: "Sensibiliser les entreprises à l’importance d’un suivi client rapide, clair et accessible.", intervention: "Conception éditoriale et visuelle d’un contenu pédagogique reliant la digitalisation à une meilleure expérience client.", approach: "Partir d’une difficulté concrète — un client sans nouvelles — puis relier la solution à la digitalisation. Le visuel hiérarchise le problème, l’explication et l’appel à l’action.", result: "Un visuel pédagogique sur le suivi des demandes clients, avec un appel à l’action et les coordonnées de Zoom Tech.", image: "/images/projects/zoom-tech-semaine.webp" },
   { name: "Événement de la semaine", client: "EVANTURA", type: "Social Media", sector: "Événementiel", context: "Rendre l’offre événementielle immédiatement compréhensible et attractive.", intervention: "Direction artistique et conception d’un visuel de promotion pour la plateforme.", approach: "Associer une question simple à un aperçu de l’application : le public comprend l’usage du service avant de découvrir les moyens d’y accéder.", result: "Un visuel de découverte de l’offre événementielle, présentant l’application et ses points d’accès.", image: "/images/projects/evantura-evenement-semaine.webp" },
   { name: "Septembre, c’est la rentrée", client: "SAFIA BELLA", type: "Social Media", sector: "Marque personnelle", context: "Faire de la rentrée une occasion de prendre la parole dans l’univers de Safia Bella : clarté, identité et guérison.", intervention: "Direction artistique, composition graphique et adaptation du message pour les réseaux sociaux.", result: "Un visuel de rentrée qui associe un message de motivation, le portrait de Safia Bella et ses codes de marque.", image: "/images/projects/safia-bella-rentree.webp" },
@@ -54,6 +73,7 @@ const certifications = [
 ];
 
 const partnerLogos = [
+  ["Esengo Tech", "/images/logos/esengo-tech.png"],
   ["Clinique Ruth", "/images/logos/clinique-ruth.png"],
   ["Afromadia", "/images/logos/afromadia.png"],
   ["Afrika Connect", "/images/logos/afrika-connect.png"],
@@ -245,7 +265,7 @@ export default function Home() {
       <div className="work-head"><div><p className="eyebrow light">03 / RÉALISATIONS</p><h2>De la stratégie<br/>aux <em>réalisations.</em></h2></div><p>Le besoin de départ, mon intervention et le travail réalisé : voici une sélection de mes projets. D’autres exemples peuvent être présentés selon votre secteur.</p></div>
       <div className="project-grid consistent-projects" id="project-list">
         {visibleProjects.map((p,i) => <article className="project case-study" key={p.name}>
-          <div className={`project-art${p.cover ? " project-document" : ""}`}>
+          <div className={`project-art${p.cover ? " project-document" : ""}${p.website ? " project-website" : ""}`}>
             <img src={p.image} alt={`${p.cover ? "Couverture — " : ""}${p.name} — ${p.client}`} loading="lazy" decoding="async"/>
             {!p.cover && <><div className="project-topline"><span>{p.type}</span><BrandGlyph className="card-glyph light"/></div><b>{String(i+1).padStart(2,"0")}</b></>}
           </div>
@@ -313,15 +333,17 @@ export default function Home() {
     {selectedProject && <div className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" onMouseDown={() => setSelectedProject(null)}>
       <article className="project-modal-card" onMouseDown={(event) => event.stopPropagation()}>
         <div className="project-modal-toolbar"><button ref={modalCloseRef} className="project-modal-close" onClick={() => setSelectedProject(null)} aria-label="Fermer le projet">×</button></div>
-        <div className={`project-modal-visual${selectedProject.cover ? " project-document" : ""}`}><img src={selectedProject.image} alt={`${selectedProject.cover ? "Couverture — " : ""}${selectedProject.name} — ${selectedProject.client}`}/></div>
+        <div className={`project-modal-visual${selectedProject.cover ? " project-document" : ""}${selectedProject.website ? " project-website" : ""}`}><img src={selectedProject.image} alt={`${selectedProject.cover ? "Couverture — " : ""}${selectedProject.name} — ${selectedProject.client}`}/></div>
         <div className="project-modal-copy">
           <p className="eyebrow">{selectedProject.client} / {selectedProject.sector}</p><h2 id="project-modal-title">{selectedProject.name}</h2>
           <div><small>CONTEXTE</small><p>{selectedProject.context}</p></div>
           {selectedProject.role && <div><small>MON RÔLE</small><p>{selectedProject.role}</p></div>}
           <div><small>INTERVENTION</small><p>{selectedProject.intervention}</p></div>
+          {selectedProject.deliverables && <div className="project-deliverables"><small>DEUX ESPACES COMPLÉMENTAIRES</small><dl>{selectedProject.deliverables.map((item) => <div key={item.title}><dt>{item.title}</dt><dd>{item.description}</dd></div>)}</dl></div>}
           {selectedProject.approach && <div><small>LE PARTI PRIS</small><p>{selectedProject.approach}</p></div>}
           <div className="project-modal-result"><small>{selectedProject.resultLabel ?? (selectedProject.measured ? "PORTÉE DE LA CAMPAGNE" : "CE QUI A ÉTÉ RÉALISÉ")}</small><strong>{selectedProject.result}</strong></div>
           {selectedProject.confidentiality && <p className="project-confidentiality">{selectedProject.confidentiality}</p>}
+          {selectedProject.website && <a className="project-website-link" href={selectedProject.website} target="_blank" rel="noopener noreferrer" aria-label={`Visiter le site ${selectedProject.client} (nouvel onglet)`}>Visiter le site Esengo Tech <BrandGlyph className="compact"/></a>}
           <a className="button dark" href="#contact" onClick={() => setSelectedProject(null)}>Parler d’un projet similaire <BrandGlyph/></a>
         </div>
       </article>
