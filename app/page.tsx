@@ -7,6 +7,7 @@ import { PilotProgramBanner } from "./components/PilotProgram";
 import ContactForm from "./components/ContactForm";
 import HomeHero from "./components/HomeHero";
 import { snelStrategy } from "../lib/snel-strategy";
+import { WEBSITE_SERVICE } from "../lib/contact-request";
 
 const contact = {
   whatsapp: "https://wa.me/243838318812",
@@ -24,6 +25,7 @@ const services = [
   ["03", "Communication de marque", "Aidez vos clients à comprendre ce que vous faites et ce qui vous distingue. Je travaille vos messages, votre ton et la cohérence de vos prises de parole."],
   ["04", "Création de contenu", "Donnez à votre audience une raison de s’intéresser à votre offre. Je transforme votre savoir-faire, vos services et vos actualités en textes et visuels adaptés à vos canaux."],
   ["05", "Publicité digitale", "Faites connaître votre offre auprès des publics que vous souhaitez toucher. Je conçois et suis vos campagnes selon un objectif défini, un budget convenu et des indicateurs de performance."],
+  ["06", WEBSITE_SERVICE, "Présentez votre activité, développez votre présence en ligne et simplifiez votre quotidien. Je conçois des sites vitrines, des boutiques en ligne et des espaces de gestion adaptés à vos besoins, en m’appuyant sur des outils d’intelligence artificielle."],
 ];
 
 type Project = {
@@ -239,12 +241,12 @@ export default function Home() {
       <div className="about-copy">
         <p className="eyebrow">01 / À PROPOS</p><h2>Votre ambition.<br/>Une direction <em>claire.</em></h2>
         <div className="bio editorial-bio">
-          <p className="about-lead">Je suis Manassé Mukendi, Social Media Manager et consultant en marketing et communication digitale. Je relie la stratégie à sa mise en œuvre.</p>
+          <p className="about-lead">Je suis Manassé Mukendi, consultant en marketing et communication digitale. Je relie la stratégie à sa mise en œuvre.</p>
           <p>Depuis 2024, j’accompagne des entreprises, des institutions et des marques personnelles, en RDC et à l’international.</p>
-          <p>Avant de publier, je cherche à comprendre votre activité, vos clients et vos objectifs. Je définis ensuite les messages et les canaux adaptés, puis je crée les contenus et pilote vos réseaux sociaux.</p>
+          <p>Je pars de votre activité, de vos clients et de vos objectifs. Je définis les messages et les canaux adaptés, puis je crée vos contenus et pilote vos réseaux sociaux. Je conçois aussi des sites et des solutions digitales avec l’appui de l’IA.</p>
         </div>
         <dl className="about-references">
-          <div><dt>QUELQUES RÉFÉRENCES</dt><dd>Zoom Tech, Evantura, FLMDA : des projets de stratégie, de contenu et de communication événementielle à découvrir dans mes réalisations.</dd></div>
+          <div><dt>QUELQUES RÉFÉRENCES</dt><dd>Zoom Tech, Evantura, FLMDA, Esengo Tech : des projets de communication, de contenu et de création web à découvrir dans mes réalisations.</dd></div>
           <div><dt>COMMENT COLLABORER</dt><dd>Une mission ciblée ou un accompagnement mensuel, à distance ou sur le terrain, selon vos besoins.</dd></div>
         </dl>
       </div>
@@ -254,9 +256,9 @@ export default function Home() {
       <div className="section-head"><p className="eyebrow">02 / SERVICES</p><h2>Vos objectifs.<br/>Les bonnes <em>actions.</em></h2><p className="section-intro">Clarifier votre offre, prendre la parole avec régularité ou faire connaître un lancement : partons de votre besoin.</p></div>
       <div className="service-list">{services.map(([n,t,d]) => <details className="service-disclosure" key={n}>
         <summary><span className="service-number">{n}</span><h3>{t}</h3><span className="disclosure-sign" aria-hidden="true">+</span></summary>
-        <div className="service-description"><p>{d}</p><a className="service-cta" href="#contact" aria-label={`Parler de ce besoin : ${t}`} onClick={() => { setRequestedService(t); trackConversion("Service selected"); }}>Parler de ce besoin <BrandGlyph className="compact"/></a></div>
+        <div className="service-description"><p>{d}</p>{t === WEBSITE_SERVICE && <p className="service-example">Un exemple concret : <a href="#realisations">la boutique et l’espace de gestion Esengo Tech</a>.</p>}<a className="service-cta" href="#contact" aria-label={`Parler de ce besoin : ${t}`} onClick={() => { setRequestedService(t); trackConversion("Service selected"); }}>Parler de ce besoin <BrandGlyph className="compact"/></a></div>
       </details>)}</div>
-      <details className="engagement-options"><summary>Un besoin ponctuel ou un suivi mensuel ? <span aria-hidden="true">+</span></summary><p>Je peux intervenir sur une stratégie, des contenus ou une campagne, ou assurer un suivi régulier de vos réseaux sociaux. Nous définissons le périmètre, les livrables, le calendrier et le budget avant de démarrer.</p></details>
+      <details className="engagement-options"><summary>Un besoin ponctuel ou un suivi mensuel ? <span aria-hidden="true">+</span></summary><p>Une stratégie, des contenus, une campagne ou un site : je peux intervenir sur un projet ciblé ou assurer un suivi régulier de vos réseaux sociaux. Nous définissons le périmètre, les livrables, le calendrier et le budget avant de démarrer.</p></details>
     </section>
 
     <section className="section why"><div className="why-head"><p className="eyebrow">COMMENT TRAVAILLER ENSEMBLE</p><h2>Un cadre clair.<br/>À chaque <em>étape.</em></h2></div><div className="why-grid">{[["01","Comprendre","Nous faisons le point sur votre activité, vos publics et ce que vous voulez améliorer."],["02","Structurer","Je propose une direction, des livrables, un calendrier et un budget à valider ensemble."],["03","Créer et déployer","Je réalise les contenus et les actions convenus, avec des points de validation définis."],["04","Faire le point","Nous examinons le travail réalisé et, selon la mission, les performances pour décider de la suite."]].map(([n,t,d]) => <article key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></article>)}</div></section>

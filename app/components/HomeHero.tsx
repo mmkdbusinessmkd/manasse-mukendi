@@ -5,7 +5,7 @@ import styles from "./HomeHero.module.css";
 export default function HomeHero({ icon }: { icon: ReactNode }) {
   return <section className={`home-hero ${styles.hero}`} id="accueil" aria-labelledby="home-title">
     <div className={styles.topline}>
-      <p>MANASSÉ MUKENDI <span>Marketing et communication digitale</span></p>
+      <p>MANASSÉ MUKENDI <span>Consultant en marketing et communication digitale</span></p>
       <span className={styles.location}>Projets locaux &amp; internationaux</span>
     </div>
 

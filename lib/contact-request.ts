@@ -1,7 +1,8 @@
 import { z } from 'zod';
 import { SHOW_PILOT_PROGRAM, PILOT_PROGRAM_OPTION } from './pilot-program';
 
-export const requestServices = ['J’ai besoin de conseils pour choisir', 'Social Media Management', 'Stratégie digitale', 'Communication de marque', 'Création de contenu', 'Publicité digitale'];
+export const WEBSITE_SERVICE = 'Création de sites & solutions digitales';
+export const requestServices = ['J’ai besoin de conseils pour choisir', 'Social Media Management', 'Stratégie digitale', 'Communication de marque', 'Création de contenu', 'Publicité digitale', WEBSITE_SERVICE];
 export const requestStatuses = { nouveau: 'Nouvelle', en_cours: 'En cours', contacte: 'Contact pris', archive: 'Archivée' } as const;
 export type RequestStatus = keyof typeof requestStatuses;
 const short = (max: number) => z.string().trim().max(max).default('');
