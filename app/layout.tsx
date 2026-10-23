@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import PublicAnalytics from "./components/PublicAnalytics";
-import { SITE_URL, PROFILE_IMAGE, SITE_TITLE, SITE_DESCRIPTION } from "../lib/site-profile";
+import { SITE_URL, PROFILE_IMAGE, PROFILE_IMAGE_WIDTH, PROFILE_IMAGE_HEIGHT, SITE_TITLE, SITE_DESCRIPTION } from "../lib/site-profile";
 import "./globals.css";
 import "./identity.css";
 import "./polish.css";
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     siteName: "Manassé Mukendi",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: [{ url: PROFILE_IMAGE, width: 1086, height: 1448, alt: "Manassé Mukendi, consultant en marketing et communication digitale" }],
+    images: [{ url: PROFILE_IMAGE, width: PROFILE_IMAGE_WIDTH, height: PROFILE_IMAGE_HEIGHT, alt: "Manassé Mukendi, consultant en marketing et communication digitale" }],
   },
   twitter: {
     card: "summary_large_image",

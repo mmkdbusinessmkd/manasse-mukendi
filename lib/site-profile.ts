@@ -1,7 +1,9 @@
 import { services, serviceAnchor } from './public-services';
 
 export const SITE_URL = 'https://www.manasse-mukendi.com';
-export const PROFILE_IMAGE = '/images/manasse-portrait-2026.png';
+export const PROFILE_IMAGE = '/images/manasse-mukendi-portrait-2026-10.jpg';
+export const PROFILE_IMAGE_WIDTH = 1254;
+export const PROFILE_IMAGE_HEIGHT = 1254;
 export const PROFILE_TITLE = 'Consultant en marketing et communication digitale';
 export const SITE_TITLE = 'Manassé Mukendi / Marketing et Communication Digitale';
 export const SITE_DESCRIPTION = 'Manassé Mukendi, consultant en marketing et communication digitale : stratégie, réseaux sociaux, contenus et création web, en RDC et à l’international.';
@@ -27,7 +29,7 @@ export const profileStructuredData = {
     {
       '@type': 'ImageObject', '@id': `${SITE_URL}/#portrait`,
       url: `${SITE_URL}${PROFILE_IMAGE}`, contentUrl: `${SITE_URL}${PROFILE_IMAGE}`,
-      width: 1086, height: 1448,
+      width: PROFILE_IMAGE_WIDTH, height: PROFILE_IMAGE_HEIGHT,
       caption: 'Manassé Mukendi, consultant en marketing et communication digitale',
       about: { '@id': `${SITE_URL}/#manasse-mukendi` },
       representativeOfPage: true,

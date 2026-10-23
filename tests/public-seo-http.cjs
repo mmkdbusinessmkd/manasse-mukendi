@@ -15,6 +15,23 @@ async function get(path) {
   const json = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
   assert(json, 'Structured data is server-rendered');
   const graph = JSON.parse(json[1])['@graph'];
+  const portraitPath = '/images/manasse-mukendi-portrait-2026-10.jpg';
+  const portraitUrl = `https://www.manasse-mukendi.com${portraitPath}`;
+  const portrait = graph.find(node => node['@type'] === 'ImageObject');
+  assert.equal(portrait.contentUrl, portraitUrl);
+  assert.equal(portrait.width, 1254);
+  assert.equal(portrait.height, 1254);
+  for (const field of ['property="og:image"', 'name="twitter:image"']) {
+    assert(html.includes(`${field} content="${portraitUrl}"`), 'Link previews use the current owner photo');
+  }
+  assert(html.includes(`src="${portraitPath}"`), 'The visible portrait matches the search image');
+  const photo = await get(portraitPath);
+  assert.equal(photo.status, 200);
+  assert(photo.headers.get('content-type').includes('image/jpeg'));
+  assert(!photo.headers.get('x-robots-tag')?.includes('noindex'));
+  const oldPhoto = await get('/images/manasse-portrait-2026.png');
+  assert.equal(oldPhoto.headers.get('x-robots-tag'), 'noindex');
+  assert((await (await get('/sitemap.xml')).text()).includes(portraitUrl));
   const services = graph.filter(node => node['@type'] === 'Service');
   assert.equal(services.length, 6);
   for (const service of services) {

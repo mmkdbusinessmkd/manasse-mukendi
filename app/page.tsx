@@ -8,7 +8,7 @@ import ContactForm from "./components/ContactForm";
 import HomeHero from "./components/HomeHero";
 import { snelStrategy } from "../lib/snel-strategy";
 import { WEBSITE_SERVICE } from "../lib/contact-request";
-import { PROFILE_IMAGE, profileStructuredData } from "../lib/site-profile";
+import { PROFILE_IMAGE, PROFILE_IMAGE_WIDTH, PROFILE_IMAGE_HEIGHT, profileStructuredData } from "../lib/site-profile";
 import WebsiteMockup from "./components/WebsiteMockup";
 import { services, serviceAnchor } from "../lib/public-services";
 
@@ -237,7 +237,7 @@ export default function Home() {
     {SHOW_PILOT_PROGRAM && <PilotProgramBanner onApply={() => setRequestedService(PILOT_PROGRAM_OPTION)} icon={<BrandGlyph className="compact"/>}/>}
 
     <section className="about about-short" id="a-propos">
-      <div className="portrait"><div className="portrait-photo"><img src={PROFILE_IMAGE} alt="Manassé Mukendi, consultant en marketing et communication digitale" width="1086" height="1448" loading="eager" decoding="async"/></div><div className="portrait-note">MANASSÉ<br/>MUKENDI <BrandGlyph className="outline"/></div></div>
+      <div className="portrait"><div className="portrait-photo"><img src={PROFILE_IMAGE} alt="Manassé Mukendi, consultant en marketing et communication digitale" width={PROFILE_IMAGE_WIDTH} height={PROFILE_IMAGE_HEIGHT} loading="eager" decoding="async"/></div><div className="portrait-note">MANASSÉ<br/>MUKENDI <BrandGlyph className="outline"/></div></div>
       <div className="about-copy">
         <p className="eyebrow">01 / À PROPOS</p><h2>Votre ambition.<br/>Une direction <em>claire.</em></h2>
         <div className="bio editorial-bio">

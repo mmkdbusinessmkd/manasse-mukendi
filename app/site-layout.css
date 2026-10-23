@@ -8,7 +8,7 @@
 .public-site :is(.about-copy,.section-head,.service-list,.why-grid,.testimonial-content,.testimonial-author,.contact>div,.footer-links){min-width:0}
 .public-site .about-short{max-width:none;margin:0;padding:80px var(--page-gutter);grid-template-columns:minmax(240px,.7fr) minmax(0,1.3fr);gap:8%;align-items:center}
 .public-site .about-short .portrait{width:100%;max-width:340px;min-height:0;margin-inline:auto}
-.public-site .about-short .portrait-photo{aspect-ratio:3/4;border-radius:24px;box-shadow:0 12px 30px #043b270a}
+.public-site .about-short .portrait-photo{aspect-ratio:1;border-radius:24px;box-shadow:0 12px 30px #043b270a}
 .public-site .about-short .portrait-photo{background-image:none!important;overflow:hidden}
 .public-site .portrait-photo img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
 .public-site .about-short .about-copy{padding:0}

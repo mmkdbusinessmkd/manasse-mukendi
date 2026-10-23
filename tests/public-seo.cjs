@@ -5,7 +5,7 @@ require.extensions['.ts'] = (module, filename) => module._compile(ts.transpileMo
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
 }).outputText, filename);
 
-const { SITE_URL, PROFILE_IMAGE, profileStructuredData } = require('../lib/site-profile.ts');
+const { SITE_URL, PROFILE_IMAGE, PROFILE_IMAGE_WIDTH, PROFILE_IMAGE_HEIGHT, profileStructuredData } = require('../lib/site-profile.ts');
 const sitemap = require('../app/sitemap.ts').default();
 const robots = require('../app/robots.ts').default();
 const { services, serviceAnchor } = require('../lib/public-services.ts');
@@ -19,6 +19,12 @@ assert.equal(person.image['@id'], portrait['@id']);
 assert.equal(page.mainEntity['@id'], person['@id']);
 assert.equal(page.primaryImageOfPage['@id'], portrait['@id']);
 assert.equal(portrait.contentUrl, `${SITE_URL}${PROFILE_IMAGE}`);
+assert.equal(PROFILE_IMAGE, '/images/manasse-mukendi-portrait-2026-10.jpg');
+assert.equal(portrait.width, PROFILE_IMAGE_WIDTH);
+assert.equal(portrait.height, PROFILE_IMAGE_HEIGHT);
+assert.equal(PROFILE_IMAGE_WIDTH, 1254);
+assert.equal(PROFILE_IMAGE_HEIGHT, 1254);
+assert(!fs.readFileSync('app/globals.css', 'utf8').includes('manasse-portrait-2026.png'));
 assert(fs.existsSync(`public${PROFILE_IMAGE}`));
 assert.equal(sitemap[0].url, `${SITE_URL}/`);
 assert(sitemap[0].images.includes(portrait.contentUrl));
@@ -43,9 +49,9 @@ assert(fs.readFileSync('app/page.tsx', 'utf8').includes('<img src={PROFILE_IMAGE
 (async () => {
   const config = (await import('../next.config.mjs')).default;
   const headers = await config.headers();
-  for (const image of ['/images/peter-ngoyi-portrait.jpg', '/images/peter-ngoyi.png']) {
+  for (const image of ['/images/peter-ngoyi-portrait.jpg', '/images/peter-ngoyi.png', '/images/manasse-portrait-2026.png', '/images/manasse-consultant.webp', '/images/manasse-marketing.jpg']) {
     assert(headers.some(rule => rule.source === image && rule.headers.some(h => h.key === 'X-Robots-Tag' && h.value === 'noindex')));
   }
   assert(!headers.some(rule => rule.source === '/' || rule.source === PROFILE_IMAGE));
-  console.log('PASS: owner portrait, Person/ProfilePage identities, canonical image sitemap and testimonial-only noindex headers.');
+  console.log('PASS: current owner portrait, matching dimensions, Person/ProfilePage identities, canonical image sitemap and legacy/testimonial noindex headers.');
 })().catch(error => { console.error(error); process.exitCode = 1; });
