@@ -8,6 +8,8 @@ import ContactForm from "./components/ContactForm";
 import HomeHero from "./components/HomeHero";
 import { snelStrategy } from "../lib/snel-strategy";
 import { WEBSITE_SERVICE } from "../lib/contact-request";
+import { PROFILE_IMAGE, profileStructuredData } from "../lib/site-profile";
+import WebsiteMockup from "./components/WebsiteMockup";
 
 const contact = {
   whatsapp: "https://wa.me/243838318812",
@@ -34,6 +36,7 @@ type Project = {
   approach?: string; measured?: boolean; cover?: boolean;
   role?: string; resultLabel?: string; confidentiality?: string;
   website?: string;
+  mobileImage?: string;
   deliverables?: { title: string; description: string }[];
 };
 
@@ -52,7 +55,8 @@ const projects: Project[] = [
     result: "Un site marchand et un espace de gestion réunis dans un même projet : présenter l’offre, recueillir les demandes et organiser leur suivi.",
     resultLabel: "LA SOLUTION LIVRÉE",
     confidentiality: "L’aperçu présente uniquement le site public. Les données et les écrans internes du client ne sont pas exposés.",
-    image: "/images/projects/esengo-tech-site.png",
+    image: "/images/projects/esengo-tech-desktop-2026.png",
+    mobileImage: "/images/projects/esengo-tech-mobile-2026.png",
     website: "https://esengotech.com/",
   },
   { name: "Simplifier le parcours client", client: "ZOOM TECH", type: "Social Media", sector: "Technologie", context: "Sensibiliser les entreprises à l’importance d’un suivi client rapide, clair et accessible.", intervention: "Conception éditoriale et visuelle d’un contenu pédagogique reliant la digitalisation à une meilleure expérience client.", approach: "Partir d’une difficulté concrète — un client sans nouvelles — puis relier la solution à la digitalisation. Le visuel hiérarchise le problème, l’explication et l’appel à l’action.", result: "Un visuel pédagogique sur le suivi des demandes clients, avec un appel à l’action et les coordonnées de Zoom Tech.", image: "/images/projects/zoom-tech-semaine.webp" },
@@ -228,6 +232,7 @@ export default function Home() {
   }, [selectedProject]);
   const visibleProjects = showAllProjects ? projects : projects.slice(0, 4);
   return <main className="public-site">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profileStructuredData).replace(/</g, '\\u003c') }}/>
     <a className="skip-link" href="#accueil">Aller au contenu</a>
     <div className="scroll-progress" aria-hidden="true" style={{ transform: `scaleX(${scrollProgress})` }}></div>
     <header className={`nav ${scrollProgress > .015 ? "scrolled" : ""}`}><a className="brand brand-logo" href="#accueil" aria-label="Accueil — Manassé Mukendi"><img src="/images/brand/logo-mm.png" alt="Manassé Mukendi"/></a><nav id="main-navigation" aria-label="Navigation principale" className={menu ? "open" : ""}>{navigation.map(({ label, target }) => <a aria-current={activeSection === target ? "page" : undefined} className={activeSection === target ? "active" : ""} onClick={() => setMenu(false)} href={`#${target}`} key={target}>{label}</a>)}</nav><a className="nav-cta" href="#contact">Échangeons <BrandGlyph className="compact"/></a><button className="menu" aria-controls="main-navigation" aria-expanded={menu} aria-label={menu ? "Fermer le menu" : "Ouvrir le menu"} onClick={() => setMenu(!menu)}>{menu ? "×" : "☰"}</button></header>
@@ -237,7 +242,7 @@ export default function Home() {
     {SHOW_PILOT_PROGRAM && <PilotProgramBanner onApply={() => setRequestedService(PILOT_PROGRAM_OPTION)} icon={<BrandGlyph className="compact"/>}/>}
 
     <section className="about about-short" id="a-propos">
-      <div className="portrait"><div className="portrait-photo" role="img" aria-label="Portrait de Manassé Mukendi, consultant en marketing et communication digitale"></div><div className="portrait-note">MANASSÉ<br/>MUKENDI <BrandGlyph className="outline"/></div></div>
+      <div className="portrait"><div className="portrait-photo"><img src={PROFILE_IMAGE} alt="Manassé Mukendi, consultant en marketing et communication digitale" width="1086" height="1448" loading="eager" decoding="async"/></div><div className="portrait-note">MANASSÉ<br/>MUKENDI <BrandGlyph className="outline"/></div></div>
       <div className="about-copy">
         <p className="eyebrow">01 / À PROPOS</p><h2>Votre ambition.<br/>Une direction <em>claire.</em></h2>
         <div className="bio editorial-bio">
@@ -268,7 +273,7 @@ export default function Home() {
       <div className="project-grid consistent-projects" id="project-list">
         {visibleProjects.map((p,i) => <article className="project case-study" key={p.name}>
           <div className={`project-art${p.cover ? " project-document" : ""}${p.website ? " project-website" : ""}`}>
-            <img src={p.image} alt={`${p.cover ? "Couverture — " : ""}${p.name} — ${p.client}`} loading="lazy" decoding="async"/>
+            {p.mobileImage ? <WebsiteMockup desktop={p.image} mobile={p.mobileImage} name={p.client}/> : <img src={p.image} alt={`${p.cover ? "Couverture — " : ""}${p.name} — ${p.client}`} loading="lazy" decoding="async"/>}
             {!p.cover && <><div className="project-topline"><span>{p.type}</span><BrandGlyph className="card-glyph light"/></div><b>{String(i+1).padStart(2,"0")}</b></>}
           </div>
           <div className="project-info">
@@ -335,18 +340,21 @@ export default function Home() {
     {selectedProject && <div className="project-modal" role="dialog" aria-modal="true" aria-labelledby="project-modal-title" onMouseDown={() => setSelectedProject(null)}>
       <article className="project-modal-card" onMouseDown={(event) => event.stopPropagation()}>
         <div className="project-modal-toolbar"><button ref={modalCloseRef} className="project-modal-close" onClick={() => setSelectedProject(null)} aria-label="Fermer le projet">×</button></div>
-        <div className={`project-modal-visual${selectedProject.cover ? " project-document" : ""}${selectedProject.website ? " project-website" : ""}`}><img src={selectedProject.image} alt={`${selectedProject.cover ? "Couverture — " : ""}${selectedProject.name} — ${selectedProject.client}`}/></div>
+        <div className={`project-modal-visual${selectedProject.cover ? " project-document" : ""}${selectedProject.website ? " project-website" : ""}`}>
+          {selectedProject.mobileImage ? <WebsiteMockup desktop={selectedProject.image} mobile={selectedProject.mobileImage} name={selectedProject.client}/> : <img src={selectedProject.image} alt={`${selectedProject.cover ? "Couverture — " : ""}${selectedProject.name} — ${selectedProject.client}`}/>}
+          {selectedProject.mobileImage && <div className="project-capture-links"><a href={selectedProject.image} target="_blank" rel="noopener noreferrer">Agrandir : ordinateur</a><a href={selectedProject.mobileImage} target="_blank" rel="noopener noreferrer">Agrandir : mobile</a></div>}
+        </div>
         <div className="project-modal-copy">
           <p className="eyebrow">{selectedProject.client} / {selectedProject.sector}</p><h2 id="project-modal-title">{selectedProject.name}</h2>
+          {selectedProject.website && <div className="project-next-actions"><a className="button dark" href="#contact" onClick={() => { setRequestedService(WEBSITE_SERVICE); setSelectedProject(null); }}>Présenter mon projet web <BrandGlyph className="compact"/></a><a className="project-website-link" href={selectedProject.website} target="_blank" rel="noopener noreferrer" aria-label={`Visiter le site ${selectedProject.client} (nouvel onglet)`}>Visiter Esengo Tech <BrandGlyph className="compact"/></a></div>}
           <div><small>CONTEXTE</small><p>{selectedProject.context}</p></div>
           {selectedProject.role && <div><small>MON RÔLE</small><p>{selectedProject.role}</p></div>}
           <div><small>INTERVENTION</small><p>{selectedProject.intervention}</p></div>
-          {selectedProject.deliverables && <div className="project-deliverables"><small>DEUX ESPACES COMPLÉMENTAIRES</small><dl>{selectedProject.deliverables.map((item) => <div key={item.title}><dt>{item.title}</dt><dd>{item.description}</dd></div>)}</dl></div>}
+          {selectedProject.deliverables && <details className="project-deliverables"><summary>Voir les fonctionnalités livrées <span aria-hidden="true">+</span></summary><dl>{selectedProject.deliverables.map((item) => <div key={item.title}><dt>{item.title}</dt><dd>{item.description}</dd></div>)}</dl></details>}
           {selectedProject.approach && <div><small>LE PARTI PRIS</small><p>{selectedProject.approach}</p></div>}
           <div className="project-modal-result"><small>{selectedProject.resultLabel ?? (selectedProject.measured ? "PORTÉE DE LA CAMPAGNE" : "CE QUI A ÉTÉ RÉALISÉ")}</small><strong>{selectedProject.result}</strong></div>
           {selectedProject.confidentiality && <p className="project-confidentiality">{selectedProject.confidentiality}</p>}
-          {selectedProject.website && <a className="project-website-link" href={selectedProject.website} target="_blank" rel="noopener noreferrer" aria-label={`Visiter le site ${selectedProject.client} (nouvel onglet)`}>Visiter le site Esengo Tech <BrandGlyph className="compact"/></a>}
-          <a className="button dark" href="#contact" onClick={() => setSelectedProject(null)}>Parler d’un projet similaire <BrandGlyph/></a>
+          <a className="button dark" href="#contact" onClick={() => { if (selectedProject.website) setRequestedService(WEBSITE_SERVICE); setSelectedProject(null); }}>Parler d’un projet similaire <BrandGlyph/></a>
         </div>
       </article>
     </div>}

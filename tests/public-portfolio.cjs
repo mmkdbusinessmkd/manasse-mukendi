@@ -15,6 +15,8 @@ assert.deepEqual(projects.slice(0, 4).map(p => p.client), ['ESENGO TECH', 'ZOOM 
 assert(projects.some(p => p.client === 'IMMO KONNECT'), 'Keep Immo Konnect in the expanded portfolio');
 const esengo = projects[0];
 assert.equal(esengo.website, 'https://esengotech.com/');
+assert(esengo.mobileImage && fs.existsSync(`public${esengo.mobileImage}`), 'Keep a real mobile screenshot alongside the desktop preview');
+assert(fs.existsSync('public/images/projects/laptop-smartphone-mockup.jpg'));
 assert.equal(esengo.deliverables.length, 2, 'Show both the shop and the private management workspace');
 assert(!esengo.measured, 'Do not imply measured commercial results');
 assert(!/codex-clipboard|admin\/dashboard/i.test(JSON.stringify(esengo)), 'Never link private dashboard screenshots');
