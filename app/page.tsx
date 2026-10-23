@@ -10,6 +10,7 @@ import { snelStrategy } from "../lib/snel-strategy";
 import { WEBSITE_SERVICE } from "../lib/contact-request";
 import { PROFILE_IMAGE, profileStructuredData } from "../lib/site-profile";
 import WebsiteMockup from "./components/WebsiteMockup";
+import { services, serviceAnchor } from "../lib/public-services";
 
 const contact = {
   whatsapp: "https://wa.me/243838318812",
@@ -20,15 +21,6 @@ const contact = {
     Facebook: "https://www.facebook.com/manasse.mkd",
   },
 };
-
-const services = [
-  ["01", "Social Media Management", "Confiez vos réseaux sociaux à un interlocuteur qui relie chaque publication à vos objectifs. Je planifie les contenus, pilote leur diffusion et suis les performances pour ajuster votre communication."],
-  ["02", "Stratégie digitale", "Sachez quoi dire, à qui et sur quels canaux. Je définis une direction et des priorités pour concentrer vos efforts sur les actions utiles à votre entreprise."],
-  ["03", "Communication de marque", "Aidez vos clients à comprendre ce que vous faites et ce qui vous distingue. Je travaille vos messages, votre ton et la cohérence de vos prises de parole."],
-  ["04", "Création de contenu", "Donnez à votre audience une raison de s’intéresser à votre offre. Je transforme votre savoir-faire, vos services et vos actualités en textes et visuels adaptés à vos canaux."],
-  ["05", "Publicité digitale", "Faites connaître votre offre auprès des publics que vous souhaitez toucher. Je conçois et suis vos campagnes selon un objectif défini, un budget convenu et des indicateurs de performance."],
-  ["06", WEBSITE_SERVICE, "Présentez votre activité, développez votre présence en ligne et simplifiez votre quotidien. Je conçois des sites vitrines, des boutiques en ligne et des espaces de gestion adaptés à vos besoins, en m’appuyant sur des outils d’intelligence artificielle."],
-];
 
 type Project = {
   name: string; client: string; type: string; sector: string;
@@ -109,6 +101,10 @@ export default function Home() {
   const [activeSection, setActiveSection] = useState("accueil");
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[number] | null>(null);
   const modalCloseRef = useRef<HTMLButtonElement>(null);
+  function revealService(number: string) {
+    const panel = document.getElementById(serviceAnchor(number));
+    if (panel instanceof HTMLDetailsElement) panel.open = true;
+  }
   useEffect(() => {
     if (!menu) return;
     const closeOnEscape = (event: KeyboardEvent) => {
@@ -230,7 +226,6 @@ export default function Home() {
       previouslyFocused?.focus({ preventScroll: true });
     };
   }, [selectedProject]);
-  const visibleProjects = showAllProjects ? projects : projects.slice(0, 4);
   return <main className="public-site">
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profileStructuredData).replace(/</g, '\\u003c') }}/>
     <a className="skip-link" href="#accueil">Aller au contenu</a>
@@ -248,7 +243,7 @@ export default function Home() {
         <div className="bio editorial-bio">
           <p className="about-lead">Je suis Manassé Mukendi, consultant en marketing et communication digitale. Je relie la stratégie à sa mise en œuvre.</p>
           <p>Depuis 2024, j’accompagne des entreprises, des institutions et des marques personnelles, en RDC et à l’international.</p>
-          <p>Je pars de votre activité, de vos clients et de vos objectifs. Je définis les messages et les canaux adaptés, puis je crée vos contenus et pilote vos réseaux sociaux. Je conçois aussi des sites et des solutions digitales avec l’appui de l’IA.</p>
+          <p>Je pars de votre activité, de vos clients et de vos objectifs. Je définis votre <a href="#service-02" onClick={() => revealService("02")}>stratégie de communication</a>, crée vos contenus et assure la <a href="#service-01" onClick={() => revealService("01")}>gestion de vos réseaux sociaux</a>. Je conçois aussi des <a href="#service-06" onClick={() => revealService("06")}>sites et solutions digitales</a> avec l’appui de l’IA.</p>
         </div>
         <dl className="about-references">
           <div><dt>QUELQUES RÉFÉRENCES</dt><dd>Zoom Tech, Evantura, FLMDA, Esengo Tech : des projets de communication, de contenu et de création web à découvrir dans mes réalisations.</dd></div>
@@ -258,8 +253,8 @@ export default function Home() {
     </section>
 
     <section className="section services" id="services">
-      <div className="section-head"><p className="eyebrow">02 / SERVICES</p><h2>Vos objectifs.<br/>Les bonnes <em>actions.</em></h2><p className="section-intro">Clarifier votre offre, prendre la parole avec régularité ou faire connaître un lancement : partons de votre besoin.</p></div>
-      <div className="service-list">{services.map(([n,t,d]) => <details className="service-disclosure" key={n}>
+      <div className="section-head"><p className="eyebrow">02 / SERVICES</p><h2>Marketing digital.<br/>Des actions <em>concrètes.</em></h2><p className="section-intro">Stratégie de communication, gestion des réseaux sociaux, création de contenus et sites web : un accompagnement adapté aux objectifs de votre entreprise.</p></div>
+      <div className="service-list">{services.map(([n,t,d]) => <details className="service-disclosure" id={serviceAnchor(n)} key={n}>
         <summary><span className="service-number">{n}</span><h3>{t}</h3><span className="disclosure-sign" aria-hidden="true">+</span></summary>
         <div className="service-description"><p>{d}</p>{t === WEBSITE_SERVICE && <p className="service-example">Un exemple concret : <a href="#realisations">la boutique et l’espace de gestion Esengo Tech</a>.</p>}<a className="service-cta" href="#contact" aria-label={`Parler de ce besoin : ${t}`} onClick={() => { setRequestedService(t); trackConversion("Service selected"); }}>Parler de ce besoin <BrandGlyph className="compact"/></a></div>
       </details>)}</div>
@@ -271,7 +266,7 @@ export default function Home() {
     <section className="work" id="realisations">
       <div className="work-head"><div><p className="eyebrow light">03 / RÉALISATIONS</p><h2>De la stratégie<br/>aux <em>réalisations.</em></h2></div><p>Le besoin de départ, mon intervention et le travail réalisé : voici une sélection de mes projets. D’autres exemples peuvent être présentés selon votre secteur.</p></div>
       <div className="project-grid consistent-projects" id="project-list">
-        {visibleProjects.map((p,i) => <article className="project case-study" key={p.name}>
+        {projects.map((p,i) => <article className="project case-study" key={p.name} hidden={!showAllProjects && i >= 4}>
           <div className={`project-art${p.cover ? " project-document" : ""}${p.website ? " project-website" : ""}`}>
             {p.mobileImage ? <WebsiteMockup desktop={p.image} mobile={p.mobileImage} name={p.client}/> : <img src={p.image} alt={`${p.cover ? "Couverture — " : ""}${p.name} — ${p.client}`} loading="lazy" decoding="async"/>}
             {!p.cover && <><div className="project-topline"><span>{p.type}</span><BrandGlyph className="card-glyph light"/></div><b>{String(i+1).padStart(2,"0")}</b></>}
@@ -283,7 +278,7 @@ export default function Home() {
               <div className="case-detail"><small>INTERVENTION</small><p>{p.intervention}</p></div>
               <div className="case-result"><small>{p.resultLabel ?? (p.measured ? "PORTÉE DE LA CAMPAGNE" : "CE QUI A ÉTÉ RÉALISÉ")}</small><strong>{p.result}</strong></div>
             </div>
-            <button className="project-view-button" onClick={() => { setSelectedProject(p); trackConversion("Project opened"); }}>Découvrir le projet <BrandGlyph className="compact"/></button>
+            <button className="project-view-button" aria-label={`Découvrir le projet ${p.client} : ${p.name}`} onClick={() => { setSelectedProject(p); trackConversion("Project opened"); }}>Découvrir le projet <BrandGlyph className="compact"/></button>
           </div>
         </article>)}
       </div>

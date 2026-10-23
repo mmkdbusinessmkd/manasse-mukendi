@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import PublicAnalytics from "./components/PublicAnalytics";
-import { SITE_URL, PROFILE_IMAGE } from "../lib/site-profile";
+import { SITE_URL, PROFILE_IMAGE, SITE_TITLE, SITE_DESCRIPTION } from "../lib/site-profile";
 import "./globals.css";
 import "./identity.css";
 import "./polish.css";
@@ -12,9 +12,8 @@ import "./site-layout.css";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "Manassé Mukendi / Marketing et Communication Digitale",
-  description: "Manassé Mukendi accompagne votre entreprise : stratégie de communication digitale, création de contenus et gestion des réseaux sociaux, en RDC et à l’international.",
-  keywords: ["marketing et communication digitale", "consultant en communication digitale international", "marketing digital Afrique", "marketing digital Kinshasa", "Social Media Manager", "stratégie digitale", "communication digitale RDC"],
+  title: SITE_TITLE,
+  description: SITE_DESCRIPTION,
   applicationName: "Manassé Mukendi",
   authors: [{ name: "Manassé Mukendi", url: SITE_URL }],
   creator: "Manassé Mukendi",
@@ -27,14 +26,14 @@ export const metadata: Metadata = {
     locale: "fr_CD",
     url: "/",
     siteName: "Manassé Mukendi",
-    title: "Manassé Mukendi / Marketing et Communication Digitale",
-    description: "Une direction claire pour votre communication, des contenus pour votre offre et un pilotage de vos réseaux sociaux. Découvrez mes réalisations et parlons de votre projet.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [{ url: PROFILE_IMAGE, width: 1086, height: 1448, alt: "Manassé Mukendi, consultant en marketing et communication digitale" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Manassé Mukendi / Marketing et Communication Digitale",
-    description: "Une direction claire pour votre communication, des contenus pour votre offre et un pilotage de vos réseaux sociaux. Découvrez mes réalisations et parlons de votre projet.",
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
     images: [PROFILE_IMAGE],
   },
   verification: {
@@ -47,5 +46,5 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="fr"><body>{children}<PublicAnalytics /></body></html>;
+  return <html lang="fr"><head><link rel="preload" href="/fonts/manrope-latin-variable.woff2" as="font" type="font/woff2" crossOrigin="anonymous"/></head><body>{children}<PublicAnalytics /></body></html>;
 }

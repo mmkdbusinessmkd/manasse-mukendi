@@ -14,6 +14,8 @@
 .public-site .about-short .about-copy{padding:0}
 .public-site .about-short .bio{max-width:64ch}
 .public-site .about-short .bio p{font-size:16px;line-height:1.8}
+.public-site .bio a{text-decoration:underline;text-decoration-color:#799783;text-underline-offset:4px}
+.public-site .bio a:hover{text-decoration-color:currentColor}
 .public-site .about-references{max-width:none;display:grid;grid-template-columns:1fr 1fr;gap:24px}
 .public-site .about-references dd{line-height:1.75}
 .public-site .services{border-top:1px solid #d9e0d5;border-bottom:1px solid #d9e0d5}
@@ -37,6 +39,8 @@
 .public-site .work-head{gap:36px;align-items:end;margin-bottom:36px}
 .public-site .work-head>p{max-width:45ch;line-height:1.75;font-size:15px}
 .public-site .consistent-projects{gap:32px;align-items:stretch}
+.public-site .consistent-projects .project[hidden]{display:none!important}
+.public-site .service-disclosure[id]{scroll-margin-top:100px}
 .public-site .consistent-projects .project{border-radius:18px}
 .public-site .consistent-projects .project-info{flex:1;padding:26px;min-height:0}
 .public-site .consistent-projects .case-client{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 7px;line-height:1.65;font-size:11px}

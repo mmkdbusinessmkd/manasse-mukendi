@@ -28,5 +28,5 @@ assert(projects.slice(-2).every(p => p.client === 'SNEL SA'), 'Keep both SNEL pr
 assert.deepEqual(projects.slice(-2).map(p => p.image), ['/images/projects/snel-strategie-couverture.webp', '/images/projects/snel-fete-travail.jpg']);
 assert(projects.every(p => p.image && fs.existsSync(`public${p.image}`)), 'Original images must exist for all projects');
 assert(!page.includes('AnonymousProjectCover'), 'Restore actual visuals in listing and modal');
-assert(/projects\.slice\(0,\s*4\)/.test(page), 'Keep four projects initially visible');
+assert(page.includes('hidden={!showAllProjects && i >= 4}'), 'Keep four projects initially visible while serving all project content');
 console.log('Public portfolio: Esengo Tech featured, partner logo, private data excluded, all existing projects preserved.');
