@@ -6,7 +6,9 @@ export const PROFILE_IMAGE_WIDTH = 1254;
 export const PROFILE_IMAGE_HEIGHT = 1254;
 export const PROFILE_TITLE = 'Consultant en marketing et communication digitale';
 export const SITE_TITLE = 'Manassé Mukendi / Marketing et Communication Digitale';
-export const SITE_DESCRIPTION = 'Manassé Mukendi, consultant en marketing et communication digitale : stratégie, réseaux sociaux, contenus et création web, en RDC et à l’international.';
+export const SITE_DESCRIPTION = 'Manassé Mukendi, consultant en marketing et communication digitale : gestion des réseaux sociaux, stratégie, contenus et sites web. En RDC et à l’international.';
+// Update only when the public content changes, not on unrelated dashboard deployments.
+export const PUBLIC_CONTENT_UPDATED_AT = '2026-10-26';
 
 // The owner, the page and its representative image share explicit identities.
 export const profileStructuredData = {
@@ -14,7 +16,7 @@ export const profileStructuredData = {
   '@graph': [
     {
       '@type': 'Person', '@id': `${SITE_URL}/#manasse-mukendi`,
-      name: 'Manassé Mukendi', jobTitle: PROFILE_TITLE, url: `${SITE_URL}/`,
+      name: 'Manassé Mukendi', alternateName: 'Manasse Mukendi', jobTitle: PROFILE_TITLE, url: `${SITE_URL}/`,
       description: SITE_DESCRIPTION,
       image: { '@id': `${SITE_URL}/#portrait` },
       knowsAbout: ['Marketing digital', 'Stratégie de communication', 'Gestion des réseaux sociaux', 'Création de contenus', 'Publicité digitale', 'Création de sites web assistée par IA'],

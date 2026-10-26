@@ -10,7 +10,7 @@ import { snelStrategy } from "../lib/snel-strategy";
 import { WEBSITE_SERVICE } from "../lib/contact-request";
 import { PROFILE_IMAGE, PROFILE_IMAGE_WIDTH, PROFILE_IMAGE_HEIGHT, profileStructuredData } from "../lib/site-profile";
 import WebsiteMockup from "./components/WebsiteMockup";
-import { services, serviceAnchor } from "../lib/public-services";
+import { services, serviceScope, serviceAnchor } from "../lib/public-services";
 
 const contact = {
   whatsapp: "https://wa.me/243838318812",
@@ -256,7 +256,7 @@ export default function Home() {
       <div className="section-head"><p className="eyebrow">02 / SERVICES</p><h2>Marketing digital.<br/>Des actions <em>concrètes.</em></h2><p className="section-intro">Stratégie de communication, gestion des réseaux sociaux, création de contenus et sites web : un accompagnement adapté aux objectifs de votre entreprise.</p></div>
       <div className="service-list">{services.map(([n,t,d]) => <details className="service-disclosure" id={serviceAnchor(n)} key={n}>
         <summary><span className="service-number">{n}</span><h3>{t}</h3><span className="disclosure-sign" aria-hidden="true">+</span></summary>
-        <div className="service-description"><p>{d}</p>{t === WEBSITE_SERVICE && <p className="service-example">Un exemple concret : <a href="#realisations">la boutique et l’espace de gestion Esengo Tech</a>.</p>}<a className="service-cta" href="#contact" aria-label={`Parler de ce besoin : ${t}`} onClick={() => { setRequestedService(t); trackConversion("Service selected"); }}>Parler de ce besoin <BrandGlyph className="compact"/></a></div>
+        <div className="service-description"><p>{d}</p><dl className="service-scope"><dt>{serviceScope[n].label}</dt><dd>{serviceScope[n].deliverables}</dd></dl>{t === WEBSITE_SERVICE && <p className="service-example">Un exemple concret : <a href="#realisations">la boutique et l’espace de gestion Esengo Tech</a>.</p>}<a className="service-cta" href="#contact" aria-label={`Parler de ce besoin : ${t}`} onClick={() => { setRequestedService(t); trackConversion("Service selected"); }}>Parler de ce besoin <BrandGlyph className="compact"/></a></div>
       </details>)}</div>
       <details className="engagement-options"><summary>Un besoin ponctuel ou un suivi mensuel ? <span aria-hidden="true">+</span></summary><p>Une stratégie, des contenus, une campagne ou un site : je peux intervenir sur un projet ciblé ou assurer un suivi régulier de vos réseaux sociaux. Nous définissons le périmètre, les livrables, le calendrier et le budget avant de démarrer.</p></details>
     </section>
@@ -264,7 +264,7 @@ export default function Home() {
     <section className="section why"><div className="why-head"><p className="eyebrow">COMMENT TRAVAILLER ENSEMBLE</p><h2>Un cadre clair.<br/>À chaque <em>étape.</em></h2></div><div className="why-grid">{[["01","Comprendre","Nous faisons le point sur votre activité, vos publics et ce que vous voulez améliorer."],["02","Structurer","Je propose une direction, des livrables, un calendrier et un budget à valider ensemble."],["03","Créer et déployer","Je réalise les contenus et les actions convenus, avec des points de validation définis."],["04","Faire le point","Nous examinons le travail réalisé et, selon la mission, les performances pour décider de la suite."]].map(([n,t,d]) => <article key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></article>)}</div></section>
 
     <section className="work" id="realisations">
-      <div className="work-head"><div><p className="eyebrow light">03 / RÉALISATIONS</p><h2>De la stratégie<br/>aux <em>réalisations.</em></h2></div><p>Le besoin de départ, mon intervention et le travail réalisé : voici une sélection de mes projets. D’autres exemples peuvent être présentés selon votre secteur.</p></div>
+      <div className="work-head"><div><p className="eyebrow light">03 / RÉALISATIONS</p><h2>Communication digitale.<br/>Des projets <em>concrets.</em></h2></div><p>Stratégie de communication, contenus pour les réseaux sociaux et création web : découvrez le besoin de chaque client, mon intervention et le travail livré. D’autres exemples peuvent être présentés selon votre secteur.</p></div>
       <div className="project-grid consistent-projects" id="project-list">
         {projects.map((p,i) => <article className="project case-study" key={p.name} hidden={!showAllProjects && i >= 4}>
           <div className={`project-art${p.cover ? " project-document" : ""}${p.website ? " project-website" : ""}`}>
@@ -273,11 +273,14 @@ export default function Home() {
           </div>
           <div className="project-info">
             <p className="case-client">CLIENT <strong>{p.client}</strong> <span>/ {p.sector}</span></p><h3>{p.name}</h3>
-            <div className="case-details">
+            <details className="case-details case-summary">
+              <summary>Le besoin et mon intervention <span aria-hidden="true">+</span></summary>
               <div className="case-detail"><small>CONTEXTE</small><p>{p.context}</p></div>
+              {p.role && <div className="case-detail"><small>MON RÔLE</small><p>{p.role}</p></div>}
               <div className="case-detail"><small>INTERVENTION</small><p>{p.intervention}</p></div>
               <div className="case-result"><small>{p.resultLabel ?? (p.measured ? "PORTÉE DE LA CAMPAGNE" : "CE QUI A ÉTÉ RÉALISÉ")}</small><strong>{p.result}</strong></div>
-            </div>
+              {p.website && <a className="case-public-link" href={p.website} target="_blank" rel="noopener noreferrer">Visiter la boutique en ligne {p.client} <BrandGlyph className="compact"/></a>}
+            </details>
             <button className="project-view-button" aria-label={`Découvrir le projet ${p.client} : ${p.name}`} onClick={() => { setSelectedProject(p); trackConversion("Project opened"); }}>Découvrir le projet <BrandGlyph className="compact"/></button>
           </div>
         </article>)}

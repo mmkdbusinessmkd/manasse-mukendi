@@ -12,6 +12,11 @@ async function get(path) {
   assert.equal(articles.length, 11, 'All projects are delivered without a click');
   assert.equal(articles.filter(tag => /\shidden(?:=|\s|>)/.test(tag)).length, 7, 'Only four cards start visible');
   assert.equal((html.match(/<h1\b/g) || []).length, 1);
+  assert.equal((html.match(/<details class="case-details case-summary"/g) || []).length, 11, 'Project explanations are native disclosures, available without running JavaScript');
+  assert.equal((html.match(/<dl class="service-scope"/g) || []).length, 6, 'Service deliverables are server-rendered');
+  assert(html.includes('Visiter la boutique en ligne'), 'The delivered website has a real, crawlable link outside the JavaScript-only modal');
+  assert(html.includes('<a class="case-public-link" href="https://esengotech.com/"'));
+  assert(html.includes('gestion des réseaux sociaux'));
   const json = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
   assert(json, 'Structured data is server-rendered');
   const graph = JSON.parse(json[1])['@graph'];

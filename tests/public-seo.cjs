@@ -5,10 +5,10 @@ require.extensions['.ts'] = (module, filename) => module._compile(ts.transpileMo
   compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 },
 }).outputText, filename);
 
-const { SITE_URL, PROFILE_IMAGE, PROFILE_IMAGE_WIDTH, PROFILE_IMAGE_HEIGHT, profileStructuredData } = require('../lib/site-profile.ts');
+const { SITE_URL, PROFILE_IMAGE, PROFILE_IMAGE_WIDTH, PROFILE_IMAGE_HEIGHT, PUBLIC_CONTENT_UPDATED_AT, SITE_DESCRIPTION, profileStructuredData } = require('../lib/site-profile.ts');
 const sitemap = require('../app/sitemap.ts').default();
 const robots = require('../app/robots.ts').default();
-const { services, serviceAnchor } = require('../lib/public-services.ts');
+const { services, serviceScope, serviceAnchor } = require('../lib/public-services.ts');
 const { requestServices } = require('../lib/contact-request.ts');
 const graph = profileStructuredData['@graph'];
 const person = graph.find(item => item['@type'] === 'Person');
@@ -27,6 +27,8 @@ assert.equal(PROFILE_IMAGE_HEIGHT, 1254);
 assert(!fs.readFileSync('app/globals.css', 'utf8').includes('manasse-portrait-2026.png'));
 assert(fs.existsSync(`public${PROFILE_IMAGE}`));
 assert.equal(sitemap[0].url, `${SITE_URL}/`);
+assert.equal(sitemap[0].lastModified, PUBLIC_CONTENT_UPDATED_AT, 'Dashboard builds must not reset the public content date');
+assert(SITE_DESCRIPTION.includes('gestion des réseaux sociaux'));
 assert(sitemap[0].images.includes(portrait.contentUrl));
 assert.equal(robots.sitemap, `${SITE_URL}/sitemap.xml`);
 assert(robots.rules.disallow.includes('/admin'));
@@ -39,6 +41,7 @@ for (const [number, name, description] of services) {
   assert.equal(entry.description, description);
   assert.equal(entry.provider['@id'], person['@id']);
   assert(requestServices.includes(name), 'All advertised services can be selected in the contact form');
+  assert(serviceScope[number].label && serviceScope[number].deliverables, 'Every service explains its concrete scope');
 }
 assert(!fs.readFileSync('app/globals.css', 'utf8').includes('fonts.googleapis.com'));
 for (const font of ['manrope-latin-variable.woff2', 'manrope-latin-ext-variable.woff2']) {
@@ -46,6 +49,8 @@ for (const font of ['manrope-latin-variable.woff2', 'manrope-latin-ext-variable.
   assert.equal(bytes.subarray(0, 4).toString(), 'wOF2');
 }
 assert(fs.readFileSync('app/page.tsx', 'utf8').includes('<img src={PROFILE_IMAGE}'));
+assert(fs.readFileSync('app/page.tsx', 'utf8').includes('<details className="case-details case-summary">'), 'Case studies must be expandable, not CSS-hidden text');
+assert(fs.readFileSync('app/site-layout.css', 'utf8').includes('.project .case-summary{display:block!important'), 'Override legacy styles that permanently hid the case-study copy');
 (async () => {
   const config = (await import('../next.config.mjs')).default;
   const headers = await config.headers();

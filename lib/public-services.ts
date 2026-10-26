@@ -10,4 +10,14 @@ export const services = [
   ["06", WEBSITE_SERVICE, "Présentez votre activité, développez votre présence en ligne et simplifiez votre quotidien. Je conçois des sites vitrines, des boutiques en ligne et des espaces de gestion adaptés à vos besoins, en m’appuyant sur des outils d’intelligence artificielle."],
 ] as const;
 
+// Concrete scope, visible on request in the existing service accordions.
+export const serviceScope: Record<string, { label: string; deliverables: string }> = {
+  '01': { label: 'Gestion des réseaux sociaux', deliverables: 'Ligne éditoriale, calendrier de publication, création et diffusion des contenus, suivi des performances.' },
+  '02': { label: 'Stratégie de communication digitale', deliverables: 'Analyse du contexte, publics cibles, messages, choix des canaux, plan d’action et indicateurs de suivi.' },
+  '03': { label: 'Messages et identité de marque', deliverables: 'Positionnement, ton de communication et messages clés pour présenter une offre de manière cohérente.' },
+  '04': { label: 'Contenus éditoriaux et visuels', deliverables: 'Textes, visuels promotionnels et contenus pédagogiques adaptés à votre marque et à vos supports de communication.' },
+  '05': { label: 'Campagnes publicitaires en ligne', deliverables: 'Objectif de campagne, ciblage, messages publicitaires, suivi du budget et lecture des résultats.' },
+  '06': { label: 'Création web assistée par IA', deliverables: 'Site vitrine ou boutique en ligne, formulaires de demande et, selon le projet, espace privé de gestion.' },
+};
+
 export function serviceAnchor(number: string) { return `service-${number}`; }
