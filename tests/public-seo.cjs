@@ -15,7 +15,8 @@ const person = graph.find(item => item['@type'] === 'Person');
 const portrait = graph.find(item => item['@type'] === 'ImageObject');
 const page = graph.find(item => item['@type'] === 'ProfilePage');
 assert.equal(person.name, 'Manassé Mukendi');
-assert.equal(person.image['@id'], portrait['@id']);
+assert.equal(person.image, portrait.contentUrl);
+assert.equal(person.mainEntityOfPage['@id'], page['@id']);
 assert.equal(page.mainEntity['@id'], person['@id']);
 assert.equal(page.primaryImageOfPage['@id'], portrait['@id']);
 assert.equal(portrait.contentUrl, `${SITE_URL}${PROFILE_IMAGE}`);
@@ -48,7 +49,7 @@ for (const font of ['manrope-latin-variable.woff2', 'manrope-latin-ext-variable.
   const bytes = fs.readFileSync(`public/fonts/${font}`);
   assert.equal(bytes.subarray(0, 4).toString(), 'wOF2');
 }
-assert(fs.readFileSync('app/page.tsx', 'utf8').includes('<img src={PROFILE_IMAGE}'));
+assert(fs.readFileSync('app/page.tsx', 'utf8').includes('id="portrait-manasse-mukendi" src={PROFILE_IMAGE}'));
 assert(fs.readFileSync('app/page.tsx', 'utf8').includes('<details className="case-details case-summary">'), 'Case studies must be expandable, not CSS-hidden text');
 assert(fs.readFileSync('app/site-layout.css', 'utf8').includes('.project .case-summary{display:block!important'), 'Override legacy styles that permanently hid the case-study copy');
 (async () => {

@@ -2,13 +2,15 @@ import { services, serviceAnchor } from './public-services';
 
 export const SITE_URL = 'https://www.manasse-mukendi.com';
 export const PROFILE_IMAGE = '/images/manasse-mukendi-portrait-2026-10.jpg';
+export const PROFILE_IMAGE_URL = `${SITE_URL}${PROFILE_IMAGE}`;
+export const PROFILE_IMAGE_ALT = 'Manassé Mukendi, consultant en marketing et communication digitale';
 export const PROFILE_IMAGE_WIDTH = 1254;
 export const PROFILE_IMAGE_HEIGHT = 1254;
 export const PROFILE_TITLE = 'Consultant en marketing et communication digitale';
 export const SITE_TITLE = 'Manassé Mukendi / Marketing et Communication Digitale';
 export const SITE_DESCRIPTION = 'Manassé Mukendi, consultant en marketing et communication digitale : gestion des réseaux sociaux, stratégie, contenus et sites web. En RDC et à l’international.';
 // Update only when the public content changes, not on unrelated dashboard deployments.
-export const PUBLIC_CONTENT_UPDATED_AT = '2026-10-26';
+export const PUBLIC_CONTENT_UPDATED_AT = '2026-10-28';
 
 // The owner, the page and its representative image share explicit identities.
 export const profileStructuredData = {
@@ -18,7 +20,8 @@ export const profileStructuredData = {
       '@type': 'Person', '@id': `${SITE_URL}/#manasse-mukendi`,
       name: 'Manassé Mukendi', alternateName: 'Manasse Mukendi', jobTitle: PROFILE_TITLE, url: `${SITE_URL}/`,
       description: SITE_DESCRIPTION,
-      image: { '@id': `${SITE_URL}/#portrait` },
+      image: PROFILE_IMAGE_URL,
+      mainEntityOfPage: { '@id': `${SITE_URL}/#webpage` },
       knowsAbout: ['Marketing digital', 'Stratégie de communication', 'Gestion des réseaux sociaux', 'Création de contenus', 'Publicité digitale', 'Création de sites web assistée par IA'],
       hasOfferCatalog: { '@id': `${SITE_URL}/#catalogue-services` },
       contactPoint: { '@type': 'ContactPoint', contactType: 'Demandes de projet', url: `${SITE_URL}/#contact`, availableLanguage: ['fr'] },
@@ -30,9 +33,11 @@ export const profileStructuredData = {
     },
     {
       '@type': 'ImageObject', '@id': `${SITE_URL}/#portrait`,
-      url: `${SITE_URL}${PROFILE_IMAGE}`, contentUrl: `${SITE_URL}${PROFILE_IMAGE}`,
+      url: PROFILE_IMAGE_URL, contentUrl: PROFILE_IMAGE_URL,
+      name: PROFILE_IMAGE_ALT,
+      encodingFormat: 'image/jpeg',
       width: PROFILE_IMAGE_WIDTH, height: PROFILE_IMAGE_HEIGHT,
-      caption: 'Manassé Mukendi, consultant en marketing et communication digitale',
+      caption: PROFILE_IMAGE_ALT,
       about: { '@id': `${SITE_URL}/#manasse-mukendi` },
       representativeOfPage: true,
     },

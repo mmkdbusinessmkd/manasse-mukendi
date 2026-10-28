@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import PublicAnalytics from "./components/PublicAnalytics";
-import { SITE_URL, PROFILE_IMAGE, PROFILE_IMAGE_WIDTH, PROFILE_IMAGE_HEIGHT, SITE_TITLE, SITE_DESCRIPTION } from "../lib/site-profile";
+import { SITE_URL, PROFILE_IMAGE_URL, PROFILE_IMAGE_ALT, PROFILE_IMAGE_WIDTH, PROFILE_IMAGE_HEIGHT, SITE_TITLE, SITE_DESCRIPTION } from "../lib/site-profile";
 import "./globals.css";
 import "./identity.css";
 import "./polish.css";
@@ -19,22 +19,22 @@ export const metadata: Metadata = {
   creator: "Manassé Mukendi",
   robots: { index: true, follow: true, googleBot: { index: true, follow: true, "max-image-preview": "large" } },
   alternates: {
-    canonical: "/",
+    canonical: `${SITE_URL}/`,
   },
   openGraph: {
     type: "website",
     locale: "fr_CD",
-    url: "/",
+    url: `${SITE_URL}/`,
     siteName: "Manassé Mukendi",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: [{ url: PROFILE_IMAGE, width: PROFILE_IMAGE_WIDTH, height: PROFILE_IMAGE_HEIGHT, alt: "Manassé Mukendi, consultant en marketing et communication digitale" }],
+    images: [{ url: PROFILE_IMAGE_URL, secureUrl: PROFILE_IMAGE_URL, type: "image/jpeg", width: PROFILE_IMAGE_WIDTH, height: PROFILE_IMAGE_HEIGHT, alt: PROFILE_IMAGE_ALT }],
   },
   twitter: {
     card: "summary_large_image",
     title: SITE_TITLE,
     description: SITE_DESCRIPTION,
-    images: [PROFILE_IMAGE],
+    images: [{ url: PROFILE_IMAGE_URL, alt: PROFILE_IMAGE_ALT }],
   },
   verification: {
     google: "4d_ZXQs7PN55JeZ_tB2xVSSPkjddHri67WOEBsxviEo",
