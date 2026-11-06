@@ -35,6 +35,31 @@ const response = (status, answer) => new Response(JSON.stringify(answer), { stat
   assert.equal(rejected.accepted, false); assert.equal(rejected.attempts, 1);
   const inactive = await notifyRequestOwner('id', data, { fetch: async () => response(200, { success: false, message: 'Activate your form first' }) });
   assert.equal(inactive.reason, 'activation_required');
+  context.process.env.RESEND_API_KEY = 'test-only-not-a-key';
+  context.process.env.CONTACT_EMAIL_FROM = 'Site <alertes@notifications.example.com>';
+  calls = 0;
+  let originalBody;
+  const dedicated = await notifyRequestOwner('request-id', data, { wait, fetch: async (url, options) => {
+    calls++;
+    assert.equal(url, 'https://api.resend.com/emails');
+    assert.equal(options.headers.Authorization, 'Bearer test-only-not-a-key');
+    assert.equal(options.headers['Idempotency-Key'], 'contact-request/request-id');
+    if (originalBody) assert.equal(options.body, originalBody, 'Retries keep the identical payload');
+    originalBody = options.body;
+    const body = JSON.parse(options.body);
+    assert.deepEqual(body.to, ['contact@manasse-mukendi.com', 'owner@example.com']);
+    assert.equal(body.reply_to, data.email);
+    assert(body.text.includes(data.message) && body.text.includes('/admin/demandes/request-id'));
+    return calls === 1 ? response(409, { name: 'concurrent_idempotent_requests' }) : response(200, { id: 'provider-message-id' });
+  } });
+  assert.equal(dedicated.accepted, true); assert.equal(calls, 2);
+  await notifyRequestOwner('request-id', data, { idempotencyKey: 'manual-retry', fetch: async (_, options) => {
+    assert.equal(options.headers['Idempotency-Key'], 'manual-retry'); return response(200, { id: 'manual-message-id' });
+  } });
+  const forbidden = await notifyRequestOwner('request-id', data, { fetch: async () => response(403, { message: 'Domain not verified' }) });
+  assert.equal(forbidden.reason, 'configuration'); assert.equal(forbidden.attempts, 1);
+  delete context.process.env.CONTACT_EMAIL_FROM;
+  assert.equal((await notifyRequestOwner('id', data)).reason, 'configuration');
   delete context.process.env.ADMIN_EMAIL;
   const missing = await notifyRequestOwner('id', data, { fetch: async () => { throw Error('Must not send with missing recipient'); } });
   assert.equal(missing.reason, 'configuration'); assert.equal(missing.attempts, 0);

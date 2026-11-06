@@ -1,4 +1,5 @@
 'use server';
+import { randomUUID } from 'node:crypto';
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { requireAdmin } from '../../lib/admin/supabase';
@@ -10,7 +11,8 @@ export type NotificationState = { error: string; accepted: boolean };
 export async function resendRequestNotification(id: string, _previous: NotificationState): Promise<NotificationState> {
   // getRequest authenticates the owner and checks the request belongs to that account.
   const request = await getRequest(id);
-  const result = await notifyRequestOwner(request.id, request);
+  const result = await notifyRequestOwner(request.id, request, { idempotencyKey: `contact-request/${request.id}/manual/${randomUUID()}` });
+  if (result.reason === 'configuration') return { accepted: false, error: 'Le service d’e-mail doit être activé dans les réglages privés. La demande reste enregistrée.' };
   if (!result.accepted) return { accepted: false, error: result.reason === 'activation_required'
     ? 'Le service d’e-mail demande une activation. Vérifiez vos boîtes de réception.'
     : 'Le service d’e-mail est momentanément indisponible. La demande reste enregistrée ; vous pourrez réessayer.' };
