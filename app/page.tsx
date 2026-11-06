@@ -242,7 +242,7 @@ export default function Home() {
 
     <section className="section services" id="services">
       <div className="section-head"><p className="eyebrow">01 / SERVICES</p><h2>Marketing digital.<br/>Des actions <em>concrètes.</em></h2><p className="section-intro">Stratégie de communication, gestion des réseaux sociaux, création de contenus et sites web : un accompagnement adapté aux objectifs de votre entreprise.</p></div>
-      <div className="service-list">{services.map(([n,t,d]) => <details className="service-disclosure" name="public-services" open={n === "02"} id={serviceAnchor(n)} key={n}>
+      <div className="service-list">{services.map(([n,t,d]) => <details className="service-disclosure" name="public-services" id={serviceAnchor(n)} key={n}>
         <summary><span className="service-number">{n}</span><h3>{t}</h3><span className="disclosure-sign" aria-hidden="true">+</span></summary>
         <div className="service-description"><p>{d}</p><dl className="service-scope"><dt>{serviceScope[n].label}</dt><dd>{serviceScope[n].deliverables}</dd></dl>{t === WEBSITE_SERVICE && <p className="service-example">Un exemple concret : <a href="#realisations">la boutique et l’espace de gestion Esengo Tech</a>.</p>}<a className="service-cta" href="#contact" aria-label={`Parler de ce besoin : ${t}`} onClick={() => { setRequestedService(t); trackConversion("Service selected"); }}>Parler de ce besoin <BrandGlyph className="compact"/></a></div>
       </details>)}</div>
