@@ -10,7 +10,7 @@ export const PROFILE_TITLE = 'Consultant en marketing et communication digitale'
 export const SITE_TITLE = 'Manassé Mukendi / Marketing et Communication Digitale';
 export const SITE_DESCRIPTION = 'Manassé Mukendi, consultant en marketing et communication digitale : gestion des réseaux sociaux, stratégie, contenus et sites web. En RDC et à l’international.';
 // Update only when the public content changes, not on unrelated dashboard deployments.
-export const PUBLIC_CONTENT_UPDATED_AT = '2026-10-28';
+export const PUBLIC_CONTENT_UPDATED_AT = '2026-11-06';
 
 // The owner, the page and its representative image share explicit identities.
 export const profileStructuredData = {

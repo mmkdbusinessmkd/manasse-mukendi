@@ -86,6 +86,14 @@ function jpegSize(bytes) {
   assert.equal(owner[0].height, String(PROFILE_IMAGE_HEIGHT));
   assert.equal(owner[0].loading, 'eager');
   assert.equal(owner[0].fetchpriority, 'high');
+  const heroPhoto = images.find(img => img.src === PROFILE_IMAGE && img.id !== 'portrait-manasse-mukendi');
+  if (html.includes('hero-portrait')) {
+    assert(heroPhoto, 'The homepage hero uses the same real portrait as the metadata');
+    assert.equal(heroPhoto.alt, PROFILE_IMAGE_ALT);
+    assert.equal(heroPhoto.width, String(PROFILE_IMAGE_WIDTH));
+    assert.equal(heroPhoto.height, String(PROFILE_IMAGE_HEIGHT));
+    assert.equal(heroPhoto.loading, 'eager');
+  }
   assert(/<section[^>]*id="a-propos"[^>]*aria-label="À propos de Manassé Mukendi"/.test(html));
   const testimonial = images.find(img => img.src === '/images/peter-ngoyi-portrait.jpg');
   assert(testimonial, 'The testimonial portrait is preserved');

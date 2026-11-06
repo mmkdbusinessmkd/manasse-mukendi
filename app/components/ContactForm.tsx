@@ -10,23 +10,29 @@ export default function ContactForm({ service, onServiceChange, icon }: { servic
   const [draft, setDraft] = useState<ContactRequest | null>(null);
   const [receipt, setReceipt] = useState('');
   const [message, setMessage] = useState('');
+  const [invalidField, setInvalidField] = useState('');
   const [sending, setSending] = useState(false);
   const [id, setId] = useState('');
   const busy = useRef(false);
   const form = useRef<HTMLFormElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const pilot = SHOW_PILOT_PROGRAM && service === PILOT_PROGRAM_OPTION;
+  const currentStep = receipt ? 3 : draft ? 2 : 1;
   useEffect(() => { if (draft) heading.current?.focus(); }, [draft, receipt]);
   // Service CTAs can change the selection while a recap is open.
-  useEffect(() => { if (!busy.current) { setDraft(null); setReceipt(''); setMessage(''); } }, [service]);
+  useEffect(() => { if (!busy.current) { setDraft(null); setReceipt(''); setMessage(''); setInvalidField(''); } }, [service]);
   function review(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const parsed = requestSchema.safeParse(Object.fromEntries(new FormData(event.currentTarget)));
     if (!parsed.success) {
-      setMessage(parsed.error.issues[0]?.message === 'Indiquez votre numéro avec son indicatif pays, par exemple +243…' ? parsed.error.issues[0].message : 'Vérifiez les champs du formulaire avant de continuer.');
+      const issue = parsed.error.issues[0];
+      const field = String(issue?.path[0] || '');
+      setInvalidField(field);
+      setMessage(field === 'phone' ? 'Indiquez votre numéro avec son indicatif pays, par exemple +243…' : `Vérifiez le champ « ${requestLabels[field as keyof ContactRequest] || 'Votre projet'} » avant de continuer.`);
+      window.requestAnimationFrame(() => { const control = form.current?.elements.namedItem(field); if (control instanceof HTMLElement) control.focus(); });
       return;
     }
-    setMessage(''); setId(crypto.randomUUID()); setDraft(parsed.data);
+    setMessage(''); setInvalidField(''); setId(crypto.randomUUID()); setDraft(parsed.data);
   }
   async function send() {
     if (!draft || busy.current) return;
@@ -45,13 +51,15 @@ export default function ContactForm({ service, onServiceChange, icon }: { servic
     } finally { busy.current = false; setSending(false); }
   }
   return <div className={s.container}>
-    <form ref={form} aria-label="Présenter mon projet" onSubmit={review} hidden={!!draft} className={draft ? s.hidden : undefined}>
+    <ol className={s.progress} aria-label="Étapes de votre demande">{['Votre projet', 'Vérification', 'Confirmation'].map((label, index) => <li key={label} aria-current={currentStep === index + 1 ? 'step' : undefined} data-complete={currentStep > index + 1}><span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>{label}</li>)}</ol>
+    {!draft && <p className={s.intro}>Décrivez l’essentiel. Vous pourrez relire votre demande avant de l’envoyer.</p>}
+    <form ref={form} aria-label="Présenter mon projet" onSubmit={review} onInput={() => { if (message) { setMessage(''); setInvalidField(''); } }} hidden={!!draft} className={draft ? s.hidden : undefined}>
       <input className="honeypot" type="text" name="_honey" aria-hidden="true" tabIndex={-1} autoComplete="off"/>
-      <label><span>Nom</span><input name="name" autoComplete="name" placeholder="Votre nom" minLength={2} maxLength={160} required/></label>
-      <label><span>E-mail</span><input name="email" type="email" autoComplete="email" placeholder="votre@email.com" maxLength={254} required/></label>
-      <label><span>Téléphone / WhatsApp</span><input name="phone" type="tel" autoComplete="tel" placeholder="+243… ou votre indicatif pays" maxLength={40} required aria-describedby="phone-help"/><small id="phone-help">Avec l’indicatif pays. Indiquez votre numéro WhatsApp si vous l’utilisez.</small></label>
-      <label><span>Votre besoin principal</span><select name="service" required value={service} onChange={e => onServiceChange(e.target.value)}><option disabled value="">Choisir un accompagnement</option>{requestServices.map(v => <option key={v}>{v}</option>)}{SHOW_PILOT_PROGRAM && <option value={PILOT_PROGRAM_OPTION}>{PILOT_PROGRAM_OPTION}</option>}</select></label>
-      {pilot ? <PilotProgramFields/> : <label className="full"><span>Parlez-moi de votre projet</span><textarea name="message" required maxLength={5000} rows={5} placeholder="Votre entreprise, votre besoin et, si vous les connaissez, votre échéance et votre budget…"/></label>}
+      <label><span>Nom</span><input name="name" autoComplete="name" placeholder="Votre nom" minLength={2} maxLength={160} required aria-invalid={invalidField === 'name' || undefined} aria-describedby={invalidField === 'name' ? 'contact-validation' : undefined}/></label>
+      <label><span>E-mail</span><input name="email" type="email" autoComplete="email" placeholder="votre@email.com" maxLength={254} required aria-invalid={invalidField === 'email' || undefined} aria-describedby={invalidField === 'email' ? 'contact-validation' : undefined}/></label>
+      <label><span>Téléphone / WhatsApp</span><input name="phone" type="tel" autoComplete="tel" placeholder="+243… ou votre indicatif pays" maxLength={40} required aria-invalid={invalidField === 'phone' || undefined} aria-describedby={invalidField === 'phone' ? 'phone-help contact-validation' : 'phone-help'}/><small id="phone-help">Avec l’indicatif pays. Indiquez votre numéro WhatsApp si vous l’utilisez.</small></label>
+      <label><span>Votre besoin principal</span><select name="service" required value={service} onChange={e => onServiceChange(e.target.value)} aria-invalid={invalidField === 'service' || undefined}><option disabled value="">Choisir un accompagnement</option>{requestServices.map(v => <option key={v}>{v}</option>)}{SHOW_PILOT_PROGRAM && <option value={PILOT_PROGRAM_OPTION}>{PILOT_PROGRAM_OPTION}</option>}</select></label>
+      {pilot ? <PilotProgramFields/> : <label className="full"><span>Parlez-moi de votre projet</span><textarea name="message" required maxLength={5000} rows={5} placeholder="Votre entreprise, votre besoin et, si vous les connaissez, votre échéance et votre budget…" aria-invalid={invalidField === 'message' || undefined} aria-describedby={invalidField === 'message' ? 'contact-validation' : undefined}/></label>}
       <div className="form-end"><p>Vos coordonnées et votre message seront enregistrés dans mon espace privé pour traiter votre demande et vous recontacter. Ils ne sont pas affichés publiquement.</p><button className="button dark">Vérifier ma demande {icon}</button></div>
     </form>
     {draft && <div className={s.summary}>
@@ -64,6 +72,6 @@ export default function ContactForm({ service, onServiceChange, icon }: { servic
       {!receipt && <div className={s.actions}><button type="button" className={s.edit} disabled={sending} onClick={() => { setDraft(null); setMessage(''); window.requestAnimationFrame(() => form.current?.querySelector<HTMLInputElement>('input[name="name"]')?.focus()); }}>Modifier</button><button type="button" className="button dark" disabled={sending} onClick={send}>{sending ? 'Enregistrement…' : 'Confirmer l’envoi'} {icon}</button></div>}
       {receipt && <button className={s.edit} type="button" onClick={() => { form.current?.reset(); setDraft(null); setReceipt(''); setMessage(''); onServiceChange(''); }}>Faire une autre demande</button>}
     </div>}
-    {message && <p className={s.error} role="alert">{message}</p>}
+    {message && <p className={s.error} id="contact-validation" role="alert">{message}</p>}
   </div>;
 }

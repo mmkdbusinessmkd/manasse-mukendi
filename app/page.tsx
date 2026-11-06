@@ -11,6 +11,7 @@ import { WEBSITE_SERVICE } from "../lib/contact-request";
 import { PROFILE_IMAGE, PROFILE_IMAGE_ALT, PROFILE_IMAGE_WIDTH, PROFILE_IMAGE_HEIGHT, profileStructuredData } from "../lib/site-profile";
 import WebsiteMockup from "./components/WebsiteMockup";
 import { services, serviceScope, serviceAnchor } from "../lib/public-services";
+import { portfolioFilters, PortfolioFilter, matchesProjectFilter, isProjectVisible, projectService } from "../lib/portfolio-navigation";
 
 const contact = {
   whatsapp: "https://wa.me/243838318812",
@@ -83,8 +84,8 @@ const partnerLogos = [
 
 const navigation = [
   { label: "Accueil", target: "accueil" },
-  { label: "À propos", target: "a-propos" },
   { label: "Services", target: "services" },
+  { label: "À propos", target: "a-propos" },
   { label: "Réalisations", target: "realisations" },
   { label: "Contact", target: "contact" },
 ];
@@ -96,11 +97,13 @@ function BrandGlyph({ className = "" }: { className?: string }) {
 export default function Home() {
   const [menu, setMenu] = useState(false);
   const [showAllProjects, setShowAllProjects] = useState(false);
+  const [projectFilter, setProjectFilter] = useState<PortfolioFilter>('selection');
   const [requestedService, setRequestedService] = useState("");
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState("accueil");
   const [selectedProject, setSelectedProject] = useState<(typeof projects)[number] | null>(null);
   const modalCloseRef = useRef<HTMLButtonElement>(null);
+  const visibleProjectCount = projects.filter((project, index) => isProjectVisible(project, index, projectFilter, showAllProjects)).length;
   function revealService(number: string) {
     const panel = document.getElementById(serviceAnchor(number));
     if (panel instanceof HTMLDetailsElement) panel.open = true;
@@ -142,14 +145,15 @@ export default function Home() {
       (entries) => entries.forEach((entry) => {
         entry.target.classList.toggle("is-visible", entry.isIntersecting);
       }),
-      { threshold: 0.12, rootMargin: "-4% 0px -8% 0px" },
+      // A tall, expanded portfolio must remain visible even when less than 12% fits on a phone.
+      { threshold: 0, rootMargin: "0px 0px -24px 0px" },
     );
     sections.forEach((section) => observer.observe(section));
     return () => observer.disconnect();
   }, []);
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const items = Array.from(document.querySelectorAll<HTMLElement>(".signature-copy > h1, .signature-copy > p, .signature-copy > div, .section-head, .about-copy, .why-head, .work-head, .trust-copy, .testimonial-heading, .service-disclosure, .consistent-projects .project, .why-grid article, .testimonial-card"));
+    const items = Array.from(document.querySelectorAll<HTMLElement>(".signature-copy > h1, .signature-copy > p, .signature-copy > div, .hero-portrait, .section-head, .about-copy, .why-head, .work-head, .trust-copy, .testimonial-heading, .service-disclosure, .consistent-projects .project, .why-grid article, .testimonial-card"));
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         entry.target.classList.toggle("motion-in", entry.isIntersecting);
@@ -163,7 +167,7 @@ export default function Home() {
     return () => {
       observer.disconnect();
     };
-  }, [showAllProjects]);
+  }, [showAllProjects, projectFilter]);
   useEffect(() => {
     const hash = decodeURIComponent(window.location.hash.slice(1));
     const target = hash.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -230,16 +234,25 @@ export default function Home() {
     <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(profileStructuredData).replace(/</g, '\\u003c') }}/>
     <a className="skip-link" href="#accueil">Aller au contenu</a>
     <div className="scroll-progress" aria-hidden="true" style={{ transform: `scaleX(${scrollProgress})` }}></div>
-    <header className={`nav ${scrollProgress > .015 ? "scrolled" : ""}`}><a className="brand brand-logo" href="#accueil" aria-label="Accueil — Manassé Mukendi"><img src="/images/brand/logo-mm.png" alt="Manassé Mukendi"/></a><nav id="main-navigation" aria-label="Navigation principale" className={menu ? "open" : ""}>{navigation.map(({ label, target }) => <a aria-current={activeSection === target ? "page" : undefined} className={activeSection === target ? "active" : ""} onClick={() => setMenu(false)} href={`#${target}`} key={target}>{label}</a>)}</nav><a className="nav-cta" href="#contact">Échangeons <BrandGlyph className="compact"/></a><button className="menu" aria-controls="main-navigation" aria-expanded={menu} aria-label={menu ? "Fermer le menu" : "Ouvrir le menu"} onClick={() => setMenu(!menu)}>{menu ? "×" : "☰"}</button></header>
+    <header className={`nav ${scrollProgress > .015 ? "scrolled" : ""}`}><a className="brand brand-logo" href="#accueil" aria-label="Accueil — Manassé Mukendi"><BrandGlyph/><span>Manassé<br/>Mukendi</span></a><nav id="main-navigation" aria-label="Navigation principale" className={menu ? "open" : ""}>{navigation.map(({ label, target }) => <a aria-current={activeSection === target ? "location" : undefined} className={activeSection === target ? "active" : ""} onClick={() => setMenu(false)} href={`#${target}`} key={target}>{label}</a>)}</nav><a className="nav-cta" href="#contact" onClick={() => setMenu(false)} aria-label="Présenter mon projet dans le formulaire"><span className="nav-cta-desktop">Échangeons</span><span className="nav-cta-mobile">Mon projet</span> <BrandGlyph className="compact"/></a><button className="menu" aria-controls="main-navigation" aria-expanded={menu} aria-label={menu ? "Fermer le menu" : "Ouvrir le menu"} onClick={() => setMenu(!menu)}>{menu ? "×" : "☰"}</button></header>
 
     <HomeHero icon={<BrandGlyph/>}/>
 
     {SHOW_PILOT_PROGRAM && <PilotProgramBanner onApply={() => setRequestedService(PILOT_PROGRAM_OPTION)} icon={<BrandGlyph className="compact"/>}/>}
 
+    <section className="section services" id="services">
+      <div className="section-head"><p className="eyebrow">01 / SERVICES</p><h2>Marketing digital.<br/>Des actions <em>concrètes.</em></h2><p className="section-intro">Stratégie de communication, gestion des réseaux sociaux, création de contenus et sites web : un accompagnement adapté aux objectifs de votre entreprise.</p></div>
+      <div className="service-list">{services.map(([n,t,d]) => <details className="service-disclosure" name="public-services" open={n === "02"} id={serviceAnchor(n)} key={n}>
+        <summary><span className="service-number">{n}</span><h3>{t}</h3><span className="disclosure-sign" aria-hidden="true">+</span></summary>
+        <div className="service-description"><p>{d}</p><dl className="service-scope"><dt>{serviceScope[n].label}</dt><dd>{serviceScope[n].deliverables}</dd></dl>{t === WEBSITE_SERVICE && <p className="service-example">Un exemple concret : <a href="#realisations">la boutique et l’espace de gestion Esengo Tech</a>.</p>}<a className="service-cta" href="#contact" aria-label={`Parler de ce besoin : ${t}`} onClick={() => { setRequestedService(t); trackConversion("Service selected"); }}>Parler de ce besoin <BrandGlyph className="compact"/></a></div>
+      </details>)}</div>
+      <details className="engagement-options"><summary>Un besoin ponctuel ou un suivi mensuel ? <span aria-hidden="true">+</span></summary><p>Une stratégie, des contenus, une campagne ou un site : je peux intervenir sur un projet ciblé ou assurer un suivi régulier de vos réseaux sociaux. Nous définissons le périmètre, les livrables, le calendrier et le budget avant de démarrer.</p></details>
+    </section>
+
     <section className="about about-short" id="a-propos" aria-label="À propos de Manassé Mukendi">
       <div className="portrait"><div className="portrait-photo"><img id="portrait-manasse-mukendi" src={PROFILE_IMAGE} alt={PROFILE_IMAGE_ALT} width={PROFILE_IMAGE_WIDTH} height={PROFILE_IMAGE_HEIGHT} loading="eager" fetchPriority="high" decoding="async"/></div><div className="portrait-note">MANASSÉ<br/>MUKENDI <BrandGlyph className="outline"/></div></div>
       <div className="about-copy">
-        <p className="eyebrow">01 / À PROPOS</p><h2>Votre ambition.<br/>Une direction <em>claire.</em></h2>
+        <p className="eyebrow">02 / À PROPOS</p><h2>Votre ambition.<br/>Une direction <em>claire.</em></h2>
         <div className="bio editorial-bio">
           <p className="about-lead">Je suis Manassé Mukendi, consultant en marketing et communication digitale. Je relie la stratégie à sa mise en œuvre.</p>
           <p>Depuis 2024, j’accompagne des entreprises, des institutions et des marques personnelles, en RDC et à l’international.</p>
@@ -252,21 +265,20 @@ export default function Home() {
       </div>
     </section>
 
-    <section className="section services" id="services">
-      <div className="section-head"><p className="eyebrow">02 / SERVICES</p><h2>Marketing digital.<br/>Des actions <em>concrètes.</em></h2><p className="section-intro">Stratégie de communication, gestion des réseaux sociaux, création de contenus et sites web : un accompagnement adapté aux objectifs de votre entreprise.</p></div>
-      <div className="service-list">{services.map(([n,t,d]) => <details className="service-disclosure" id={serviceAnchor(n)} key={n}>
-        <summary><span className="service-number">{n}</span><h3>{t}</h3><span className="disclosure-sign" aria-hidden="true">+</span></summary>
-        <div className="service-description"><p>{d}</p><dl className="service-scope"><dt>{serviceScope[n].label}</dt><dd>{serviceScope[n].deliverables}</dd></dl>{t === WEBSITE_SERVICE && <p className="service-example">Un exemple concret : <a href="#realisations">la boutique et l’espace de gestion Esengo Tech</a>.</p>}<a className="service-cta" href="#contact" aria-label={`Parler de ce besoin : ${t}`} onClick={() => { setRequestedService(t); trackConversion("Service selected"); }}>Parler de ce besoin <BrandGlyph className="compact"/></a></div>
-      </details>)}</div>
-      <details className="engagement-options"><summary>Un besoin ponctuel ou un suivi mensuel ? <span aria-hidden="true">+</span></summary><p>Une stratégie, des contenus, une campagne ou un site : je peux intervenir sur un projet ciblé ou assurer un suivi régulier de vos réseaux sociaux. Nous définissons le périmètre, les livrables, le calendrier et le budget avant de démarrer.</p></details>
-    </section>
-
     <section className="section why"><div className="why-head"><p className="eyebrow">COMMENT TRAVAILLER ENSEMBLE</p><h2>Un cadre clair.<br/>À chaque <em>étape.</em></h2></div><div className="why-grid">{[["01","Comprendre","Nous faisons le point sur votre activité, vos publics et ce que vous voulez améliorer."],["02","Structurer","Je propose une direction, des livrables, un calendrier et un budget à valider ensemble."],["03","Créer et déployer","Je réalise les contenus et les actions convenus, avec des points de validation définis."],["04","Faire le point","Nous examinons le travail réalisé et, selon la mission, les performances pour décider de la suite."]].map(([n,t,d]) => <article key={n}><span>{n}</span><h3>{t}</h3><p>{d}</p></article>)}</div></section>
 
     <section className="work" id="realisations">
       <div className="work-head"><div><p className="eyebrow light">03 / RÉALISATIONS</p><h2>Communication digitale.<br/>Des projets <em>concrets.</em></h2></div><p>Stratégie de communication, contenus pour les réseaux sociaux et création web : découvrez le besoin de chaque client, mon intervention et le travail livré. D’autres exemples peuvent être présentés selon votre secteur.</p></div>
+      <div className="portfolio-toolbar">
+        <div className="portfolio-filters" role="group" aria-label="Filtrer les réalisations">{portfolioFilters.map(filter => {
+          const label = filter.id === 'selection' && showAllProjects ? 'Tous les projets' : filter.label;
+          const count = filter.id === 'selection' ? (showAllProjects ? projects.length : 4) : projects.filter(project => matchesProjectFilter(project, filter.id)).length;
+          return <button type="button" key={filter.id} aria-pressed={projectFilter === filter.id} aria-controls="project-list" onClick={() => setProjectFilter(filter.id)}>{label}<span aria-hidden="true">{count}</span></button>;
+        })}</div>
+        <p className="portfolio-count" role="status">{visibleProjectCount} projet{visibleProjectCount > 1 ? 's' : ''} présenté{visibleProjectCount > 1 ? 's' : ''}<span> / {projects.length} réalisations</span></p>
+      </div>
       <div className="project-grid consistent-projects" id="project-list">
-        {projects.map((p,i) => <article className="project case-study" key={p.name} hidden={!showAllProjects && i >= 4}>
+        {projects.map((p,i) => <article className="project case-study" key={p.name} hidden={!isProjectVisible(p, i, projectFilter, showAllProjects)}>
           <div className={`project-art${p.cover ? " project-document" : ""}${p.website ? " project-website" : ""}`}>
             {p.mobileImage ? <WebsiteMockup desktop={p.image} mobile={p.mobileImage} name={p.client}/> : <img src={p.image} alt={`${p.cover ? "Couverture — " : ""}${p.name} — ${p.client}`} loading="lazy" decoding="async"/>}
             {!p.cover && <><div className="project-topline"><span>{p.type}</span><BrandGlyph className="card-glyph light"/></div><b>{String(i+1).padStart(2,"0")}</b></>}
@@ -285,7 +297,7 @@ export default function Home() {
           </div>
         </article>)}
       </div>
-      <div className="work-actions">{projects.length > 4 && <button className="button project-toggle" aria-expanded={showAllProjects} aria-controls="project-list" onClick={() => setShowAllProjects(!showAllProjects)}>{showAllProjects ? "Réduire la sélection" : `Voir ${projects.length - 4} autres projets`} <span aria-hidden="true">{showAllProjects ? "−" : "+"}</span></button>}</div>
+      <div className="work-actions">{projectFilter === 'selection' && projects.length > 4 && <button className="button project-toggle" aria-expanded={showAllProjects} aria-controls="project-list" onClick={() => { setShowAllProjects(!showAllProjects); if (showAllProjects) document.getElementById('realisations')?.scrollIntoView({ block: 'start' }); }}>{showAllProjects ? "Réduire la sélection" : `Voir ${projects.length - 4} autres projets`} <span aria-hidden="true">{showAllProjects ? "−" : "+"}</span></button>}</div>
     </section>
 
 
@@ -352,7 +364,7 @@ export default function Home() {
           {selectedProject.approach && <div><small>LE PARTI PRIS</small><p>{selectedProject.approach}</p></div>}
           <div className="project-modal-result"><small>{selectedProject.resultLabel ?? (selectedProject.measured ? "PORTÉE DE LA CAMPAGNE" : "CE QUI A ÉTÉ RÉALISÉ")}</small><strong>{selectedProject.result}</strong></div>
           {selectedProject.confidentiality && <p className="project-confidentiality">{selectedProject.confidentiality}</p>}
-          <a className="button dark" href="#contact" onClick={() => { if (selectedProject.website) setRequestedService(WEBSITE_SERVICE); setSelectedProject(null); }}>Parler d’un projet similaire <BrandGlyph/></a>
+          <a className="button dark" href="#contact" onClick={() => { setRequestedService(projectService(selectedProject)); setSelectedProject(null); }}>Parler d’un projet similaire <BrandGlyph/></a>
         </div>
       </article>
     </div>}

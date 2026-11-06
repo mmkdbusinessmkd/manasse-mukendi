@@ -8,6 +8,9 @@
 .public-site :is(.about-copy,.section-head,.service-list,.why-grid,.testimonial-content,.testimonial-author,.contact>div,.footer-links){min-width:0}
 .public-site .about-short{max-width:none;margin:0;padding:80px var(--page-gutter);grid-template-columns:minmax(240px,.7fr) minmax(0,1.3fr);gap:8%;align-items:center}
 .public-site .about-short .portrait{width:100%;max-width:340px;min-height:0;margin-inline:auto}
+.public-site .about-short .portrait{position:relative;isolation:isolate;overflow:visible}
+.public-site .about-short .portrait:before{content:"";position:absolute;inset:auto;left:-9px;top:-9px;width:32%;height:32%;border-radius:0 32px 0 32px;background:#ff8b38;z-index:-1;pointer-events:none}
+.public-site .about-short .portrait:after{content:"";position:absolute;inset:auto;right:-9px;bottom:-9px;width:30%;height:30%;border:1px solid #71937b;border-radius:0 0 32px 0;background:none;z-index:-1;pointer-events:none}
 .public-site .about-short .portrait-photo{aspect-ratio:1;border-radius:24px;box-shadow:0 12px 30px #043b270a}
 .public-site .about-short .portrait-photo{background-image:none!important;overflow:hidden}
 .public-site .portrait-photo img{display:block;width:100%;height:100%;object-fit:contain;object-position:center}
@@ -101,13 +104,31 @@
 .public-site .skip-link{position:fixed;top:8px;left:16px;z-index:120;padding:14px 20px;background:#f5f5e9;color:#043b27;border:2px solid #043b27;border-radius:10px;transform:translateY(-180%)}
 .public-site .skip-link:focus{transform:none}
 .public-site > footer{padding-inline:var(--page-gutter);gap:32px}
+.public-site .nav-cta-mobile{display:none}
+.public-site .portfolio-toolbar{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:18px 24px;margin:0 0 28px}
+.public-site .portfolio-filters{display:flex;flex-wrap:wrap;gap:8px;min-width:0}
+.public-site .portfolio-filters button{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:44px;padding:9px 15px;border:1px solid #b7d1bf55;border-radius:999px;background:#ffffff06;color:#e5eee6;font:600 12px/1.5 Manrope,Arial,sans-serif;cursor:pointer;white-space:nowrap;transition:background .2s,border-color .2s,color .2s}
+.public-site .portfolio-filters button>span{display:grid;place-items:center;min-width:22px;height:22px;padding-inline:4px;border-radius:50%;background:#ffffff10;font-size:10px}
+.public-site .portfolio-filters button[aria-pressed="true"]{color:#143f2c;background:#f5f5e9;border-color:#f5f5e9}
+.public-site .portfolio-filters button[aria-pressed="true"]>span{background:#143f2c10}
+.public-site .portfolio-count{margin:0;color:#e5eee6;font-size:12px;line-height:1.8}
+.public-site .portfolio-count>span{color:#bdcfc2}
 @media(hover:hover){
   .public-site .service-disclosure:hover{border-color:#8eac98}
   .public-site .contact .mail:hover,.public-site .contact .contact-whatsapp:hover{background:#eaf1e5;border-color:#6a9077}
+  .public-site .portfolio-filters button:not([aria-pressed="true"]):hover{background:#1e543e;border-color:#d3e1d5;color:#fff}
 }
 @media(max-width:1100px){.public-site .contact.section{grid-template-columns:1fr;gap:40px}.public-site .contact .section-head>p:not(.eyebrow){max-width:65ch}}
 @media(max-width:800px){
   .public-site{--page-gutter:24px;--section-space:64px}
+  .public-site .nav{gap:10px}
+  .public-site .nav .nav-cta{display:inline-flex;position:static;transform:none;justify-content:center;gap:7px;min-height:42px;margin-left:auto;padding:5px 6px 5px 11px;border:1px solid #043b27;border-radius:12px;background:#043b27;color:#f5f5e9!important;font-size:11px;line-height:1.5;white-space:nowrap}
+  .public-site .nav-cta .brand-glyph{width:25px;height:25px;flex-basis:25px;padding:5px;border-radius:7px;box-shadow:none}
+  .public-site .nav-cta-desktop{display:none}.public-site .nav-cta-mobile{display:inline}
+  .public-site .portfolio-toolbar{display:block;margin-bottom:24px}
+  .public-site .portfolio-filters{flex-wrap:nowrap;overflow-x:auto;max-width:100%;padding:3px 3px 10px;scrollbar-width:thin;scrollbar-color:#b8ccbf66 transparent;scroll-snap-type:x proximity}
+  .public-site .portfolio-filters button{flex-shrink:0;scroll-snap-align:start;padding-inline:13px;font-size:12px}
+  .public-site .portfolio-count{margin-top:8px;font-size:11px}
   .public-site :is(.section-head,.about-copy,.why-head,.work-head,.trust-copy,.testimonial-heading) h2{font-size:clamp(28px,7.5vw,34px);line-height:1.22;letter-spacing:-.04em}
   .public-site .about-short{padding:56px var(--page-gutter) 64px;grid-template-columns:1fr;gap:32px}
   .public-site .about-short .portrait{width:208px}
@@ -138,7 +159,7 @@
 }
 @media(max-width:360px){.public-site{--page-gutter:20px}.public-site .testimonial-card{padding:20px 16px}.public-site .testimonial-author{grid-template-columns:60px minmax(0,1fr);gap:10px}.public-site .testimonial-author img{width:60px;height:60px}.public-site .service-disclosure summary{padding-inline:12px}.public-site .service-disclosure h3{font-size:16px}.public-site .contact .mail{font-size:12px}}
 @media(min-width:600px) and (max-width:800px){.public-site{--page-gutter:32px}.public-site .about-short{grid-template-columns:180px minmax(0,1fr);gap:32px;align-items:start}.public-site .about-short .portrait{width:180px}.public-site .testimonial-author{grid-template-columns:80px minmax(0,1fr)}.public-site .testimonial-author img{width:80px;height:80px}}
-@media(prefers-reduced-motion:reduce){.public-site .skip-link{transition:none}}
+@media(prefers-reduced-motion:reduce){.public-site .skip-link,.public-site .portfolio-filters button{transition:none}}
 
 /* Website case studies keep the same card dimensions as the visual portfolio. */
 .public-site .project-art.project-website,
