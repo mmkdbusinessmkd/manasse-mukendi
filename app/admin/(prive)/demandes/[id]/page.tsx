@@ -4,6 +4,7 @@ import { replyLinks, requestLabels } from '../../../../../lib/contact-request';
 import { dateLabel } from '../../../../../lib/admin/model';
 import { PageHeading } from '../../../Views';
 import RequestFollowUp from '../../../RequestFollowUp';
+import RequestNotification from '../../../RequestNotification';
 import s from '../../../admin.module.css';
 
 export default async function Page({ params }: { params: Promise<{ id: string }> }) {
@@ -21,6 +22,6 @@ export default async function Page({ params }: { params: Promise<{ id: string }>
     </section><div><section className={s.panel}><h2>Recontacter cette personne</h2><p>Un message est préparé. Vous pouvez le modifier avant de l’envoyer depuis votre messagerie ou WhatsApp.</p>
       <div className={s.actions}><a className={s.primary} href={links.email}>Répondre par e-mail</a>{links.whatsapp && <a className={s.secondary} href={links.whatsapp} target="_blank" rel="noreferrer">Ouvrir WhatsApp</a>}</div>
       <p className={s.meta}>Le site ne vérifie pas si ce numéro possède un compte WhatsApp. Ouvrir un bouton ne marque pas la demande comme contactée.</p>
-    </section><section className={s.panel}><h2>Votre suivi</h2><RequestFollowUp id={request.id} status={request.status} notes={request.notes} version={request.updated_at}/></section></div></div>
+    </section><section className={s.panel}><h2>Votre suivi</h2><RequestFollowUp id={request.id} status={request.status} notes={request.notes} version={request.updated_at}/><RequestNotification id={request.id}/></section></div></div>
   </>;
 }

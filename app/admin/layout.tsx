@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import styles from './admin.module.css';
 
 export const dynamic = 'force-dynamic';
+export const maxDuration = 60;
 export const metadata: Metadata = {
   title: 'Espace privé | Manassé Mukendi',
   description: 'Gestion freelance privée.',
@@ -12,7 +13,7 @@ export const metadata: Metadata = {
   robots: { index: false, follow: false, nocache: true },
   alternates: {}, openGraph: {}, twitter: {},
 };
-export const viewport: Viewport = { themeColor: '#103f28', width: 'device-width', initialScale: 1 };
+export const viewport: Viewport = { themeColor: '#102d23', width: 'device-width', initialScale: 1 };
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return <div className={styles.root}>{children}</div>;

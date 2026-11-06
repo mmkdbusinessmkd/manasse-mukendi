@@ -3,8 +3,10 @@ import { createClient } from '@supabase/supabase-js';
 import { NextRequest, NextResponse, after } from 'next/server';
 import { z } from 'zod';
 import { requestSchema } from '../../../lib/contact-request';
+import { notifyRequestOwner } from '../../../lib/contact-notification';
 
 export const runtime = 'nodejs';
+export const maxDuration = 60;
 const envelope = z.object({ id: z.string().uuid(), honey: z.string().max(200).default(''), data: requestSchema });
 const reply = (message: string, status: number) => NextResponse.json({ error: message }, { status, headers: { 'Cache-Control': 'no-store' } });
 
@@ -54,15 +56,10 @@ export async function POST(request: NextRequest) {
       if (error.code === '23505') return reply('Cette demande a changé. Revenez au formulaire avant de réessayer.', 409);
       return reply('Enregistrement non confirmé. Réessayez sans fermer cette page, ou contactez-moi directement.', 503);
     }
-    // Keep the existing owner email alert as a best-effort supplement, not the source of truth.
+    // Only notify after a newly committed request; idempotent retries do not send another alert.
     if (created === true) after(async () => {
-      try {
-        await fetch('https://formsubmit.co/ajax/contact@manasse-mukendi.com', {
-          method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-          body: JSON.stringify({ ...payload.data, _subject: 'Nouvelle demande — site Manassé Mukendi', _template: 'table', reference: payload.id, espace_prive: `https://www.manasse-mukendi.com/admin/demandes/${payload.id}` }),
-          signal: AbortSignal.timeout(8000),
-        });
-      } catch { /* The saved request remains available in the private inbox. */ }
+      const result = await notifyRequestOwner(payload.id, payload.data);
+      if (!result.accepted) console.error('contact_notification_failed', { reference: payload.id, reason: result.reason, attempts: result.attempts });
     });
     return NextResponse.json({ success: true, reference: payload.id }, { status: created ? 201 : 200, headers: { 'Cache-Control': 'no-store' } });
   } catch { return reply('Enregistrement non confirmé. Réessayez sans fermer cette page, ou contactez-moi directement.', 503); }

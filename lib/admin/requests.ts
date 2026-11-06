@@ -22,3 +22,10 @@ export async function listRequests(status: string, page: number) {
   if (error) throw new Error('Les demandes sont momentanément indisponibles.');
   return { rows: data as Pick<InboxRequest, 'id' | 'name' | 'email' | 'phone' | 'service' | 'status' | 'created_at'>[], count: count || 0 };
 }
+
+export async function countNewRequests() {
+  const { db, user } = await requireAdmin();
+  const { count, error } = await db.from('contact_requests').select('id', { count: 'exact', head: true }).eq('owner_id', user.id).eq('status', 'nouveau');
+  if (error) throw new Error('Le nombre de demandes est momentanément indisponible.');
+  return count || 0;
+}

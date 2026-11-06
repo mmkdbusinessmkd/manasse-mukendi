@@ -9,6 +9,7 @@ const context = { exports: {}, process: { env: { SUPABASE_URL: 'https://test.inv
   if (name === 'next/server') return { NextResponse: { json: (body, init) => ({ body, ...init }) }, after: () => { alerts++; } };
   if (name === '@supabase/supabase-js') return { createClient: () => ({ rpc: async () => { calls++; return rpcResult; } }) };
   if (name.includes('contact-request')) return validation;
+  if (name.includes('contact-notification')) return { notifyRequestOwner: async () => ({ accepted: true, attempts: 1 }) };
   return require(name);
 } };
 vm.runInNewContext(ts.transpileModule(fs.readFileSync('app/api/contact/route.ts', 'utf8'), { compilerOptions: { module: ts.ModuleKind.CommonJS, target: ts.ScriptTarget.ES2022 } }).outputText, context);

@@ -2,8 +2,20 @@
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
 import { requireAdmin } from '../../lib/admin/supabase';
+import { getRequest } from '../../lib/admin/requests';
+import { notifyRequestOwner } from '../../lib/contact-notification';
 
 export type FollowUpState = { error: string; saved: boolean; version: string };
+export type NotificationState = { error: string; accepted: boolean };
+export async function resendRequestNotification(id: string, _previous: NotificationState): Promise<NotificationState> {
+  // getRequest authenticates the owner and checks the request belongs to that account.
+  const request = await getRequest(id);
+  const result = await notifyRequestOwner(request.id, request);
+  if (!result.accepted) return { accepted: false, error: result.reason === 'activation_required'
+    ? 'Le service d’e-mail demande une activation. Vérifiez vos boîtes de réception.'
+    : 'Le service d’e-mail est momentanément indisponible. La demande reste enregistrée ; vous pourrez réessayer.' };
+  return { accepted: true, error: '' };
+}
 const schema = z.object({ id: z.string().uuid(), status: z.enum(['nouveau', 'en_cours', 'contacte', 'archive']), notes: z.string().trim().max(5000), version: z.iso.datetime({ offset: true }) });
 export async function updateRequest(id: string, previous: FollowUpState, form: FormData): Promise<FollowUpState> {
   const { db, user } = await requireAdmin();
