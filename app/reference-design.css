@@ -7,7 +7,8 @@
 .public-site .nav nav{gap:26px;font-size:12px}
 .public-site .nav nav a{color:#dfE5d7;opacity:1;font-weight:550;min-height:44px;display:flex;align-items:center;padding-block:8px}
 .public-site .nav nav a.active,.public-site .nav nav a:hover{color:#ffc58c}
-.public-site .nav nav a:after{height:1px;bottom:5px;background:#ff963e}
+.public-site .nav nav a:after{left:50%;right:auto;width:65%;max-width:36px;height:2px;bottom:5px;background:#ff963e;transform:translateX(-50%) scaleX(0);transform-origin:center;transition:transform .25s ease}
+.public-site .nav nav a:is(:hover,:focus-visible,.active):after{left:50%;right:auto;transform:translateX(-50%) scaleX(1);transform-origin:center}
 .public-site .nav .nav-cta{display:inline-flex;align-items:center;justify-content:space-between;gap:18px;min-height:48px;margin:0;padding:6px 7px 6px 18px;border:1px solid #f6f3e9;border-radius:100px;background:#f6f3e9;color:#10392a!important;font-size:12px;font-weight:750;white-space:nowrap}
 .public-site .nav-cta .brand-glyph{width:32px;height:32px;flex-basis:32px;border-radius:50%;padding:6px;box-shadow:none}
 .public-site .nav .menu{color:#f6f3e9;border-color:#65836d}
