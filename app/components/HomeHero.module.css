@@ -17,7 +17,7 @@
 .introduction>a{display:inline-flex;align-items:center;gap:12px;margin-top:24px;font-size:11px;font-weight:700;min-height:44px;border-bottom:1px solid #b8c0ac}
 .introduction :global(.brand-glyph){width:24px;height:24px;flex-basis:24px;padding:5px;box-shadow:none;border-radius:50%}
 .portrait{position:relative;align-self:stretch;margin:0;min-width:0;isolation:isolate}
-.portrait picture{position:absolute;bottom:0;left:50%;transform:translateX(-50%);display:block;width:min(112%,550px);z-index:2}
+.portrait picture{position:absolute;bottom:70px;left:50%;transform:translateX(-50%);display:block;width:min(80%,390px);z-index:2;border-radius:48% 48% 22px 22px;overflow:hidden;box-shadow:0 14px 32px #123b2920}
 .portrait img{display:block;width:100%;height:auto;max-width:none}
 .monogram{position:absolute;inset:17% 8% 9%;display:grid;place-items:center;z-index:0}
 .monogram :global(.brand-glyph){--glyph-bg:transparent;--glyph-main:#e2e5d5;--glyph-accent:#e9d5b8;width:100%;height:100%;flex-basis:auto;padding:0;border:none;border-radius:0;box-shadow:none;gap:14px}
@@ -53,15 +53,15 @@
   @keyframes arrive{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
   @keyframes turn{to{transform:rotate(360deg)}}@keyframes marquee{to{transform:translateX(-50%)}}
 }
-@media(min-width:1500px){.stage{min-height:540px}.portrait picture{width:600px}.hero{padding-top:60px}}
-@media(max-width:1000px) and (min-width:701px){.stage{grid-template-columns:1fr 2fr 1fr;min-height:410px}.title{font-size:48px}.introduction>p{font-size:20px}.description{font-size:12px}.proof blockquote{font-size:14px}.skillPills{gap:4px}.skillPills>span{font-size:9px;padding:5px 8px}.portrait picture{width:460px}.location{left:-7%;font-size:9px;top:18%}.introduction{padding-right:8px}.proof{padding-left:8px}.actionDock{bottom:20px}.primary,.secondary{font-size:12px}}
+@media(min-width:1500px){.stage{min-height:540px}.hero{padding-top:60px}}
+@media(max-width:1000px) and (min-width:701px){.stage{grid-template-columns:1fr 2fr 1fr;min-height:410px}.title{font-size:48px}.introduction>p{font-size:20px}.description{font-size:12px}.proof blockquote{font-size:14px}.skillPills{gap:4px}.skillPills>span{font-size:9px;padding:5px 8px}.portrait picture{width:min(78%,320px);bottom:58px}.location{left:-7%;font-size:9px;top:18%}.introduction{padding-right:8px}.proof{padding-left:8px}.actionDock{bottom:20px}.primary,.secondary{font-size:12px}}
 @media(max-width:700px){
  .hero{padding-top:34px}.kicker{font-size:10px;max-width:31ch;gap:8px;margin-bottom:20px;text-align:left}.kicker :global(.brand-glyph){flex-shrink:0}
  .title{font-size:clamp(32px,9.4vw,52px);line-height:1.13;letter-spacing:-.055em}.title em{display:block}
  .promise{font-size:15px;line-height:1.6;max-width:29ch;margin:16px auto 0}
  .stage{display:block;min-height:0;margin:12px auto 0;padding-bottom:90px;max-width:420px}
  .introduction,.proof{display:none}.portrait{height:340px;max-width:390px;margin:0 auto}
- .portrait picture{bottom:0;width:100%}.monogram{inset:12% 10% 7%;opacity:.8}.globe{top:6%;right:0;width:76%}
+ .portrait picture{bottom:0;width:min(80%,320px)}.monogram{inset:12% 10% 7%;opacity:.8}.globe{top:6%;right:0;width:76%}
  .location{top:21%;left:1%;font-size:9px;padding:8px 11px}.location>span{font-size:7px}
  .actionDock{bottom:22px;width:100%;padding:4px;gap:2px}.primary,.secondary{min-height:50px;font-size:11px;padding:7px 8px 7px 12px;gap:8px;flex:1}
  .actionDock :global(.brand-glyph){width:26px;height:26px;flex-basis:26px;padding:5px}

@@ -4,7 +4,6 @@ import styles from "./HomeHero.module.css";
 
 const capabilities = ["Stratégie digitale", "Réseaux sociaux", "Création de contenu", "Sites & solutions digitales"];
 
-/** A portrait-led composition; the original photo remains the semantic fallback. */
 export default function HomeHero({ icon }: { icon: ReactNode }) {
   return <section className={"home-hero " + styles.hero} id="accueil" aria-labelledby="home-title">
     <div className={"signature-copy " + styles.heading}>
@@ -27,7 +26,7 @@ export default function HomeHero({ icon }: { icon: ReactNode }) {
           <path d="M50 184C160 242 320 242 430 184M50 296C160 238 320 238 430 296"/>
           <circle cx="398" cy="70" r="6" className={styles.globePin}/>
         </svg>
-        <picture><source srcSet="/images/manasse-mukendi-cutout-v1.png" type="image/png"/><img src={PROFILE_IMAGE} alt={PROFILE_IMAGE_ALT} width={PROFILE_IMAGE_WIDTH} height={PROFILE_IMAGE_HEIGHT} loading="eager" fetchPriority="high" decoding="async"/></picture>
+        <picture><img src={PROFILE_IMAGE} alt={PROFILE_IMAGE_ALT} width={PROFILE_IMAGE_WIDTH} height={PROFILE_IMAGE_HEIGHT} loading="eager" fetchPriority="high" decoding="async"/></picture>
         <figcaption className={styles.location}>RDC &amp; international<span>À distance ou sur le terrain</span></figcaption>
       </figure>
       <aside className={styles.proof} aria-label="Un mot de Peter Ngoyi">

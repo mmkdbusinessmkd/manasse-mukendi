@@ -20,11 +20,11 @@ assert.equal(person.mainEntityOfPage['@id'], page['@id']);
 assert.equal(page.mainEntity['@id'], person['@id']);
 assert.equal(page.primaryImageOfPage['@id'], portrait['@id']);
 assert.equal(portrait.contentUrl, `${SITE_URL}${PROFILE_IMAGE}`);
-assert.equal(PROFILE_IMAGE, '/images/manasse-mukendi-portrait-2026-10.jpg');
+assert.equal(PROFILE_IMAGE, '/images/manasse-mukendi-portrait-2026-11.jpg');
 assert.equal(portrait.width, PROFILE_IMAGE_WIDTH);
 assert.equal(portrait.height, PROFILE_IMAGE_HEIGHT);
-assert.equal(PROFILE_IMAGE_WIDTH, 1254);
-assert.equal(PROFILE_IMAGE_HEIGHT, 1254);
+assert.equal(PROFILE_IMAGE_WIDTH, 3443);
+assert.equal(PROFILE_IMAGE_HEIGHT, 3541);
 assert(!fs.readFileSync('app/globals.css', 'utf8').includes('manasse-portrait-2026.png'));
 assert(fs.existsSync(`public${PROFILE_IMAGE}`));
 assert.equal(sitemap[0].url, `${SITE_URL}/`);
@@ -55,7 +55,7 @@ assert(fs.readFileSync('app/site-layout.css', 'utf8').includes('.project .case-s
 (async () => {
   const config = (await import('../next.config.mjs')).default;
   const headers = await config.headers();
-  for (const image of ['/images/peter-ngoyi-portrait.jpg', '/images/peter-ngoyi.png', '/images/manasse-portrait-2026.png', '/images/manasse-consultant.webp', '/images/manasse-marketing.jpg']) {
+  for (const image of ['/images/peter-ngoyi-portrait.jpg', '/images/peter-ngoyi.png', '/images/manasse-portrait-2026.png', '/images/manasse-consultant.webp', '/images/manasse-marketing.jpg', '/images/manasse-mukendi-portrait-2026-10.jpg', '/images/manasse-mukendi-cutout-v1.png']) {
     assert(headers.some(rule => rule.source === image && rule.headers.some(h => h.key === 'X-Robots-Tag' && h.value === 'noindex')));
   }
   assert(!headers.some(rule => rule.source === '/' || rule.source === PROFILE_IMAGE));

@@ -52,7 +52,7 @@
 .public-site .about-short{padding-block:80px;background:#102d23;color:#f6f3e9;gap:9%;grid-template-columns:minmax(260px,.8fr) minmax(0,1.2fr);border-top:3px solid #ff963e}
 .public-site .about-short .portrait{max-width:370px;min-height:0;background:none;padding:0;border:0}
 .public-site .about-short .portrait:before,.public-site .about-short .portrait:after{display:none}
-.public-site .about-short .portrait-photo{position:relative;aspect-ratio:1;height:auto;background:#f6f3e9!important;border-radius:6px 42px 6px 42px;box-shadow:-12px 12px 0 #ff963e;overflow:hidden}
+.public-site .about-short .portrait-photo{position:relative;aspect-ratio:auto;height:auto;background:#f6f3e9!important;border-radius:6px 42px 6px 42px;box-shadow:-12px 12px 0 #ff963e;overflow:hidden}
 .public-site .about-short .portrait-photo img{display:block;position:static;width:100%;height:auto;object-fit:contain;max-width:none}
 .public-site .about-short .eyebrow{color:#becfba}
 .public-site .about-short .eyebrow:before{background:#f6f3e9}
@@ -106,7 +106,7 @@
  .public-site .service-description{padding:0 20px 25px}.public-site .service-description p{font-size:14px;line-height:1.85}
  .public-site .service-scope dt{font-size:12px}.public-site .service-scope dd{font-size:13px}.public-site .service-description .service-cta{font-size:12px}
  .public-site .about-short{grid-template-columns:1fr;gap:36px;padding-block:64px}
- .public-site .about-short .portrait{width:min(100%,270px)}.public-site .about-short .portrait-photo{border-radius:4px 32px 4px 32px;aspect-ratio:1;box-shadow:-8px 8px 0 #ff963e}
+ .public-site .about-short .portrait{width:min(100%,270px)}.public-site .about-short .portrait-photo{border-radius:4px 32px 4px 32px;aspect-ratio:auto;box-shadow:-8px 8px 0 #ff963e}
  .public-site .about-short .bio p{font-size:15px}.public-site .about-short .about-references{grid-template-columns:1fr;gap:0}
  .public-site .about-short .about-references dt{font-size:9px}.public-site .about-short .about-references dd{font-size:13px}
  .public-site .consistent-projects .project{border-radius:4px 24px 4px 24px}

@@ -1,16 +1,16 @@
 import { services, serviceAnchor } from './public-services';
 
 export const SITE_URL = 'https://www.manasse-mukendi.com';
-export const PROFILE_IMAGE = '/images/manasse-mukendi-portrait-2026-10.jpg';
+export const PROFILE_IMAGE = '/images/manasse-mukendi-portrait-2026-11.jpg';
 export const PROFILE_IMAGE_URL = `${SITE_URL}${PROFILE_IMAGE}`;
 export const PROFILE_IMAGE_ALT = 'Manassé Mukendi, consultant en marketing et communication digitale';
-export const PROFILE_IMAGE_WIDTH = 1254;
-export const PROFILE_IMAGE_HEIGHT = 1254;
+export const PROFILE_IMAGE_WIDTH = 3443;
+export const PROFILE_IMAGE_HEIGHT = 3541;
 export const PROFILE_TITLE = 'Consultant en marketing et communication digitale';
 export const SITE_TITLE = 'Manassé Mukendi / Marketing et Communication Digitale';
 export const SITE_DESCRIPTION = 'Manassé Mukendi, consultant en marketing et communication digitale : gestion des réseaux sociaux, stratégie, contenus et sites web. En RDC et à l’international.';
 // Update only when the public content changes, not on unrelated dashboard deployments.
-export const PUBLIC_CONTENT_UPDATED_AT = '2026-11-06';
+export const PUBLIC_CONTENT_UPDATED_AT = '2026-11-09';
 
 // The owner, the page and its representative image share explicit identities.
 export const profileStructuredData = {
