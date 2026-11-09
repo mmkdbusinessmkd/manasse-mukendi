@@ -250,7 +250,7 @@ export default function Home() {
     </section>
 
     <section className="about about-short" id="a-propos" aria-label="À propos de Manassé Mukendi">
-      <div className="portrait"><div className="portrait-photo"><img id="portrait-manasse-mukendi" src={PROFILE_IMAGE} alt={PROFILE_IMAGE_ALT} width={PROFILE_IMAGE_WIDTH} height={PROFILE_IMAGE_HEIGHT} loading="eager" fetchPriority="high" decoding="async"/></div><div className="portrait-note">MANASSÉ<br/>MUKENDI <BrandGlyph className="outline"/></div></div>
+      <div className="portrait"><div className="portrait-photo"><img id="portrait-manasse-mukendi" src={PROFILE_IMAGE} alt={PROFILE_IMAGE_ALT} width={PROFILE_IMAGE_WIDTH} height={PROFILE_IMAGE_HEIGHT} loading="lazy" decoding="async"/></div><div className="portrait-note">MANASSÉ<br/>MUKENDI <BrandGlyph className="outline"/></div></div>
       <div className="about-copy">
         <p className="eyebrow">02 / À PROPOS</p><h2>Votre ambition.<br/>Une direction <em>claire.</em></h2>
         <div className="bio editorial-bio">
