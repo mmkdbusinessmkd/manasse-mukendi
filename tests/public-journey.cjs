@@ -29,7 +29,8 @@ assert(form.includes('receipt ? 3 : draft ? 2 : 1'), 'Confirmation is reached on
 assert(form.includes('control.focus()'), 'Validation directs the visitor to the incorrect field');
 assert(form.includes('onClick={send}'), 'Review must not submit automatically');
 const hero = fs.readFileSync('app/components/HomeHero.tsx', 'utf8');
-assert(hero.includes('src={PROFILE_IMAGE} alt={PROFILE_IMAGE_ALT}'), 'Use the real owner photo already used in SEO');
+assert(hero.includes('src={PROFILE_IMAGE} alt={PROFILE_IMAGE_ALT}'), 'Keep the original owner photo as the image fallback');
+assert(hero.includes('/images/manasse-mukendi-accueil-sans-fond.png') && hero.includes('srcSet={cutout.srcSet}'), 'Show the responsive transparent cutout on the homepage');
 assert(hero.includes('aria-hidden="true"'), 'The decorative globe does not replace the portrait identity');
 assert(!hero.includes('350+') && !hero.includes('Award-Winning'), 'Do not copy invented awards or reviews from the reference');
 console.log('PASS: four featured projects, category filtering, service preselection, tall-section visibility, review steps and validation focus.');
