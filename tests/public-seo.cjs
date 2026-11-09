@@ -55,7 +55,7 @@ assert(fs.readFileSync('app/site-layout.css', 'utf8').includes('.project .case-s
 (async () => {
   const config = (await import('../next.config.mjs')).default;
   const headers = await config.headers();
-  for (const image of ['/images/peter-ngoyi-portrait.jpg', '/images/peter-ngoyi.png', '/images/manasse-portrait-2026.png', '/images/manasse-consultant.webp', '/images/manasse-marketing.jpg', '/images/manasse-mukendi-portrait-2026-10.jpg', '/images/manasse-mukendi-cutout-v1.png']) {
+  for (const image of ['/images/peter-ngoyi-portrait.jpg', '/images/peter-ngoyi.png', '/images/manasse-portrait-2026.png', '/images/manasse-consultant.webp', '/images/manasse-marketing.jpg', '/images/manasse-mukendi-portrait-2026-10.jpg', '/images/manasse-mukendi-cutout-v1.png', '/images/manasse-mukendi-accueil-sans-fond.png']) {
     assert(headers.some(rule => rule.source === image && rule.headers.some(h => h.key === 'X-Robots-Tag' && h.value === 'noindex')));
   }
   assert(!headers.some(rule => rule.source === '/' || rule.source === PROFILE_IMAGE));

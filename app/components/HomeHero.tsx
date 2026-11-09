@@ -1,6 +1,15 @@
 import type { ReactNode } from "react";
+import { getImageProps } from "next/image";
 import { PROFILE_IMAGE, PROFILE_IMAGE_ALT, PROFILE_IMAGE_WIDTH, PROFILE_IMAGE_HEIGHT } from "../../lib/site-profile";
 import styles from "./HomeHero.module.css";
+
+const { props: cutout } = getImageProps({
+  src: "/images/manasse-mukendi-accueil-sans-fond.png",
+  alt: PROFILE_IMAGE_ALT,
+  width: 1121,
+  height: 1403,
+  sizes: "(max-width: 380px) 235px, (max-width: 700px) 275px, (max-width: 1000px) 300px, 350px",
+});
 
 const capabilities = ["Stratégie digitale", "Réseaux sociaux", "Création de contenu", "Sites & solutions digitales"];
 
@@ -26,7 +35,10 @@ export default function HomeHero({ icon }: { icon: ReactNode }) {
           <path d="M50 184C160 242 320 242 430 184M50 296C160 238 320 238 430 296"/>
           <circle cx="398" cy="70" r="6" className={styles.globePin}/>
         </svg>
-        <picture><img src={PROFILE_IMAGE} alt={PROFILE_IMAGE_ALT} width={PROFILE_IMAGE_WIDTH} height={PROFILE_IMAGE_HEIGHT} loading="eager" fetchPriority="high" decoding="async"/></picture>
+        <picture>
+          <source srcSet={cutout.srcSet} sizes={cutout.sizes} width={cutout.width} height={cutout.height}/>
+          <img src={PROFILE_IMAGE} alt={PROFILE_IMAGE_ALT} width={PROFILE_IMAGE_WIDTH} height={PROFILE_IMAGE_HEIGHT} loading="eager" fetchPriority="high" decoding="async"/>
+        </picture>
         <figcaption className={styles.location}>RDC &amp; international<span>À distance ou sur le terrain</span></figcaption>
       </figure>
       <aside className={styles.proof} aria-label="Un mot de Peter Ngoyi">
