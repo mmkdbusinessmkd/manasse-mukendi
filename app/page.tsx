@@ -254,14 +254,25 @@ export default function Home() {
       <div className="about-copy">
         <p className="eyebrow">02 / À PROPOS</p><h2>Votre ambition.<br/>Une direction <em>claire.</em></h2>
         <div className="bio editorial-bio">
-          <p className="about-lead">Je suis Manassé Mukendi, consultant en marketing et communication digitale. Je relie la stratégie à sa mise en œuvre.</p>
-          <p>Depuis 2024, j’accompagne des entreprises, des institutions et des marques personnelles, en RDC et à l’international.</p>
-          <p>Je pars de votre activité, de vos clients et de vos objectifs. Je définis votre <a href="#service-02" onClick={() => revealService("02")}>stratégie de communication</a>, crée vos contenus et assure la <a href="#service-01" onClick={() => revealService("01")}>gestion de vos réseaux sociaux</a>. Je conçois aussi des <a href="#service-06" onClick={() => revealService("06")}>sites et solutions digitales</a> avec l’appui de l’IA.</p>
+          <p className="about-lead">Je suis Manassé Mukendi, consultant en marketing et communication digitale.</p>
+          <p>Depuis 2024, j’accompagne des entreprises, des institutions et des marques personnelles en RDC et à l’international. Je les aide à <a href="#service-02" onClick={() => revealService("02")}>structurer leur communication</a>, à créer des contenus, à <a href="#service-01" onClick={() => revealService("01")}>gérer leurs réseaux sociaux</a> et à développer leur présence en ligne.</p>
+          <p>Je commence par comprendre votre activité, vos clients et vos objectifs. C’est ce qui guide la stratégie et les actions que je vous propose.</p>
+          <p>Mes projets couvrent aussi les campagnes digitales, les identités de marque et la conception de <a href="#service-06" onClick={() => revealService("06")}>solutions web</a> avec l’appui de l’IA.</p>
         </div>
         <dl className="about-references">
           <div><dt>QUELQUES RÉFÉRENCES</dt><dd>Zoom Tech, Evantura, FLMDA, Esengo Tech : des projets de communication, de contenu et de création web à découvrir dans mes réalisations.</dd></div>
           <div><dt>COMMENT COLLABORER</dt><dd>Une mission ciblée ou un accompagnement mensuel, à distance ou sur le terrain, selon vos besoins.</dd></div>
         </dl>
+        <div className="about-training">
+          <h3>Formations et certifications</h3>
+          <p>Je continue à me former pour faire évoluer ma pratique et adapter mes recommandations aux nouveaux usages du digital.</p>
+          <ul role="list">
+            <li><strong>HubSpot Academy</strong><span>Social Media Marketing</span></li>
+            <li><strong>Digital School RDC</strong><span>Community Management et gestion de projet digital</span></li>
+            <li><strong>Digital Ad Expert</strong><span>Publicité digitale</span></li>
+            <li><strong>Formations complémentaires</strong><span>Facebook Ads, création de contenu et marketing digital</span></li>
+          </ul>
+        </div>
       </div>
     </section>
 

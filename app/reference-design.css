@@ -64,6 +64,12 @@
 .public-site .about-short .about-references{border-color:#4b6a51;gap:24px;margin-top:24px}
 .public-site .about-short .about-references dt{color:#ffb879;font-size:9px}
 .public-site .about-short .about-references dd{color:#bfcebb;font-size:12px;line-height:1.85}
+.public-site .about-training{margin-top:28px;padding-top:24px;border-top:1px solid #4b6a51}
+.public-site .about-training h3{margin:0 0 8px;color:#f6f3e9;font-size:clamp(19px,2.4vw,24px);line-height:1.25;letter-spacing:-.025em}
+.public-site .about-training p{max-width:64ch;margin:0;color:#d3dfd0;font-size:15px;line-height:1.7}
+.public-site .about-training ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));gap:10px;margin:16px 0 0;padding:0;list-style:none}
+.public-site .about-training li{display:flex;flex-direction:column;gap:4px;min-width:0;padding:12px 14px;border:1px solid #4b6a51;border-radius:12px;background:#173a2d;color:#d3dfd0;font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+.public-site .about-training strong{color:#ffb879;font-weight:700}
 .public-site .why-grid article>span{background:#10392a;color:#f6f3e9;border:0;border-radius:50%}
 .public-site .work{background-color:#102d23;background-image:url('/images/brand/paper-grain.svg');border-top:3px solid #ff963e}
 .public-site .work .eyebrow{color:#bfcebb}
