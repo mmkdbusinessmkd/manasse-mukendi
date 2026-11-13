@@ -255,19 +255,13 @@ export default function Home() {
         <p className="eyebrow">02 / À PROPOS</p><h2>Votre ambition.<br/>Une direction <em>claire.</em></h2>
         <div className="bio editorial-bio">
           <p className="about-lead">Je suis Manassé Mukendi, consultant en marketing et communication digitale.</p>
+          <p className="about-intro">Depuis 2024, j’accompagne des entreprises, des institutions et des marques personnelles en RDC et à l’international. Je les aide à clarifier leur message, à créer leurs contenus et à développer leur présence sur les réseaux sociaux.</p>
         </div>
-        <a className="about-cv-link" href="/documents/CV-Manasse-Mukendi.pdf" download>
-          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/>
-          </svg>
-          <span>Télécharger mon CV <small>PDF</small></span>
-        </a>
         <div className="about-menus">
           <details name="about-info">
             <summary>Parcours et approche <span className="disclosure-sign" aria-hidden="true">+</span></summary>
             <div className="about-menu-content">
-              <p>Depuis 2024, j’accompagne des entreprises, des institutions et des marques personnelles en RDC et à l’international. Je les aide à <a href="#service-02" onClick={() => revealService("02")}>structurer leur communication</a>, à créer des contenus, à <a href="#service-01" onClick={() => revealService("01")}>gérer leurs réseaux sociaux</a> et à développer leur présence en ligne.</p>
-              <p>Je commence par comprendre votre activité, vos clients et vos objectifs. C’est ce qui guide la stratégie et les actions que je vous propose.</p>
+              <p>Je commence par comprendre votre activité, vos clients et vos objectifs. À partir de là, je définis votre <a href="#service-02" onClick={() => revealService("02")}>stratégie de communication</a>, je planifie vos contenus et je <a href="#service-01" onClick={() => revealService("01")}>pilote vos réseaux sociaux</a>.</p>
               <p>Mes projets couvrent aussi les campagnes digitales, les identités de marque et la conception de <a href="#service-06" onClick={() => revealService("06")}>solutions web</a> avec l’appui de l’IA.</p>
             </div>
           </details>
@@ -291,6 +285,12 @@ export default function Home() {
             </div>
           </details>
         </div>
+        <a className="about-cv-link" href="/documents/CV-Manasse-Mukendi.pdf" download aria-label="Télécharger mon CV (PDF)">
+          <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/>
+          </svg>
+          <span>Mon CV (PDF)</span>
+        </a>
       </div>
     </section>
 

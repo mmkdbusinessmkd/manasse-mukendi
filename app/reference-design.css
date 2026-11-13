@@ -58,12 +58,12 @@
 .public-site .about-short .eyebrow:before{background:#f6f3e9}
 .public-site .about-short .about-copy h2{color:#f6f3e9;margin-bottom:28px}
 .public-site .about-short .about-copy h2 em{color:#ffb879}
-.public-site .about-short .bio p,.public-site .about-short .bio .about-lead{color:#d3dfd0;font-size:15px;font-weight:450;line-height:1.85}
-.public-site .about-short .bio .about-lead{color:#f6f3e9;font-weight:600}
-.public-site .about-cv-link{display:inline-flex;align-self:flex-start;align-items:center;gap:9px;min-height:44px;max-width:100%;padding:9px 15px;border:1px solid #718d77;border-radius:100px;color:#f6f3e9;font-size:13px;font-weight:700;line-height:1.4;transition:background-color .2s,border-color .2s}
-.public-site .about-cv-link svg{flex:none;color:#ffb879}
-.public-site .about-cv-link small{margin-left:6px;color:#d3dfd0;font-size:10px;letter-spacing:.04em}
-.public-site .about-cv-link:hover{background-color:#214735;border-color:#ffb879}
+.public-site .about-short .bio .about-lead{margin:0 0 10px;color:#f6f3e9;font-size:clamp(17px,1.5vw,20px);font-weight:650;line-height:1.5;letter-spacing:-.015em}
+.public-site .about-short .bio .about-intro{margin:0;color:#d3dfd0;font-size:15px;font-weight:450;line-height:1.75}
+.public-site .about-cv-link{display:inline-flex;align-self:flex-start;align-items:center;gap:7px;min-height:44px;max-width:100%;margin-top:10px;padding:6px 10px;border-radius:8px;color:#d3dfd0;font-size:12px;font-weight:600;line-height:1.4}
+.public-site .about-cv-link svg{flex:none}
+.public-site .about-cv-link span{text-decoration:underline;text-decoration-color:#8da48f;text-underline-offset:3px}
+.public-site .about-cv-link:hover{background-color:#214735;color:#f6f3e9}
 .public-site .about-cv-link:focus-visible{outline:2px solid #ffb879;outline-offset:4px}
 .public-site .about-menus{margin-top:26px;border-top:1px solid #4b6a51}
 .public-site .about-menus details{border-bottom:1px solid #4b6a51}
@@ -125,7 +125,6 @@
  .public-site .service-scope dt{font-size:12px}.public-site .service-scope dd{font-size:13px}.public-site .service-description .service-cta{font-size:12px}
  .public-site .about-short{grid-template-columns:1fr;gap:36px;padding-block:64px}
  .public-site .about-short .portrait{width:min(100%,270px)}.public-site .about-short .portrait-photo{border-radius:4px 32px 4px 32px;aspect-ratio:auto;box-shadow:-8px 8px 0 #ff963e}
- .public-site .about-short .bio p{font-size:15px}
  .public-site .consistent-projects .project{border-radius:4px 24px 4px 24px}
  .public-site .testimonial-card{border-radius:4px 24px 4px 24px}
 }
