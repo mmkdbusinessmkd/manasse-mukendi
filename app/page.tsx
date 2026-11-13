@@ -259,6 +259,12 @@ export default function Home() {
           <p>Je commence par comprendre votre activité, vos clients et vos objectifs. C’est ce qui guide la stratégie et les actions que je vous propose.</p>
           <p>Mes projets couvrent aussi les campagnes digitales, les identités de marque et la conception de <a href="#service-06" onClick={() => revealService("06")}>solutions web</a> avec l’appui de l’IA.</p>
         </div>
+        <a className="about-cv-link" href="/documents/CV-Manasse-Mukendi.pdf" download>
+          <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M12 3v12m-4-4 4 4 4-4M5 16v4h14v-4"/>
+          </svg>
+          <span>Télécharger mon CV <small>PDF</small></span>
+        </a>
         <dl className="about-references">
           <div><dt>QUELQUES RÉFÉRENCES</dt><dd>Zoom Tech, Evantura, FLMDA, Esengo Tech : des projets de communication, de contenu et de création web à découvrir dans mes réalisations.</dd></div>
           <div><dt>COMMENT COLLABORER</dt><dd>Une mission ciblée ou un accompagnement mensuel, à distance ou sur le terrain, selon vos besoins.</dd></div>
