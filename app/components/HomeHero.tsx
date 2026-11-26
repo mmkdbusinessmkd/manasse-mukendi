@@ -27,6 +27,7 @@ export default function HomeHero({ icon }: { icon: ReactNode }) {
           <circle cx="398" cy="70" r="6" className={styles.globePin}/>
         </svg>
         <picture>
+          <source srcSet="/images/manasse-mukendi-accueil-sans-fond.webp" type="image/webp"/>
           <img src="/images/manasse-mukendi-accueil-sans-fond.png" alt={PROFILE_IMAGE_ALT} width={1121} height={1403} loading="eager" fetchPriority="high" decoding="async"/>
         </picture>
         <figcaption className={styles.location}>RDC &amp; international<span>À distance ou sur le terrain</span></figcaption>
